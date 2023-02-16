@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import  Navbar  from './components/Navbar';
 import Donors from './components/Donors'
 import Contact from "./components/Contact"
+import Services from './components/Services';
 
 export default function App() {
   return (
@@ -16,9 +17,10 @@ export default function App() {
         <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
           <Route path="/AboutUs" element={<AboutUs />} />
-          <Route path="/HistoryPage" element={<HistoryPage />} />
-          <Route path="/Donors" element={<Donors />} />
+      <Route path="/HistoryPage"  element={<HistoryPage />} />
+          <Route path="/Donors" element={<Donors/>} />
           <Route path='/UniversityPage' element={<UniversityPage />} />
+          <Route path='/Services' element={<Services />}/>
           <Route path="*" element={<Contact />} />
         </Route>
       </Routes>

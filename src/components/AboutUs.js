@@ -6,7 +6,7 @@ const AboutUs = () => {
   return (
     <section className="py-12">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-medium mb-4">About Us</h2>
+        <h2 className="text-3xl font-medium mb-4 flex justify-center">About Us</h2>
         <div className="flex flex-wrap -mx-3">
           <div className="w-full md:w-1/2 px-3 mb-6">
             <div className="bg-white rounded-lg shadow-md p-6">

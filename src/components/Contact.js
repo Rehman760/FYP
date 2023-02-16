@@ -9,8 +9,8 @@ const ContactUs = () => {
           <div className="w-full md:w-1/2 px-3 mb-6">
             <h3 className="text-xl font-medium mb-4">Address</h3>
             <p className="text-base mb-4">
-              1234 Street Name <br />
-              City, State ZIP Code
+              Nisar Ahmed Siqqidique Road <br />
+              Sukkur, Sindh Pakistan
             </p>
           </div>
           <div className="w-full md:w-1/2 px-3 mb-6">

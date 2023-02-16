@@ -1,8 +1,10 @@
 import React from 'react'
+import HistoryPage from './HistoryPage'
 
 function Donors() {
   return (
-    <div>Donors</div>
+    <div><h1 className='flex justify-center text-3xl bold'>Our Donors</h1>
+      <HistoryPage /></div>
   )
 }
 

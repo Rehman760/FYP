@@ -1,26 +1,26 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
-const HistoryPage = () => {
+const HistoryPage = (props) => {
     const students = [
         {
             id: 1,
-            name: "John Doe",
-            bio: "John is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
+            name: "Abdul Rehman",
+            bio: "Abdul Rehman is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
             picture: "https://via.placeholder.com/150",
             sponsoredBy: "Jane Smith"
         },
         {
             id: 2,
-            name: "Jane Smith",
-            bio: "Jane is a dedicated student who is currently pursuing a degree in medicine at ABC University. She is committed to making a positive impact on her community through her profession.",
+            name: "Ameer Hamza",
+            bio: "Ameer is a dedicated student who is currently pursuing a degree in medicine at ABC University. She is committed to making a positive impact on her community through her profession.",
             picture: "https://via.placeholder.com/150",
             sponsoredBy: "John Doe"
         },
         {
             id: 1,
-            name: "John Doe",
-            bio: "John is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
+            name: "Shoaib Ahmed",
+            bio: "Shoaib is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
             picture: "https://via.placeholder.com/150",
             sponsoredBy: "Jane Smith"
         }
@@ -29,7 +29,7 @@ const HistoryPage = () => {
 
     return (
         <div className="container">
-            <h1 className="text-center my-5 font-medium text-3xl">Our Students</h1>
+            <h1 className="text-center my-5 font-medium text-3xl">{props.title}</h1>
             <div className="row">
                 {students.map((student) => (
                     <div className="col-sm-4 my-3" key={student.id}>
@@ -39,7 +39,7 @@ const HistoryPage = () => {
                                 <Card.Title>{student.name}</Card.Title>
                                 <Card.Text>{student.bio}</Card.Text>
                                 <Card.Text className="text-muted">Sponsored by: {student.sponsoredBy}</Card.Text>
-                                <Button variant="primary" href={`/student/${student.id}`}>View Profile</Button>
+                                <Button variant="success" href={`/student/${student.id}`}>View Profile</Button>
                             </Card.Body>
                         </Card>
                     </div>

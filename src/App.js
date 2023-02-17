@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import AboutUs from './components/AboutUs';
 import HomePage from './components/HomePage';
@@ -9,19 +8,26 @@ import  Navbar  from './components/Navbar';
 import Donors from './components/Donors'
 import Contact from "./components/Contact"
 import Services from './components/Services';
+import SignUp from './components/SignUp';
+import LogIn from './components/LogIn';
+import ForgotPassword from './components/ForgotPassword';
 
 export default function App() {
   return (
+
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
           <Route path="/AboutUs" element={<AboutUs />} />
-      <Route path="/HistoryPage"  element={<HistoryPage />} />
+          <Route path="/HistoryPage"  element={<HistoryPage />} />
           <Route path="/Donors" element={<Donors/>} />
           <Route path='/UniversityPage' element={<UniversityPage />} />
           <Route path='/Services' element={<Services />}/>
           <Route path="*" element={<Contact />} />
+          <Route path='/LogIn' element={<LogIn/>}/>
+          <Route path='/SignUp' element={<SignUp/>}/>
+          <Route path='/ForgotPassword' element={<ForgotPassword />}/>
         </Route>
       </Routes>
     </BrowserRouter>

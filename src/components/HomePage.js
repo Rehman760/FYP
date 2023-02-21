@@ -12,7 +12,6 @@ import Donors from './Donors'
 const HomePage = () => {
   return (
     <>
-    {/* <StudentInformation /> */}
       <MainSection />
       <AboutUs />
       <History title="Our Students"/>

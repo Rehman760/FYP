@@ -11,6 +11,7 @@ import Services from './components/Services';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import ForgotPassword from './components/ForgotPassword';
+import StudentInformation from './components/StudentInformation';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="*" element={<Contact />} />
           <Route path='/LogIn' element={<LogIn/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
+          <Route path='/StudentInformation' element={<StudentInformation />}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
         </Route>
       </Routes>

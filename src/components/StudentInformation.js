@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PersonalInfo from "./PersonalInfo";
 
 const StudentInformation = () => {
   const [activeSection, setActiveSection] = useState(1);
@@ -50,7 +51,7 @@ const StudentInformation = () => {
       {activeSection === 1 && (
         <div className="p-4">
           <h3 className="text-lg font-bold">Personal Information</h3>
-          {/* Personal information form */}
+         <PersonalInfo />
         </div>
       )}
       {activeSection === 2 && (

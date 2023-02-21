@@ -22,8 +22,7 @@ const Navbar = () => {
             <Link to="/UniversityPage" className="px-4">Universities</Link>
             <Link to="/Services" className="px-4">Services</Link>
             <Link to="/Contact" className="px-4">Contact</Link>
-            <Link to="/LogIn" className="px-4">LogIn</Link>
-            <Link to="/SignUp" className="px-4">Sign Up</Link>
+            <Link to="/StudentInformation" className="px-4">Student information</Link>
             <button className="bg-green-500 text-white px-4 py-2 rounded-lg">Apply Now</button>
           </div>
         </div>

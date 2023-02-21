@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -79,12 +80,12 @@ function SignUp() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
+        <Link to="/LogIn">
         <button
-          className="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg"
-          type="submit"
-        >
+          className="btn-primary hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg" type="submit">
           Sign Up
         </button>
+        </Link>
       </form>
     </div>
   );

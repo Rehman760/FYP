@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState} from "react";
+// import { Link } from "react-router-dom";
+import {db} from "./firebase-config";
+import {addDoc, collection} from "firebase/firestore";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -7,16 +9,25 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const userCollectionRef = collection(db, "users");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
+    console.log(firstName);
+
+    const createUser = async ()=>{
+      console.log("User creation");
+      await addDoc(userCollectionRef, {firstname:firstName, lastname:lastName, email:email, password:password});
+    };
+    createUser();
   };
+
+  
 
   return (
     <div className="min-h-screen bg-green-500 flex items-center justify-center">
       <form
-        onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
         className="bg-white p-6 rounded-lg shadow-md"
       >
         <h2 className="text-2xl font-bold mb-6 text-green-500">Sign Up</h2>
@@ -80,12 +91,11 @@ function SignUp() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <Link to="/LogIn">
         <button
-          className="btn-primary hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg" type="submit">
-          Sign Up
-        </button>
-        </Link>
+          type="submit"
+          className="w-full h-12 font-bold  text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">
+          Sign Up     
+        </button>        
       </form>
     </div>
   );

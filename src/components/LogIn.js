@@ -1,9 +1,13 @@
+import { collection, getDocs } from "firebase/firestore";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {db} from "./firebase-config";
+
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const userCollectionRef = collection(db, "users");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -15,7 +19,16 @@ const LogIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login submission
+    console.log("Login");
+
+    const getUsers = async()=>{
+      const data = await getDocs(userCollectionRef);
+      const pass = data.docs[0].data();
+      console.log(pass);      
+    };
+
+    getUsers();
+    
   };
 
   return (
@@ -55,12 +68,12 @@ const LogIn = () => {
             </div>
             <Link to="/ForgotPassword" className="text-green-500 font-medium hover:text-green-700">Forgot password?</Link>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-          >
+          <button 
+          type="submit"
+          className="w-full h-12 font-bold text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">
             Log In
           </button>
+          
         </form>
         <div className="flex justify-center items-center mt-6">
           <span className="text-gray-600">Don't have an account?</span>

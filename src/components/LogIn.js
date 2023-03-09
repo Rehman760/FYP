@@ -22,9 +22,22 @@ const LogIn = () => {
     console.log("Login");
 
     const getUsers = async()=>{
-      const data = await getDocs(userCollectionRef);
-      const pass = data.docs[0].data();
-      console.log(pass);      
+      const querySnapshot = await getDocs(userCollectionRef);
+      let available = false;
+      querySnapshot.forEach((doc) => {
+        const username = email.match(/^([^@]*)@/)[1];
+        if(username === doc.id && password === doc.data().password){
+          available = true;
+        }        
+      // console.log(`${doc.id} => ${doc.data()}`);
+      });
+      if(available){
+        alert("Log in to the System");
+      }
+      else{
+        alert("Wrong Password!!");
+      }
+
     };
 
     getUsers();

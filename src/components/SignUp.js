@@ -1,7 +1,7 @@
 import { useState} from "react";
 // import { Link } from "react-router-dom";
 import {db} from "./firebase-config";
-import {addDoc, collection} from "firebase/firestore";
+import {doc, setDoc} from "firebase/firestore";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -9,7 +9,8 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const userCollectionRef = collection(db, "users");
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +18,8 @@ function SignUp() {
 
     const createUser = async ()=>{
       console.log("User creation");
-      await addDoc(userCollectionRef, {firstname:firstName, lastname:lastName, email:email, password:password});
+      const  data = {firstname:firstName, lastname:lastName, email:email, password:password};
+      await setDoc(doc(db, "users", email.match(/^([^@]*)@/)[1]), data);      
     };
     createUser();
   };

@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import EducationInfo from "./EducationInfo";
+import ExpendituresInfo from "./ExpendituresInfo";
+import FamilyInfo from "./FamilyInfo";
+import OtherDetails from "./OtherDetails";
 import PersonalInfo from "./PersonalInfo";
 
 const StudentInformation = () => {
@@ -50,32 +54,27 @@ const StudentInformation = () => {
       </div>
       {activeSection === 1 && (
         <div className="p-4">
-          <h3 className="text-lg font-bold">Personal Information</h3>
          <PersonalInfo />
         </div>
       )}
       {activeSection === 2 && (
         <div className="p-4">
-          <h3 className="text-lg font-bold">Education Information</h3>
-          {/* Education information form */}
+       <EducationInfo />
         </div>
       )}
       {activeSection === 3 && (
         <div className="p-4">
-          <h3 className="text-lg font-bold">Family Information</h3>
-          {/* Family information form */}
+          <FamilyInfo />
         </div>
       )}
       {activeSection === 4 && (
         <div className="p-4">
-          <h3 className="text-lg font-bold">Expenditure Information</h3>
-          {/* Expenditure information form */}
+      <ExpendituresInfo />
         </div>
       )}
       {activeSection === 5 && (
         <div className="p-4">
-          <h3 className="text-lg font-bold">Other Details</h3>
-          {/* Other details form */}
+         <OtherDetails />
         </div>
       )}
       </div>

@@ -82,9 +82,10 @@ function SignUp() {
         </div>
         <Link to="/LogIn">
         <button
-          className="btn-primary hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg" type="submit">
-          Sign Up
-        </button>
+          type="submit"
+          className="w-full h-12 font-bold  text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">
+          Sign Up     
+        </button>        
         </Link>
       </form>
     </div>

@@ -11,6 +11,7 @@ import Services from './components/Services';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import ForgotPassword from './components/ForgotPassword';
+import AfterLogin from './components/AfterLogin';
 import StudentInformation from './components/StudentInformation';
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navbar />}>
+          <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/HistoryPage"  element={<HistoryPage />} />
@@ -30,6 +31,7 @@ export default function App() {
           <Route path='/SignUp' element={<SignUp/>}/>
           <Route path='/StudentInformation' element={<StudentInformation />}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
+          <Route path='/AfterLogin' element={<AfterLogin />}/>
         </Route>
       </Routes>
     </BrowserRouter>

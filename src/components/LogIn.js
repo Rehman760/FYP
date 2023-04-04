@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import { Link, Navigate } from "react-router-dom";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [goToDash, setGoToDash] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,9 +18,31 @@ const LogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login submission
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        // Signed in 
+        setGoToDash(true);
+        console.log(response.user);
+        // ...
+      })
+      .catch((error) => {
+        console.log(" ErorCode: "+error.code);
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+      });
   };
 
+  if(goToDash){
+    
+    return <Navigate to={{
+      pathname: "/AfterLogin",
+      state: email 
+    }}/>
+  }
+
   return (
+  
     <div className="flex flex-col h-screen justify-center items-center bg-green-500">
       <div className="bg-white p-10 rounded-lg shadow-md">
         <div className="flex flex-col items-center">

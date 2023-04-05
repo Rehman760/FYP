@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword} from "firebase/auth";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [goToDash, setGoToDash] = useState(false);
+  const navigate = useNavigate();
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -22,8 +23,8 @@ const LogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         // Signed in 
-        setGoToDash(true);
         console.log(response.user);
+        navigate("/AfterLogin", {state:{email:email}});
         // ...
       })
       .catch((error) => {
@@ -32,14 +33,6 @@ const LogIn = () => {
         // const errorMessage = error.message;
       });
   };
-
-  if(goToDash){
-    
-    return <Navigate to={{
-      pathname: "/AfterLogin",
-      state: email 
-    }}/>
-  }
 
   return (
   

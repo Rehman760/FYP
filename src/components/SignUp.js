@@ -22,7 +22,10 @@ function SignUp() {
     createUserWithEmailAndPassword(auth, email, password)
     .then((response) => {
       // alert("Successfully Account Created");
-      console.log(response.user.emailVerified);
+      console.log(response.user);
+      // response.user.sendEmailVerification();
+      auth.signOut();
+      alert("Email sent");
       setgoToLogin(true);
       // Signed in
       // const user = userCredential.user;

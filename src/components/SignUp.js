@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 function SignUp() {
@@ -8,18 +8,20 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Perform");
     // Handle form submission
     const auth = getAuth();
+    
     createUserWithEmailAndPassword(auth, email, password)
     .then((response) => {
       console.log(response.user);
       // response.user.sendEmailVerification();
       auth.signOut();
-      alert("Email sent");
+      alert("Account Created Succesfully");
+      navigate("/LogIn");     
     })
     .catch((error) => {
       const errorCode = error.code;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,18 @@ const LogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login submission
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        // Signed in 
+        alert(response.user.email+" is login");
+        // navigate("/AfterLogin", {state:{email:email}});
+      })
+      .catch((error) => {
+        alert(" ErorCode: "+error.code);
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+      });
   };
 
   return (

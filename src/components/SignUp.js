@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -7,10 +8,27 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
+    const auth = getAuth();
+    
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((response) => {
+      console.log(response.user);
+      // response.user.sendEmailVerification();
+      auth.signOut();
+      alert("Account Created Succesfully");
+      navigate("/LogIn");     
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      // const errorMessage = error.message;
+      alert(errorCode);
+    });
+
   };
 
   return (
@@ -80,12 +98,11 @@ function SignUp() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <Link to="/LogIn">
         <button
-          className="btn-primary hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg" type="submit">
-          Sign Up
-        </button>
-        </Link>
+          type="submit"
+          className="w-full h-12 font-bold  text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">
+          Sign Up     
+        </button>         
       </form>
     </div>
   );

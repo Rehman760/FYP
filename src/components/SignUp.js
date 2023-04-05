@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -10,7 +11,22 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    alert("Perform");
     // Handle form submission
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((response) => {
+      console.log(response.user);
+      // response.user.sendEmailVerification();
+      auth.signOut();
+      alert("Email sent");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      // const errorMessage = error.message;
+      alert(errorCode);
+    });
+
   };
 
   return (

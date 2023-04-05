@@ -1,6 +1,10 @@
 import { initializeApp } from "firebase/app";
 import {getFirestore} from "@firebase/firestore"
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6f37cf1574205d03b0b99c6b086374f9bc156712
 const firebaseConfig = {
     apiKey: "AIzaSyBT09B43D8_HUWGAZm_LtbAcQt31o41pF8",
     authDomain: "financedb-ddce7.firebaseapp.com",
@@ -11,6 +15,10 @@ const firebaseConfig = {
     measurementId: "G-GVG8K54WER"
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6f37cf1574205d03b0b99c6b086374f9bc156712
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 

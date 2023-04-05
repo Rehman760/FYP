@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import {db} from "./firebase-config";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {doc, setDoc} from "firebase/firestore";
 
+=======
+import { useState} from "react";
+// import { Link } from "react-router-dom";
+import {db} from "./firebase-config";
+import {doc, setDoc} from "firebase/firestore";
+>>>>>>> 6f37cf1574205d03b0b99c6b086374f9bc156712
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -14,8 +21,11 @@ function SignUp() {
   const [goToLogin, setgoToLogin] = useState(false);
 
 
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     // console.log(email);
     // Handle form submission
     const auth = getAuth();
@@ -54,11 +64,24 @@ function SignUp() {
     return <Navigate to="/Login"/>
   }
 
+=======
+    console.log(firstName);
+
+    const createUser = async ()=>{
+      console.log("User creation");
+      const  data = {firstname:firstName, lastname:lastName, email:email, password:password};
+      await setDoc(doc(db, "users", email.match(/^([^@]*)@/)[1]), data);      
+    };
+    createUser();
+  };
+
+  
+>>>>>>> 6f37cf1574205d03b0b99c6b086374f9bc156712
 
   return (
     <div className="min-h-screen bg-green-500 flex items-center justify-center">
       <form
-        onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
         className="bg-white p-6 rounded-lg shadow-md"
       >
         <h2 className="text-2xl font-bold mb-6 text-green-500">Sign Up</h2>
@@ -122,13 +145,19 @@ function SignUp() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
+<<<<<<< HEAD
         {/* <Link to="/LogIn"> */}
+=======
+>>>>>>> 6f37cf1574205d03b0b99c6b086374f9bc156712
         <button
           type="submit"
           className="w-full h-12 font-bold  text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">
           Sign Up     
         </button>        
+<<<<<<< HEAD
         {/* </Link> */}
+=======
+>>>>>>> 6f37cf1574205d03b0b99c6b086374f9bc156712
       </form>
     </div>
   );

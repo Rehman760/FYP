@@ -23,6 +23,7 @@ const Navbar = () => {
             <Link to="/Services" className="px-4">Services</Link>
             <Link to="/Contact" className="px-4">Contact</Link>
             <Link to="/StudentInformation" className="px-4">Student information</Link>
+            <Link to='/BasicComponentForData' className="px-4">New component</Link>
             <button className="bg-green-500 text-white px-4 py-2 rounded-lg">Apply Now</button>
           </div>
         </div>

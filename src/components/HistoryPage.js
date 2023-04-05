@@ -29,23 +29,25 @@ const HistoryPage = (props) => {
 
     return (
         <div className="container">
-            <h1 className="text-center my-5 font-medium text-3xl">{props.title}</h1>
-            <div className="row">
-                {students.map((student) => (
-                    <div className="col-sm-4 my-3" key={student.id}>
-                        <Card>
-                            <Card.Img variant="top" src={student.picture} />
-                            <Card.Body>
-                                <Card.Title>{student.name}</Card.Title>
-                                <Card.Text>{student.bio}</Card.Text>
-                                <Card.Text className="text-muted">Sponsored by: {student.sponsoredBy}</Card.Text>
-                                <Button variant="success" href={`/student/${student.id}`}>View Profile</Button>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                ))}
-            </div>
+        <h1 className="text-center my-3 font-medium text-3xl">{props.title}</h1>
+        <div className="row">
+            {students.map((student) => (
+                <div className="col-sm-4 my-2" key={student.id}>
+                    <Card>
+                        <div className="text-center">
+                            <Card.Img variant="top" src={student.picture} style={{ height: '250px' }} />
+                        </div>
+                        <Card.Body>
+                            <Card.Title>{student.name}</Card.Title>
+                            <Card.Text>{student.bio}</Card.Text>
+                            <Card.Text className="text-muted">Sponsored by: {student.sponsoredBy}</Card.Text>
+                            <Button variant="success" href={`/student/${student.id}`}>View Profile</Button>
+                        </Card.Body>
+                    </Card>
+                </div>
+            ))}
         </div>
+    </div>
     );
 }
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import {app} from "./FirebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 function SignUp() {
@@ -24,7 +25,7 @@ function SignUp() {
       navigate("/LogIn");     
     })
     .catch((error) => {
-      const errorCode = error.code;
+      const errorCode = error.message;
       // const errorMessage = error.message;
       alert(errorCode);
     });

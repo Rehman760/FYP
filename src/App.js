@@ -20,6 +20,7 @@ import { useState } from 'react';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
+  
  
   //code for removing the scroll
   // useEffect(() => {
@@ -51,7 +52,7 @@ export default function App() {
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
           <Route path='/Notification' element={<Notification />}/>
-          <Route path='/Dashboard' element={<Dashboard />}/>
+          <Route path='/components/student/Dashboard' element={<Dashboard />}/>
         </Route>
       </Routes>
     </BrowserRouter>

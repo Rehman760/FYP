@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import {app} from "./FirebaseConfig";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -22,7 +23,8 @@ const LogIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         // Signed in 
-        alert(response.user.email+" is login");
+        // alert(response.user.email+" is login");
+        navigate("/components/student/Dashboard", {state:{email:response.user.email}});
         // navigate("/AfterLogin", {state:{email:email}});
       })
       .catch((error) => {

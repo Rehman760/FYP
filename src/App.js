@@ -52,8 +52,13 @@ export default function App() {
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
           <Route path='/Notification' element={<Notification />}/>
+<<<<<<< HEAD
           <Route path='/Dashboard' element={<Dashboard />}/>
+=======
+          
+>>>>>>> 6bd22e037b900b36221b59810e88a09055946d18
         </Route>
+        <Route path='/components/student/Dashboard' element={<Dashboard/>}/>
       </Routes>
     </BrowserRouter>
   );

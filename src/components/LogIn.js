@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import {app} from "./FirebaseConfig";
+import {app} from "./FirebaseConfig";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -28,7 +29,12 @@ const LogIn = () => {
         // navigate("/AfterLogin", {state:{email:email}});
       })
       .catch((error) => {
-        alert(" ErorCode: "+error.code);
+        if(error.code === 'auth/wrong-password'){
+          setErrorMessage('Please check the Password');
+        }
+        if(error.code === 'auth/user-not-found'){
+          setErrorMessage('Please check the Email');
+        }
         // const errorCode = error.code;
         // const errorMessage = error.message;
       });
@@ -71,6 +77,13 @@ const LogIn = () => {
             </div>
             <Link to="/ForgotPassword" className="text-green-500 font-medium hover:text-green-700">Forgot password?</Link>
           </div>
+
+          {errorMessage &&  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            {/* <strong class="font-bold">Error!</strong> */}
+            <span class="block sm:inline">{errorMessage}</span>
+          </div>
+          }
+
           <button 
           type="submit"
           className="w-full h-12 font-bold text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">

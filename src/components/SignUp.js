@@ -9,13 +9,13 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
-    const auth = getAuth();
-    
+    const auth = getAuth();    
     createUserWithEmailAndPassword(auth, email, password)
     .then((response) => {
       console.log(response.user);
@@ -25,9 +25,16 @@ function SignUp() {
       navigate("/LogIn");     
     })
     .catch((error) => {
-      const errorCode = error.message;
       // const errorMessage = error.message;
-      alert(errorCode);
+      if(error.code === 'auth/email-already-in-use'){
+        setErrorMessage('Please use another email. This email is already in use.');
+      }      
+
+      if(error.code === 'auth/weak-password'){
+        setErrorMessage('Please use strong password');
+      }
+           
+      // alert(error.code);
     });
 
   };
@@ -99,6 +106,12 @@ function SignUp() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
+
+        {errorMessage &&  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          {/* <strong class="font-bold">Error!</strong> */}
+          <span class="block sm:inline">{errorMessage}</span>
+        </div>}
+            
         <button
           type="submit"
           className="w-full h-12 font-bold  text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">

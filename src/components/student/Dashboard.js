@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Notification from '../Notification';
 import Opportunities from '../Opportunities';
 
 function Navbar({ name }) {
+  const {state} = useLocation();
   return (
     <nav className="bg-white shadow">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,8 +14,8 @@ function Navbar({ name }) {
         </div>
         <div className="flex items-center">
           <div className="ml-4 flex items-center">
-            <img className="w-8 h-8 rounded-full border-2 border-green-500" src="https://dummyimage.com/100x100/000/fff" alt="User" />
-            <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${name}`}</h2>
+            <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${state.email}`}</h2>
+            <img className="w-8 h-8 rounded-full border-2 border-green-500" src="https://dummyimage.com/100x100/000/fff" alt="User"/>
           </div>
         </div>
       </div>

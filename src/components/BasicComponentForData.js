@@ -5,8 +5,8 @@ import Donor from '../donor'
 function BasicComponentForData() {
   return (
     <div>
-        {/* <Navbar/> */}
-        <Donor/>
+        <Navbar/>
+        {/* <Donor/> */}
 
     </div>
   )

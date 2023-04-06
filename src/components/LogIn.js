@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import {app} from "./FirebaseConfig";
+import {app} from "./FirebaseConfig";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const LogIn = () => {
@@ -83,7 +83,7 @@ const LogIn = () => {
             <span class="block sm:inline">{errorMessage}</span>
           </div>
           }
-          
+
           <button 
           type="submit"
           className="w-full h-12 font-bold text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">

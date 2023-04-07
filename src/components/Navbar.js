@@ -39,7 +39,7 @@ const Navbar = () => {
                 isNavOpen ? "block" : "hidden"
               }`}
             >
-              <div className="text-md md:flex-grow">
+              <div className=" text-md md:flex-grow">
                 <Link
                   to="/"
                   className="block mt-4 md:inline-block md:mt-0 md:ml-6"

@@ -54,7 +54,9 @@ export default function App() {
           <Route path='/Notification' element={<Notification />}/>
         </Route>
         <Route path='/components/student/Dashboard' element={<Dashboard/>}/>
+          
       </Routes>
+
     </BrowserRouter>
   );
 }

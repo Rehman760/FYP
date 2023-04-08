@@ -9,8 +9,8 @@ function BasicComponentForData() {
   return (
     <div>
         {/* <Navbar/> */}
-        {/* <Donor/> */}
-        <StudentProfile/>
+        <Donor/>
+        {/* <StudentProfile/> */}
         {/* <DonorProfile/> */}
         {/* <DonorForm/> */}
 

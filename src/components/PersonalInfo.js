@@ -6,15 +6,21 @@ import AddressInfo from './AddressInfo';
 import NationalityInfo from './NationalityInfo';
 import { useState } from 'react';
 
-function PersonalInfo() {
+function PersonalInfo({setActiveSection, activeSectionNo}) {
   const [selfData, setSelfData] = useState();
   const [bioData, setBioData] = useState();
   const [fatherData, setFatherData] = useState();
   const [addressData, setAddressData] = useState();
   const [nationalityData, setNationalityData] = useState();
+  
   const handleNextPage = () => {
-    // Save data to database and move to next page
-    showMe();
+    setActiveSection(activeSectionNo+1);
+    // showMe();
+  };
+
+  const handlePreviousPage = () => {
+    // Move to previous page
+    alert("No Previous Page. Stop here");
   };
 
   const onSelfDataFetch = (data)=>{
@@ -50,9 +56,7 @@ function PersonalInfo() {
     console.log(nationalityData);
   }
 
-  const handlePreviousPage = () => {
-    // Move to previous page
-  };
+  
   return (
     
     <div className="bg-green-50 p-8 rounded-lg shadow-md">

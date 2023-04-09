@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import InputField from './InputField';
 
-const EducationInfo = () => {
+const EducationInfo = ({setActiveSection, activeSectionNo}) => {
   const [formData, setFormData] = useState({
     schoolName: '',
     degree: '',
@@ -17,10 +17,14 @@ const EducationInfo = () => {
 
   const handleNextPage = () => {
     // Save data to database and move to next page
+    setActiveSection(activeSectionNo+1);
+    // show();
   };
 
   const handlePreviousPage = () => {
     // Move to previous page
+    console.log("Previous"+activeSectionNo);
+    setActiveSection(activeSectionNo-1);
   };
 
   return (

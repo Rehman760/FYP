@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import InputField from './InputField';
 
-const ExpendituresInfo = () => {
+const ExpendituresInfo = ({setActiveSection, activeSectionNo}) => {
   const [tuitionFee, setTuitionFee] = useState('');
   const [accommodation, setAccommodation] = useState('');
   const [booksAndSupplies, setBooksAndSupplies] = useState('');
@@ -10,10 +10,13 @@ const ExpendituresInfo = () => {
 
   const handleNextPage = () => {
     // Save data to database and move to next page
+    setActiveSection(activeSectionNo+1);      
   };
 
   const handlePreviousPage = () => {
     // Move to previous page
+    console.log("Previous"+activeSectionNo);
+    setActiveSection(activeSectionNo-1);
   };
 
   return (

@@ -2,15 +2,12 @@ import { useState } from 'react';
 import InputField from './InputField';
 
 const ExpendituresInfo = ({setActiveSection, activeSectionNo}) => {
-  const [tuitionFee, setTuitionFee] = useState('');
-  const [accommodation, setAccommodation] = useState('');
-  const [booksAndSupplies, setBooksAndSupplies] = useState('');
-  const [transportation, setTransportation] = useState('');
-  const [otherExpenses, setOtherExpenses] = useState('');
+  const [expInfo, setExpInfo] = useState({});
 
   const handleNextPage = () => {
     // Save data to database and move to next page
     setActiveSection(activeSectionNo+1);      
+    showMe();
   };
 
   const handlePreviousPage = () => {
@@ -18,6 +15,10 @@ const ExpendituresInfo = ({setActiveSection, activeSectionNo}) => {
     console.log("Previous"+activeSectionNo);
     setActiveSection(activeSectionNo-1);
   };
+
+  const showMe = ()=>{
+    console.log(expInfo);
+  }
 
   return (
     <div className="bg-green-50 py-4 px-2 sm:py-8 sm:px-6 lg:px-8">
@@ -30,36 +31,31 @@ const ExpendituresInfo = ({setActiveSection, activeSectionNo}) => {
           label="Tuition fee"
           type="number"
           placeholder="Enter amount"
-          value={tuitionFee}
-          onChange={(e) => setTuitionFee(e.target.value)}
+          onChange={(e) => setExpInfo({...expInfo, tuitionFee:e.target.value})}
         />
         <InputField
           label="Accommodation"
           type="number"
           placeholder="Enter amount"
-          value={accommodation}
-          onChange={(e) => setAccommodation(e.target.value)}
+          onChange={(e) => setExpInfo({...expInfo, accommodation:e.target.value})}
         />
         <InputField
           label="Books and supplies"
           type="number"
           placeholder="Enter amount"
-          value={booksAndSupplies}
-          onChange={(e) => setBooksAndSupplies(e.target.value)}
+          onChange={(e) => setExpInfo({...expInfo, booksAndSupplies:e.target.value})}
         />
         <InputField
           label="Transportation"
           type="number"
           placeholder="Enter amount"
-          value={transportation}
-          onChange={(e) => setTransportation(e.target.value)}
+          onChange={(e) => setExpInfo({...expInfo, transportation:e.target.value})}
         />
         <InputField
           label="Other expenses"
           type="number"
           placeholder="Enter amount"
-          value={otherExpenses}
-          onChange={(e) => setOtherExpenses(e.target.value)}
+          onChange={(e) => setExpInfo({...expInfo, otherExpenses:e.target.value})}
         />
       </div>
 

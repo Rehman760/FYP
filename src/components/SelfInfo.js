@@ -73,7 +73,7 @@ const SelfInfo = ({sendData}) => {
           placeholder="Enter phone"
           onChange={(e) => {
             setSelfInfo({...selfInfo, phone:e.target.value})
-            console.log(selfInfo);
+            // console.log(selfInfo);
             // setSelfData(selfInfo);
           }}
         />

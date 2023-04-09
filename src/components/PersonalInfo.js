@@ -14,6 +14,10 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   const [nationalityData, setNationalityData] = useState();
   
   const handleNextPage = () => {
+    //Task-1 -Check if any field is null then generate an indicator message.
+    showMe();
+    //Task-2 -Save data to the database
+    //Task 3 -Move to next page
     setActiveSection(activeSectionNo+1);
     // showMe();
   };
@@ -24,25 +28,25 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   };
 
   const onSelfDataFetch = (data)=>{
-    console.log(data);
+    // console.log(data);
     setSelfData(data);
   }
   const onBioDataFetch = (data)=>{
-    console.log(data);
+    // console.log(data);
     setBioData(data);    
   }
   const onFatherDataFetch =(data)=>{
-    console.log(data);
+    // console.log(data);
     setFatherData(data);
   }
   const onAddressDataFetch = (data)=>{
-    console.log(data);
+    // console.log(data);
     setAddressData(data);
 
   }
 
   const onNationalityDataFetch = (data)=>{
-    console.log(data);
+    // console.log(data);
     setNationalityData(data);
   }
 

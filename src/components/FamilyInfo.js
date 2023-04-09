@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
 
-const FamilyInfo = ({setActiveSection, activeSectionNo, totalSections}) => {
-  const [fatherName, setFatherName] = useState("");
-  const [fatherOccupation, setFatherOccupation] = useState("");
-  const [motherName, setMotherName] = useState("");
-  const [motherOccupation, setMotherOccupation] = useState("");
-  const [annualIncome, setAnnualIncome] = useState("");
+const FamilyInfo = ({setActiveSection, activeSectionNo}) => {
+  const [familyInfo, setFamilyInfo] = useState({});
 
   const handleNextPage = () => {
     // Save data to database and move to next page
     setActiveSection(activeSectionNo+1);
-    // showMe();
+    showMe();
   };
 
   const handlePreviousPage = () => {
@@ -20,7 +16,9 @@ const FamilyInfo = ({setActiveSection, activeSectionNo, totalSections}) => {
     setActiveSection(activeSectionNo-1);
   };
 
-
+  const showMe = ()=>{
+    console.log(familyInfo);
+  }
 
 
   return (
@@ -30,36 +28,36 @@ const FamilyInfo = ({setActiveSection, activeSectionNo, totalSections}) => {
           label="Father's Name"
           type="text"
           placeholder="Enter your Father Name"
-          value={fatherName}
-          onChange={(e) => setFatherName(e.target.value)}
+          name="fatherName"
+          onChange={(e)=>setFamilyInfo({...familyInfo, fatherName:e.target.value})}
         />
         <InputField
           label="Father's Occupation"
           type="text"
           placeholder="Enter your Father Occupation"
-          value={fatherOccupation}
-          onChange={(e) => setFatherOccupation(e.target.value)}
+          name="fatherOccupation"
+          onChange={(e)=>setFamilyInfo({...familyInfo, fatherOccupation:e.target.value})}
         />
         <InputField
           label="Mother's Name"
           type="text"
           placeholder="Enter your Mother's Name"
-          value={motherName}
-          onChange={(e) => setMotherName(e.target.value)}
+          name="motherName"
+          onChange={(e)=>setFamilyInfo({...familyInfo, motherName:e.target.value})}
         />
         <InputField
           label="Mother's Occupation"
           type="text"
           placeholder="Enter your Mother's Occupation"
-          value={motherOccupation}
-          onChange={(e) => setMotherOccupation(e.target.value)}
+          name="motherOccupation"
+          onChange={(e)=>setFamilyInfo({...familyInfo, motherOccupation:e.target.value})}
         />
         <InputField
           label="Annual Income"
           type="number"
           placeholder="Enter your Annual Income"
-          value={annualIncome}
-          onChange={(e) => setAnnualIncome(e.target.value)}
+          name="annualIncome"
+          onChange={(e)=>setFamilyInfo({...familyInfo, annualIncome:e.target.value})}
         />
       </div>
       <div className="flex justify-between mt-8">

@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from './student/Navbar'
-import Donor from '../donor'
+import Donor from './donor'
 import StudentProfile from './student/StudentProfile'
-import DonorProfile from '../donor/DonorProfile'
-import DonorForm from '../donor/DonorForm'
+import DonorProfile from './donor/DonorProfile'
+import DonorForm from './donor/DonorForm'
 import LoadingComponent from './LoadingComponent'
 import PopUp from './PopUp'
-import Dashboard from '../donor/Dashboard'
+import Dashboard from './donor/Dashboard'
 import StudentInformation from './student/StudentInformation'
 
 function BasicComponentForData() {
@@ -15,12 +15,12 @@ function BasicComponentForData() {
         {/* <Navbar/> */}
         {/* <Donor/> */}
         {/* <StudentProfile/> */}
-        {/* <DonorProfile/> */}
+        <DonorProfile/>
         {/* <DonorForm/> */}
         {/* <LoadingComponent/> */}
         {/* <PopUp/> */}
         {/* <Dashboard/> */}
-        <StudentInformation/>
+        {/* <StudentInformation/> */}
 
     </div>
   )

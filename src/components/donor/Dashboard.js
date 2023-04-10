@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Notification from '../components/Notification';
+import Notification from '../Notification';
 import { FaSearch, FaMoneyBill, FaComments, FaBell,FaBars, FaTimes } from 'react-icons/fa';
-import logo from '../components/images/logo2.jpg'
-import HistoryPage from '../components/HistoryPage';
+import logo from '../images/logo2.jpg'
+import HistoryPage from '../HistoryPage';
 
 
 function Navbar({ name }) {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaUser, FaEnvelope, FaPhone, FaDollarSign, FaMoneyCheck, FaBriefcase, FaImage,FaUserCircle  } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaDollarSign, FaMoneyCheck, FaBriefcase, FaImage, FaUserCircle } from 'react-icons/fa';
 
 
 function DonorForm({ handleSubmit }) {
@@ -35,7 +35,7 @@ function DonorForm({ handleSubmit }) {
       <div className="md:grid md:grid-cols-2 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0">
-            <h3 className="text-2xl font-medium leading-6 text-gray-900">Personal Information</h3>
+            <h3 className="text-2xl font-medium leading-6 text-green-500">Personal Information</h3>
             <p className="mt-1 text-lg text-gray-600">Please provide your personal information.</p>
           </div>
         </div>
@@ -51,13 +51,13 @@ function DonorForm({ handleSubmit }) {
                     <FaUser className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
-                    type="text"
+                    type="number"
                     name="name"
                     id="name"
                     autoComplete="off"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="focus:ring-green-500 focus:border-green-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                    value={income}
+                    onChange={(e) => setIncome(e.target.value)}
+                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -71,14 +71,13 @@ function DonorForm({ handleSubmit }) {
                     <FaEnvelope className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
-                    type="email"
+                    type="number"
                     name="email"
                     id="email"
                     autoComplete="off"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="focus:ring-green-500 focus:border-green-500 block w-full pl-10 sm:text
-                    sm:text-sm border-gray-300 rounded-md"
+                    value={income}
+                    onChange={(e) => setIncome(e.target.value)}
+                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -92,13 +91,13 @@ function DonorForm({ handleSubmit }) {
                     <FaPhone className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
-                    type="tel"
+                    type="number"
                     name="phone"
                     id="phone"
                     autoComplete="off"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="focus:ring-green-500 focus:border-green-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                    value={income}
+                    onChange={(e) => setIncome(e.target.value)}
+                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -118,7 +117,7 @@ function DonorForm({ handleSubmit }) {
                     autoComplete="off"
                     value={income}
                     onChange={(e) => setIncome(e.target.value)}
-                    className="focus:ring-green-500 focus:border-green-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -132,13 +131,13 @@ function DonorForm({ handleSubmit }) {
                     <FaMoneyCheck className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
-                    type="text"
-                    name="bankAccount"
-                    id="bankAccount"
+                    type="number"
+                    name="bank"
+                    id="bank"
                     autoComplete="off"
-                    value={bankAccount}
-                    onChange={(e) => setBankAccount(e.target.value)}
-                    className="focus:ring-green-500 focus:border-green-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                    value={income}
+                    onChange={(e) => setIncome(e.target.value)}
+                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -152,13 +151,13 @@ function DonorForm({ handleSubmit }) {
                     <FaBriefcase className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
-                    type="text"
+                    type="number"
                     name="job"
                     id="job"
                     autoComplete="off"
-                    value={job}
-                    onChange={(e) => setJob(e.target.value)}
-                    className="focus:ring-green-500 focus:border-green-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                    value={income}
+                    onChange={(e) => setIncome(e.target.value)}
+                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -168,53 +167,56 @@ function DonorForm({ handleSubmit }) {
 php
 Copy code
               text-gray-700">
-              Profile Picture
-            </label>
-            <div className="mt-1 relative rounded-md shadow-sm">
-              <div className="flex items-center justify-center py-2 px-3 border border-gray-300 bg-white rounded-md">
-                {image ? (
-                  <img
-                    src={image}
-                    alt="Profile"
-                    className="h-20 w-20 object-cover rounded-full"
-                  />
-                ) : (
-                  <FaUserCircle className="h-12 w-12 text-gray-400" aria-hidden="true" />
-                )}
-                <div className="ml-2 text-sm">
-                  <label htmlFor="image" className="font-medium text-green-600 hover:text-green-500">
-                    {image? 'Change' : 'Upload'}
-                  </label>
-                  <p className="text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                  <input
-                    type="file"
-                    name="image"
-                    id="image"
-                    className="hidden"
-                    onChange={handleImageChange}
-                  />
+                  Profile Picture
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="flex items-center justify-center py-2 px-3 border border-gray-300 bg-white rounded-md">
+                    {image ? (
+                      <img
+                        src={image}
+                        alt="Profile"
+                        className="h-20 w-20 object-cover rounded-full"
+                      />
+                    ) : (
+                      <FaUserCircle className="h-12 w-12 text-gray-400" aria-hidden="true" />
+                    )}
+                    <div className="ml-2 text-sm">
+                      <label htmlFor="image" className="font-medium text-green-600 hover:text-green-500">
+                        {image ? 'Change' : 'Upload'}
+                      </label>
+                      <p className="text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                      <input
+                        type="number"
+                        name="image"
+                        id="image"
+                        autoComplete="off"
+                        value={income}
+                        onChange={(e) => setIncome(e.target.value)}
+                        className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
+                        required
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+            <div className="mt-8 border-t border-green-200 pt-5 ">
+              <div className="flex justify-end ">
+                <button
+                  type="submit"
+                  className="ml-3 inline-flex border-green-600 justify-center py-2 px-4 border  border-green-300 shadow-sm text-lg font-medium rounded-md text-black  hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className="mt-8 border-t border-green-200 pt-5">
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border  border-green-300 shadow-sm text-lg font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-            >
-              Save
-            </button>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-</div>
 
 
-);
+  );
 }
 
 export default DonorForm;    

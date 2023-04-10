@@ -7,18 +7,20 @@ import DonorForm from '../donor/DonorForm'
 import LoadingComponent from './LoadingComponent'
 import PopUp from './PopUp'
 import Dashboard from '../donor/Dashboard'
+import StudentInformation from './student/StudentInformation'
 
 function BasicComponentForData() {
   return (
     <div>
         {/* <Navbar/> */}
         {/* <Donor/> */}
-        <StudentProfile/>
+        {/* <StudentProfile/> */}
         {/* <DonorProfile/> */}
-        <DonorForm/>
+        {/* <DonorForm/> */}
         {/* <LoadingComponent/> */}
         {/* <PopUp/> */}
         {/* <Dashboard/> */}
+        <StudentInformation/>
 
     </div>
   )

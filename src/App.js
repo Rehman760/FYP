@@ -12,7 +12,7 @@ import Services from './components/Services';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import ForgotPassword from './components/ForgotPassword';
-import StudentInformation from './components/StudentInformation';
+import StudentInformation from './components/student/StudentInformation';
 import BasicComponentForData from './components/BasicComponentForData';
 import Notification from './components/Notification';
 import StudentNav from './components/student/Navbar';

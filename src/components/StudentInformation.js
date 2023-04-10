@@ -8,6 +8,10 @@ import PersonalInfo from "./PersonalInfo";
 const StudentInformation = () => {
   const [activeSection, setActiveSection] = useState(1);
 
+  const getActiveSection = (number)=>{
+    setActiveSection(number);
+  }
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex flex-col md:flex-row justify-between border-b border-gray-300 py-2">
@@ -53,11 +57,11 @@ const StudentInformation = () => {
         </div>
       </div>
       <div className="p-4">
-        {activeSection === 1 && <PersonalInfo />}
-        {activeSection === 2 && <EducationInfo />}
-        {activeSection === 3 && <FamilyInfo />}
-        {activeSection === 4 && <ExpendituresInfo />}
-        {activeSection === 5 && <OtherDetails />}
+        {activeSection === 1 && <PersonalInfo setActiveSection={getActiveSection} activeSectionNo={activeSection} />}
+        {activeSection === 2 && <EducationInfo setActiveSection={getActiveSection} activeSectionNo={activeSection} />}
+        {activeSection === 3 && <FamilyInfo setActiveSection={getActiveSection} activeSectionNo={activeSection} />}
+        {activeSection === 4 && <ExpendituresInfo setActiveSection={getActiveSection} activeSectionNo={activeSection} />}
+        {activeSection === 5 && <OtherDetails setActiveSection={getActiveSection} activeSectionNo={activeSection} />}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ function BasicComponentForData() {
     <div>
         {/* <Navbar/> */}
         {/* <Donor/> */}
-        {/* <StudentProfile/> */}
+        <StudentProfile/>
         {/* <DonorProfile/> */}
         <DonorForm/>
         {/* <LoadingComponent/> */}

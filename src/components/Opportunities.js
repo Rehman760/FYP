@@ -25,49 +25,6 @@ function Opportunities() {
     fetchData();
   },[]);
 
-  // function setOppor(arr){
-  //   optrs.push(arr);
-
-  // }
-
-    
-
-  // const fetchData = ()=>{
-  //   db.collection("Opportunities").get()
-  //   .then(qs=>{
-  //     qs.array.forEach(element => {
-  //       var data = element.data();
-  //       setInfo(arr=>[...arr, data]);        
-  //     });
-    
-  //   });
-
-  // }
-  
-  // const opportunities = [
-  //   {
-  //     id: 1,
-  //     title: 'Internship at Google',
-  //     description: 'We are looking for a highly motivated individual to join our team as a software engineering intern.',
-  //     deadline: 'April 15, 2023',
-  //     image: 'https://via.placeholder.com/150',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Scholarship at Stanford University',
-  //     description: 'We are offering a full scholarship to an outstanding student with demonstrated financial need.',
-  //     deadline: 'May 1, 2023',
-  //     image: 'https://via.placeholder.com/150',
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Volunteer opportunity at local food bank',
-  //     description: 'We need volunteers to help sort and distribute food to those in need in our community.',
-  //     deadline: 'Ongoing',
-  //     image: 'https://via.placeholder.com/150',
-  //   },
-  // ];
-
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6">
@@ -76,7 +33,9 @@ function Opportunities() {
       </div>
       <div className="border-t border-gray-200">
         <ul className="divide-y divide-gray-200">
-          {info.map((opportunity) => (
+          {           
+            //Spinner to show the data is being fetched from the database. (state: Info)
+          info.map((opportunity) => (
             <li key={opportunity.id} className="px-4 py-4 sm:px-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">

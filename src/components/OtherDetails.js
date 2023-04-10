@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
 
-const OtherDetails = () => {
+const OtherDetails = ({setActiveSection, activeSectionNo}) => {
   const [interests, setInterests] = useState("");
   const [achievements, setAchievements] = useState("");
   const [hobbies, setHobbies] = useState("");
@@ -17,14 +17,19 @@ const OtherDetails = () => {
   const handleHobbiesChange = (event) => {
     setHobbies(event.target.value);
   };
-  const handleNextPage = () => {
+
+  const handleSavePage = () => {
     // Save data to database and move to next page
+    alert("Data is saved to the database");
   };
 
   const handlePreviousPage = () => {
     // Move to previous page
+    console.log("Previous"+activeSectionNo);
+    setActiveSection(activeSectionNo-1);
   };
 
+  
   return (
     <div className="bg-green-50 py-8 px-4 sm:px-6 lg:px-8">
     <p className="mt-1 text-sm text-gray-500">
@@ -70,7 +75,7 @@ const OtherDetails = () => {
         </button>
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          onClick={handleNextPage}
+          onClick={handleSavePage}
         >
           Save
         </button>

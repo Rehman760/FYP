@@ -14,12 +14,12 @@ const HistoryPage = (props) => {
         {
             id: 2,
             name: "Ameer Hamza",
-            bio: "Ameer is a dedicated student who is currently pursuing a degree in medicine at ABC University. She is committed to making a positive impact on her community through her profession.",
+            bio: "Ameer is a dedicated student who is currently pursuing a degree in medicine at ABC University. He is committed to making a positive impact on her community through his profession.",
             picture: "https://via.placeholder.com/150",
             status: "sponsored"
         },
         {
-            id: 1,
+            id: 3,
             name: "Shoaib Ahmed",
             bio: "Shoaib is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
             picture: "https://via.placeholder.com/150",

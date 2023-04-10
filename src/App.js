@@ -15,7 +15,9 @@ import ForgotPassword from './components/ForgotPassword';
 import StudentInformation from './components/StudentInformation';
 import BasicComponentForData from './components/BasicComponentForData';
 import Notification from './components/Notification';
+import StudentNav from './components/student/Navbar';
 import Dashboard from './components/student/Dashboard';
+import StudentProfile from './components/student/StudentProfile';
 import { useState } from 'react';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,8 +54,13 @@ export default function App() {
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
           <Route path='/Notification' element={<Notification />}/>
+              
         </Route>
-        <Route path='/components/student/Dashboard' element={<Dashboard/>}/>
+        <Route path='/components/student/Navbar' element={<StudentNav/>}>
+        <Route index path=':name' element={<Dashboard/>}/>
+  
+          {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}
+        </Route>
       </Routes>
     </BrowserRouter>
   );

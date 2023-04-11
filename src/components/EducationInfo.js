@@ -4,6 +4,8 @@ import InputField from './InputField';
 const EducationInfo = ({setActiveSection, activeSectionNo}) => {
   const [formData, setFormData] = useState({});
 
+  
+
   const handleNextPage = () => {
     // Save data to database and move to next page
     setActiveSection(activeSectionNo+1);

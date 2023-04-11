@@ -6,6 +6,12 @@ import AddressInfo from './AddressInfo';
 import NationalityInfo from './NationalityInfo';
 import { useState } from 'react';
 
+function checkForEmptyField(obj){
+  console.log(obj);
+
+
+}
+
 function PersonalInfo({setActiveSection, activeSectionNo}) {
   const [selfData, setSelfData] = useState();
   const [bioData, setBioData] = useState();
@@ -15,6 +21,7 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   
   const handleNextPage = () => {
     //Task-1 -Check if any field is null then generate an indicator message.
+    checkForEmptyField(selfData);
     showMe();
     //Task-2 -Save data to the database
     //Task 3 -Move to next page
@@ -59,6 +66,7 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
     console.log(addressData);
     console.log(nationalityData);
   }
+
 
   
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Notification from '../Notification';
-import Opportunities from '../Opportunities';
+import Opportunities from './Opportunities';
 
 function Navbar({ name }) {
   const {state} = useLocation();

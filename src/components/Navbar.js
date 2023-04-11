@@ -8,6 +8,9 @@ const Navbar = () => {
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
 
   return (
     <>
@@ -42,28 +45,28 @@ const Navbar = () => {
               <div className=" text-md md:flex-grow">
                 <Link
                   to="/"
-                  className="block mt-4 md:inline-block md:mt-0 md:ml-6"
+                  className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"
+                  onClick={closeNav}
                 >
                   Home
                 </Link>
-                <Link to="/AboutUs" className="block mt-4 md:inline-block md:mt-0 md:ml-6">About</Link>
-              <Link to="/HistoryPage"className="block mt-4 md:inline-block md:mt-0 md:ml-6" >History</Link>
-              <Link to="/Donors"className="block mt-4 md:inline-block md:mt-0 md:ml-6" title="Our Donors">Donors</Link>
-              <Link to="/UniversityPage" className="block mt-4 md:inline-block md:mt-0 md:ml-6">Universities</Link>
-              <Link to="/Services" className="block mt-4 md:inline-block md:mt-0 md:ml-6">Services</Link>
-              <Link to="/Contact" className="block mt-4 md:inline-block md:mt-0 md:ml-6">Contact</Link>
-              <Link to="/StudentInformation" className="block mt-4 md:inline-block md:mt-0 md:ml-6">Student information</Link>
+                <Link to="/AboutUs" className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"   onClick={closeNav}>About</Link>
+              <Link to="/HistoryPage"className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"    onClick={closeNav}>History</Link>
+              <Link to="/Donors"className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"    onClick={closeNav} title="Our Donors">Donors</Link>
+              <Link to="/UniversityPage" className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer" onClick={closeNav}>   Universities</Link>
+              <Link to="/Services" className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}>Services</Link>
+              <Link to="/Contact" className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}>Contact</Link>
 
                 <Link
                   to="/BasicComponentForData"
-                  className="block mt-4 md:inline-block md:mt-0 md:ml-6"
+                  className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}
                 >
                   New component
                 </Link>
               </div>
               <div>
-                <button className="bg-green-500 text-white px-4 py-2 rounded-lg md:ml-4">
-                  Apply Now
+                <button className="bg-green-500 text-white px-3 py-2 rounded-lg md:ml-4">
+                  Log in as Student
                 </button>
               </div>
             </div>

@@ -6,7 +6,7 @@ import History from './HistoryPage'
 import UniversityPage from './UniversityPage'
 import Services from './Services'
 import Contact from './Contact'
-import StudentInformation from './StudentInformation'
+import StudentInformation from './student/StudentInformation'
 import Donors from './Donors'
 
 const HomePage = () => {

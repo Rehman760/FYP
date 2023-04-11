@@ -16,6 +16,7 @@ const LogIn = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+  const handleGmailLogin=(e)=>{}
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +26,7 @@ const LogIn = () => {
       .then((response) => {
         // Signed in 
         // alert(response.user.email+" is login");
-        navigate("/components/student/Dashboard", {state:{email:response.user.email}});
+        navigate("/components/student/Navbar", {state:{email:response.user.email}});
         // navigate("/AfterLogin", {state:{email:email}});
       })
       .catch((error) => {
@@ -44,9 +45,18 @@ const LogIn = () => {
     <div className="flex flex-col h-screen justify-center items-center bg-green-500">
       <div className="bg-white p-10 rounded-lg shadow-md">
         <div className="flex flex-col items-center">
-          <h1 className="text-4xl font-bold text-green-500">Finance for Education</h1>
+          <h1 className="text-4xl font-bold text-green-500 ">Finance for Education</h1>
           <p className="text-xl font-semibold mt-2 mb-8 text-gray-500">Login to your account</p>
         </div>
+        <button
+  onClick={handleGmailLogin}
+  className="flex items-center justify-center w-full mt-6 h-12 mb-2 rounded-lg shadow-md bg-green-500 text-white hover:bg-green-700"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M18.533 7.678H10v4.644h4.149a4.376 4.376 0 01-1.896 2.864v2.381h3.072c1.797-1.659 2.835-4.098 2.835-6.809a6.764 6.764 0 00-.712-3.48zM9.999 8.134v3.445l-2.74 1.756a6.736 6.736 0 01-.24-2.042c0-1.815.702-3.542 1.976-4.834L9.999 8.134zm0-7.678a6.76 6.76 0 015.304 2.604l-2.441 2.428a3.877 3.877 0 00-2.863-1.301c-2.14 0-3.897 1.743-3.897 3.897 0 .44.076.865.209 1.266l-2.245 1.399A6.751 6.751 0 019.999.456z" clipRule="evenodd" />
+  </svg>
+  Log in with Gmail
+</button>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col mb-6">
             <label htmlFor="email" className="text-gray-600 font-medium mb-2">Email Address</label>

@@ -56,8 +56,8 @@ export const StudentNavbarData = [
     {
         title:'Logout',
         icons:<FaLock/>,
-        link:'logout',
-        body:<h1>Exit</h1>
+        link:'/',
+        body:'Exit'
     }
 ]
 

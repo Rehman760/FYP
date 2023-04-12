@@ -4,7 +4,7 @@ import AboutUs from './components/AboutUs';
 import HomePage from './components/HomePage';
 import HistoryPage from './components/HistoryPage';
 import UniversityPage from './components/UniversityPage';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import  Navbar  from './components/Navbar';
 import Donors from './components/Donors'
 import Contact from "./components/Contact"
@@ -19,6 +19,8 @@ import StudentNav from './components/student/Navbar';
 import Dashboard from './components/student/Dashboard';
 import StudentProfile from './components/student/StudentProfile';
 import { useState } from 'react';
+import StudentNavbar from './components/student/StudentNavbar';
+import Container from './components/student/Container';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
@@ -47,20 +49,20 @@ export default function App() {
           <Route path="/Donors" element={<Donors/>} />
           <Route path='/UniversityPage' element={<UniversityPage />} />
           <Route path='/Services' element={<Services />}/>
-          <Route path="*" element={<Contact />} />
+          <Route path="*" element={<h1>Page not found</h1>} />
           <Route path='/LogIn' element={<LogIn/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
           <Route path='/StudentInformation' element={<StudentInformation />}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
           <Route path='/Notification' element={<Notification />}/>
-              
         </Route>
-        <Route path='/components/student/Navbar' element={<StudentNav/>}>
-        <Route index path=':name' element={<Dashboard/>}/>
+        <Route path="student" element={<StudentNavbar/>}>
+            <Route path=":catId" element={<Container/>}/>
+        </Route>
   
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}
-        </Route>
+
         <Route path='/components/student/Dashboard' element={<Dashboard/>}/>
       </Routes>
 

@@ -36,3 +36,72 @@
     transform: rotate(360deg);
   }
 }
+
+*{
+  margin:0;
+  padding:0;
+  text-decoration: none;
+}
+.student-portal{
+  display:flex;
+}
+main{
+  width: 100vw;
+  margin: 0;
+  /* background-color: yellow; */
+}
+.side-nav-bar{
+  background: greenyellow;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  width: 250px;
+  transition: all 0.5s;
+}
+
+.logo-section{
+  display: flex;
+  align-items:center;
+  /* justify-content: center; */
+  /*background-color: white; */
+  color: #000;
+  padding:20px 10px;
+  padding-bottom: 50px;
+  /* padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 0px; */
+}
+.logo{
+  font-size: 30px;
+}
+.ham-sign{
+  display: flex;
+  font-size: 25px;
+  margin-left: 85px;
+}
+
+.nav-item{
+  display: flex;
+  color: #fff;
+  border-bottom: 1px solid black;
+  align-items: center;
+  padding: 10px 15px;
+  padding-top: 25px;
+  gap: 15px;
+  transition: all 0.25s;
+}
+.nav-item:hover{
+  background-color: white;
+  color: #000;
+  transition: all 0.25s;
+}
+.active{
+  background-color: white;
+  color: #000;
+}
+.nav-title, .nav-icon{
+  font-size: 20px;
+}
+
+

@@ -51,7 +51,7 @@ main{
   /* background-color: yellow; */
 }
 .side-nav-bar{
-  background: greenyellow;
+  background: rgb(92, 135, 27);
   color: #fff;
   height: 100vh;
   position: fixed;

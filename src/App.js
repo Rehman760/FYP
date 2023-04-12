@@ -4,7 +4,7 @@ import AboutUs from './components/AboutUs';
 import HomePage from './components/HomePage';
 import HistoryPage from './components/HistoryPage';
 import UniversityPage from './components/UniversityPage';
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import  Navbar  from './components/Navbar';
 import Donors from './components/Donors'
 import Contact from "./components/Contact"
@@ -21,6 +21,9 @@ import StudentProfile from './components/student/StudentProfile';
 import { useState } from 'react';
 import StudentNavbar from './components/student/StudentNavbar';
 import Container from './components/student/Container';
+import DonorDashboard from './components/donor/DonorDashboard';
+import DonorProfile from './components/donor/DonorProfile';
+import DonorForm from './components/donor/DonorForm';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
@@ -49,16 +52,19 @@ export default function App() {
           <Route path="/Donors" element={<Donors/>} />
           <Route path='/UniversityPage' element={<UniversityPage />} />
           <Route path='/Services' element={<Services />}/>
-          <Route path="*" element={<h1>Page not found</h1>} />
+          <Route path='/Contact' element={<Contact/>}/>          
           <Route path='/LogIn' element={<LogIn/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
-          <Route path='/StudentInformation' element={<StudentInformation />}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
-          <Route path='/Notification' element={<Notification />}/>
+          <Route path="*" element={<h1>Page not found</h1>} />
         </Route>
         <Route path="student" element={<StudentNavbar/>}>
             <Route path=":catId" element={<Container/>}/>
+        </Route>
+
+        <Route path="donor" element={<DonorForm/>}>
+
         </Route>
   
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}

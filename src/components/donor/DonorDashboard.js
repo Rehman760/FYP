@@ -70,7 +70,7 @@ function Navbar({ name }) {
 
 
   
-  function Dashboard() {
+function DonorDashboard() {
   const name = 'John Doe';
   
   return (
@@ -90,4 +90,4 @@ function Navbar({ name }) {
   );
   }
   
-  export default Dashboard;
+  export default DonorDashboard;

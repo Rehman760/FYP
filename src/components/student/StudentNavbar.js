@@ -1,12 +1,12 @@
 import React , {useState} from 'react';
-import { FaHamburger } from 'react-icons/fa';
+import Hamburger, {Squash as hamburger} from 'hamburger-react'
 import { StudentNavbarData } from './StudentNavbarData';
 import { NavLink, Outlet } from 'react-router-dom';
 
 function StudentNavbar() {
-    const [isOpenHumSign , setOpenHumSign] = useState(true);
+    const [isOpenHumSign , setOpenHumSign] = useState(false);
     
-    const toggle = ()=>setOpenHumSign(!isOpenHumSign);
+    // const toggleFn = ()=>setOpenHumSign(!isOpenHumSign);
 
     return (
         <div className="student-portal">
@@ -14,7 +14,7 @@ function StudentNavbar() {
                <div className="logo-section">
                    <h1 style={{display: isOpenHumSign ? "block" : "none"}} className="logo">Logo</h1>
                    <div style={{marginLeft: isOpenHumSign ? "85px" : "0px"}} className="ham-sign">
-                       <FaHamburger onClick={toggle}/>
+                       <Hamburger toggled={isOpenHumSign} toggle={setOpenHumSign} size={20}/>
                    </div>
                </div>
                {

@@ -6,7 +6,7 @@ import DonorProfile from './donor/DonorProfile'
 import DonorForm from './donor/DonorForm'
 import LoadingComponent from './LoadingComponent'
 import PopUp from './PopUp'
-import Dashboard from './donor/Dashboard'
+import Dashboard from './donor/DonorDashboard'
 import StudentInformation from './student/StudentInformation'
 
 function BasicComponentForData() {

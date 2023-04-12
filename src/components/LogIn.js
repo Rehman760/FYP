@@ -26,7 +26,7 @@ const LogIn = () => {
       .then((response) => {
         // Signed in 
         // alert(response.user.email+" is login");
-        navigate("/student", {state:{email:response.user.email}});
+        navigate("/student/dashboard", {state:{email:response.user.email}});
         // navigate("/AfterLogin", {state:{email:email}});
       })
       .catch((error) => {

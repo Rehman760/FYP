@@ -12,7 +12,7 @@ const MainSection = () => {
             <h1 className="text-5xl font-bold mb-4 ">Finance for Education</h1>
             <p className="text-xl mb-8">We provide funding for students in need.</p>
 
-            <Link to="/LogIn">
+            <Link to="/donor">
             <button className="bg-green-500 text-white px-4 py-2 rounded-lg border-2 hover:bg-green-700">
               Become a Donor
             </button>

@@ -1,28 +1,32 @@
 import React, { useEffect } from 'react';
-import {db} from "../Firebase/FirebaseConfig";
-import { collection, getDocs } from 'firebase/firestore';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
+import { getOpportunities } from '../Firebase/SaveData';
 
 function Opportunities() {
   // const optrs = [];
   const [info, setInfo] = useState([]);
 
-  const oppCollectionRef = collection(db, "Opportunities");
+  // const oppCollectionRef = collection(db, "Opportunities");
 
-  const fetchData = async()=>{
-    const querySnapshot = await getDocs(oppCollectionRef);
-    const oppsList = [] ;
-    querySnapshot.forEach((doc) => {
-        var data = doc.data();
-        oppsList.push(data);
-    });
-    setInfo(oppsList);
-  };
+  // const fetchData = async()=>{
+  //   const querySnapshot = await getDocs(oppCollectionRef);
+  //   const oppsList = [] ;
+  //   querySnapshot.forEach((doc) => {
+  //       var data = doc.data();
+  //       oppsList.push(data);
+  //   });
+  //   setInfo(oppsList);
+  // };
   
   useEffect(()=>{
-    fetchData();
+    const opps = getOpportunities();
+    opps.then((response)=>{
+      setInfo(response);
+    }).catch((error)=>{
+      console.log(error);
+    })
   },[]);
 
   return (

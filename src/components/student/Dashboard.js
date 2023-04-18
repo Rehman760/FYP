@@ -3,8 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import Notification from '../Notification';
 import Opportunities from './Opportunities';
 
-function Navbar({ name }) {
-  const {state} = useLocation();
+function Navbar({ email }) {
   return (
     <nav className="bg-white shadow">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,7 +13,7 @@ function Navbar({ name }) {
         </div>
         <div className="flex items-center">
           <div className="ml-4 flex items-center">
-            <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${state?.email}`}</h2>
+            <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${email}`}</h2>
             <img className="w-8 h-8 rounded-full border-2 border-green-500" src="https://dummyimage.com/100x100/000/fff" alt="User"/>
           </div>
         </div>
@@ -80,12 +79,15 @@ function PaymentList() {
 }
 
 function Dashboard() {
+  const {state} = useLocation();
+  console.log("DASH", state?.email);
+  sessionStorage.setItem("email", state?.email);
   const name = 'John Doe';
   console.log(useParams());
   
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Navbar name={name} />
+      <Navbar email={state?.email} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-1">
@@ -134,6 +136,7 @@ function Dashboard() {
   );
 }
 
- 
+
   
-  export default Dashboard;
+export default Dashboard;
+

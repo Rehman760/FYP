@@ -51,13 +51,13 @@ function DonorForm({ handleSubmit }) {
                     <FaUser className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
-                    type="number"
+                    type="text"
                     name="name"
                     id="name"
                     autoComplete="off"
-                    value={income}
-                    onChange={(e) => setIncome(e.target.value)}
-                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="block w-full p-2 px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -71,13 +71,13 @@ function DonorForm({ handleSubmit }) {
                     <FaEnvelope className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
-                    type="number"
+                    type="text"
                     name="email"
                     id="email"
                     autoComplete="off"
-                    value={income}
-                    onChange={(e) => setIncome(e.target.value)}
-                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="block w-full p-2  px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -95,9 +95,9 @@ function DonorForm({ handleSubmit }) {
                     name="phone"
                     id="phone"
                     autoComplete="off"
-                    value={income}
-                    onChange={(e) => setIncome(e.target.value)}
-                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="block w-full p-2  px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -117,7 +117,7 @@ function DonorForm({ handleSubmit }) {
                     autoComplete="off"
                     value={income}
                     onChange={(e) => setIncome(e.target.value)}
-                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
+                 className="block w-full p-2 px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -135,9 +135,9 @@ function DonorForm({ handleSubmit }) {
                     name="bank"
                     id="bank"
                     autoComplete="off"
-                    value={income}
-                    onChange={(e) => setIncome(e.target.value)}
-                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
+                    value={bankAccount}
+                    onChange={(e) => setBankAccount(e.target.value)}
+                    className="block w-full p-2  px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -151,13 +151,13 @@ function DonorForm({ handleSubmit }) {
                     <FaBriefcase className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
                   <input
-                    type="number"
+                    type="text"
                     name="job"
                     id="job"
                     autoComplete="off"
-                    value={income}
-                    onChange={(e) => setIncome(e.target.value)}
-                    className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
+                    value={job}
+                    onChange={(e) => setJob(e.target.value)}
+                    className="block w-full p-2  px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>
@@ -186,12 +186,12 @@ Copy code
                       </label>
                       <p className="text-gray-500">PNG, JPG, GIF up to 10MB</p>
                       <input
-                        type="number"
+                        type="file"
                         name="image"
                         id="image"
                         autoComplete="off"
-                        value={income}
-                        onChange={(e) => setIncome(e.target.value)}
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
                         className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                         required
                       />

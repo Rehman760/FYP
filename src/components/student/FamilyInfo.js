@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
+import { saveFamilyInfo } from "../Firebase/SaveData";
 
 const FamilyInfo = ({setActiveSection, activeSectionNo}) => {
   const [familyInfo, setFamilyInfo] = useState({});
 
   const handleNextPage = () => {
     // Save data to database and move to next page
+    saveFamilyInfo(familyInfo);
     setActiveSection(activeSectionNo+1);
     showMe();
   };

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {app} from "./Firebase/FirebaseConfig";
+// import {app} from "./Firebase/FirebaseConfig";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import StudentNavbar from "./student/StudentNavbar";
 import { setMyEmail } from "./student/StudentNavbarData";
 
 const LogIn = () => {

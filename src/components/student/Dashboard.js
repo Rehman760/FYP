@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import Notification from '../Notification';
 import Opportunities from './Opportunities';
 
@@ -86,7 +86,6 @@ function PaymentList() {
 
 function Dashboard() {
   // sessionStorage.setItem("email", state?.email);
-  const name = 'John Doe';
   console.log(useParams());
   
   return (

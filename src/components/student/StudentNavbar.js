@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import Hamburger, {Squash as hamburger} from 'hamburger-react'
+import Hamburger from 'hamburger-react'
 import { StudentNavbarData, getMyEmail } from './StudentNavbarData';
 import { NavLink, Outlet } from 'react-router-dom';
 

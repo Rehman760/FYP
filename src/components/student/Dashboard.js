@@ -3,27 +3,33 @@ import { useLocation, useParams } from 'react-router-dom';
 import Notification from '../Notification';
 import Opportunities from './Opportunities';
 
-function Navbar({ email }) {
-  return (
-    <nav className="bg-white shadow">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-between h-16">
-        <div className="flex-shrink-0">
-          <h1 className="text-lg font-bold text-gray-800">Student Dashboard</h1>
-        </div>
-        <div className="flex items-center">
-          <div className="ml-4 flex items-center">
-            <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${email}`}</h2>
-            <img className="w-8 h-8 rounded-full border-2 border-green-500" src="https://dummyimage.com/100x100/000/fff" alt="User"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+// export function Navbar({ email }) {
+//   const [isOpenHumSign , setOpenHumSign] = useState(false);
+//   return (
+//     // top-0 z-100 
+//     <nav className="fixed w-full bg-white shadow">
+//     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+//       <div className="flex items-center justify-between h-16">
+//         <div>
+//             <Hamburger toggled={isOpenHumSign} toggle={setOpenHumSign} size={20}/>
+//         </div>
+//         <div className="flex-shrink-0">
+//           <h1 className="text-lg font-bold text-gray-800">Student Dashboard</h1>
+//         </div>
+//         <div className="flex items-center">
+//           <div className="ml-4 flex items-center">
+//             <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${email}`}</h2>
+//             <img className="w-8 h-8 rounded-full border-2 border-green-500" src="https://dummyimage.com/100x100/000/fff" alt="User"/>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   </nav>
+   
   
-  
-  );
-}
+//   );
+// }
 
 function UniversityList() {
   const universities = [    { id: 1, name: 'University of California, Los Angeles' },    { id: 2, name: 'University of California, Berkeley' },    { id: 3, name: 'University of California, San Diego' },    { id: 4, name: 'University of California, Santa Barbara' },  ];
@@ -87,7 +93,7 @@ function Dashboard() {
   
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Navbar email={state?.email} />
+      {/* <Navbar email={state?.email} /> */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-1">

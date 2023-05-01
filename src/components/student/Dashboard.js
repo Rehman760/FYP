@@ -85,9 +85,7 @@ function PaymentList() {
 }
 
 function Dashboard() {
-  const {state} = useLocation();
-  console.log("DASH", state?.email);
-  sessionStorage.setItem("email", state?.email);
+  // sessionStorage.setItem("email", state?.email);
   const name = 'John Doe';
   console.log(useParams());
   

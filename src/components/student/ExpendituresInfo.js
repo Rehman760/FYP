@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import InputField from './InputField';
+import { saveExpenditureInfo } from '../Firebase/SaveData';
 
 const ExpendituresInfo = ({setActiveSection, activeSectionNo}) => {
   const [expInfo, setExpInfo] = useState({});
 
   const handleNextPage = () => {
     // Save data to database and move to next page
+    saveExpenditureInfo(expInfo);
     setActiveSection(activeSectionNo+1);      
     showMe();
   };

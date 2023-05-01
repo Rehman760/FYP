@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputField from "./InputField";
+import { saveOtherInfo } from "../Firebase/SaveData";
 
 const OtherDetails = ({setActiveSection, activeSectionNo}) => {
   const [interests, setInterests] = useState("");
@@ -20,6 +21,7 @@ const OtherDetails = ({setActiveSection, activeSectionNo}) => {
 
   const handleSavePage = () => {
     // Save data to database and move to next page
+    saveOtherInfo({interests, achievements, hobbies});
     alert("Data is saved to the database");
   };
 

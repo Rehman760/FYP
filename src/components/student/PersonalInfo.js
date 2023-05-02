@@ -5,14 +5,13 @@ import FatherInfo from './FatherInfo';
 import AddressInfo from './AddressInfo';
 import NationalityInfo from './NationalityInfo';
 import { useState } from 'react';
+import { savePersonalInfo } from '../Firebase/SaveData';
 
 function checkForEmptyField(obj){
   console.log(obj);
-
-
 }
 
-function PersonalInfo({setActiveSection, activeSectionNo}) {
+function PersonalInfo({email, setActiveSection, activeSectionNo}) {
   const [selfData, setSelfData] = useState();
   const [bioData, setBioData] = useState();
   const [fatherData, setFatherData] = useState();
@@ -21,9 +20,10 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   
   const handleNextPage = () => {
     //Task-1 -Check if any field is null then generate an indicator message.
-    checkForEmptyField(selfData);
-    showMe();
+    // checkForEmptyField(selfData);
+    // showMe();
     //Task-2 -Save data to the database
+    savePersonalInfo([selfData, bioData, fatherData, addressData, nationalityData]);
     //Task 3 -Move to next page
     setActiveSection(activeSectionNo+1);
     // showMe();

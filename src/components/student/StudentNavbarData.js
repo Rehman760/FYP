@@ -2,9 +2,17 @@ import { FaAccessibleIcon, FaBookOpen, FaCalendar, FaDelicious, FaInbox, FaLock,
 import Dashboard from './Dashboard';
 import StudentProfile from './StudentProfile';
 import Notification from '../Notification';
-import PersonalInfo from './PersonalInfo';
 import StudentInformation from './StudentInformation';
 
+let email='';
+
+export function setMyEmail(myemail){
+    email = myemail;
+}
+
+export function getMyEmail(){
+    return email;
+}
 
 export const StudentNavbarData = [
     {

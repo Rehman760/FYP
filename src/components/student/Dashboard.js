@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Notification from '../Notification';
 import Opportunities from './Opportunities';
+import UserProfile from '../UserProfile';
 
 // export function Navbar({ email }) {
 //   const [isOpenHumSign , setOpenHumSign] = useState(false);
@@ -31,34 +32,6 @@ import Opportunities from './Opportunities';
 //   );
 // }
 
-function UniversityList() {
-  const universities = [    { id: 1, name: 'University of California, Los Angeles' },    { id: 2, name: 'University of California, Berkeley' },    { id: 3, name: 'University of California, San Diego' },    { id: 4, name: 'University of California, Santa Barbara' },  ];
-
-  return (
-    <div className="bg-white rounded-lg shadow-lg p-6 my-4">
-      <h2 className="text-xl font-bold mb-4">My Universities</h2>
-      <div className="overflow-x-auto">
-        <table className="table-auto w-full">
-          <thead>
-            <tr>
-              <th className="text-left text-gray-600 uppercase font-medium text-sm">Name</th>
-              <th className="text-left text-gray-600 uppercase font-medium text-sm">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {universities.map(university => (
-              <tr key={university.id} className="border-b border-gray-200">
-                <td className="text-left py-2 text-gray-800">{university.name}</td>
-                <td className="text-left py-2 text-green-600 font-medium">Enrolled</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
 
 function PaymentList() {
   const payments = [
@@ -84,6 +57,35 @@ function PaymentList() {
   );
 }
 
+function CompleteProfile() {
+  return (
+    <div className="bg-white border border-green-500 rounded-lg shadow-md p-4">
+      <div className="flex items-center mb-4">
+        <h2 className="text-green-500 text-2xl font-bold">Complete Your Profile</h2>
+      </div>
+      <div className="flex flex-col items-center">
+        <p className="text-gray-700 text-lg mb-4 text-center">
+          To get the most out of our platform, we need you to complete your personal information. Please click the button below to get started.
+        </p>
+        <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg">
+          Continue
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+
+const applications = [
+  { id: 1, form: 'Form 1', program: 'Program 1', university: 'University 1', status: 'Pending' },
+  { id: 2, form: 'Form 2', program: 'Program 2', university: 'University 2', status: 'Accepted' },
+  { id: 3, form: 'Form 3', program: 'Program 3', university: 'University 3', status: 'Rejected' },
+];
+
+
+  
+
 function Dashboard() {
   // sessionStorage.setItem("email", state?.email);
   console.log(useParams());
@@ -93,8 +95,8 @@ function Dashboard() {
       {/* <Navbar email={state?.email} /> */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="col-span-1">
-            <UniversityList />
+          <div className='col-span-1'>
+          <UserProfile/>
           </div>
           <div className="col-span-1">
             <PaymentList />

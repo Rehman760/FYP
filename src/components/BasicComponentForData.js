@@ -8,6 +8,12 @@ import LoadingComponent from './LoadingComponent'
 import PopUp from './PopUp'
 import Dashboard from './donor/DonorDashboard'
 import StudentInformation from './student/StudentInformation'
+import CompleteProfile from './student/CompleteProfile'
+import UserProfile from './UserProfile'
+import UniversityForm from './university/UniversityForm'
+import Details from './university/Details'
+import University from './university/Index'
+
 
 function BasicComponentForData() {
   return (
@@ -15,13 +21,17 @@ function BasicComponentForData() {
         {/* <Navbar/> */}
         {/* <Donor/> */}
         {/* <StudentProfile/> */}
-        <DonorProfile/>
+        {/* <DonorProfile/> */}
         {/* <DonorForm/> */}
         {/* <LoadingComponent/> */}
         {/* <PopUp/> */}
         {/* <Dashboard/> */}
         {/* <StudentInformation/> */}
-
+        {/* <CompleteProfile/> */}
+        {/* <UserProfile/> */}
+        {/* <UniversityForm/> */}
+      {/* <Details/> */}
+      <University/>
     </div>
   )
 }

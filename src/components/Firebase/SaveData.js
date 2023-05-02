@@ -1,12 +1,37 @@
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "./FirebaseConfig";
 import { collection, getDocs } from 'firebase/firestore';
+import { getMyEmail } from "../student/StudentNavbarData";
 
+const email = getMyEmail();
 export const savePersonalInfo= async([selfData, bioData,fatherData, addressData, nationalityData])=>{
-    const email = sessionStorage.getItem("email");
-    const document = doc(db, "personalData", email);
-    await setDoc(document, {selfData, bioData, fatherData});
-    console.log("Data added");    
+    const document = doc(db, "students", email);
+    const data = {selfData, bioData, fatherData, addressData, nationalityData};
+    await setDoc(document, {personalInfo:data});
+    console.log("Data added");
+}
+
+export const saveEducationInfo = async(data)=>{
+    const document = doc(db, 'students', email);
+    await updateDoc(document, {educationInfo:data});
+    console.log(data);
+}
+
+export const saveFamilyInfo = async(data)=>{
+    const document = doc(db, 'students', email);
+    await updateDoc(document, {familyInfo:data});
+    console.log(data);
+}
+
+export const saveExpenditureInfo = async(data)=>{
+    const document = doc(db, 'students', email);
+    await updateDoc(document, {expenditureInfo:data});
+    console.log(data);
+}
+export const saveOtherInfo = async(data)=>{
+    const document = doc(db, 'students', email);
+    await updateDoc(document, {otherInfo:data});
+    console.log(data);
 }
 
 export const getOpportunities = async()=>{

@@ -69,7 +69,7 @@ export default function App() {
   
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}
 
-        <Route path='/components/student/Dashboard' element={<Dashboard/>}/>
+        {/* <Route path='/components/student/Dashboard' element={<Dashboard/>}/> */}
       </Routes>
 
     </BrowserRouter>

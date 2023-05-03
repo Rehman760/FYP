@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import {app} from "./Firebase/FirebaseConfig";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { setMyEmail } from "./student/StudentNavbarData";
+// import { setMyEmail } from "./student/StudentNavbarData";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +28,7 @@ const LogIn = () => {
         // Signed in 
         // alert(response.user.email+" is login");
         navigate("/student/dashboard");
-        setMyEmail(response.user.email);
+        // setMyEmail(response.user.email);
       
         //set email to the studentNavBar:
         

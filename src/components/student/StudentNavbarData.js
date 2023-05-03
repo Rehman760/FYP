@@ -4,15 +4,15 @@ import StudentProfile from './StudentProfile';
 import Notification from '../Notification';
 import StudentInformation from './StudentInformation';
 
-let email='';
+// let email='';
 
-export function setMyEmail(myemail){
-    email = myemail;
-}
+// export function setMyEmail(myemail){
+//     email = myemail;
+// }
 
-export function getMyEmail(){
-    return email;
-}
+// export function getMyEmail(){
+//     return email;
+// }
 
 export const StudentNavbarData = [
     {

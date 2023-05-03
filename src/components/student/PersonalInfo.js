@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import SelfInfo from './SelfInfo';
 import BioInfo from './BioInfo';
 import FatherInfo from './FatherInfo';
 import AddressInfo from './AddressInfo';
 import NationalityInfo from './NationalityInfo';
-import { useState } from 'react';
+// import { getMyEmail } from './StudentNavbarData';
 import { savePersonalInfo } from '../Firebase/SaveData';
-import { getMyEmail } from './StudentNavbarData';
+
 
 function checkForEmptyField(obj){
   console.log(obj);
 }
 
 function PersonalInfo({setActiveSection, activeSectionNo}) {
-  const email = getMyEmail();
+  // const email = getMyEmail();
   const [selfData, setSelfData] = useState();
   const [bioData, setBioData] = useState();
   const [fatherData, setFatherData] = useState();
@@ -25,8 +25,8 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
     // checkForEmptyField(selfData);
     // showMe();
     //Task-2 -Save data to the database
-    alert(`email is ${email}`);
-    savePersonalInfo([selfData, bioData, fatherData, addressData, nationalityData], email);
+    // alert(`email is ${email}`);
+    savePersonalInfo([selfData, bioData, fatherData, addressData, nationalityData]);
     //Task 3 -Move to next page
     setActiveSection(activeSectionNo+1);
     // showMe();

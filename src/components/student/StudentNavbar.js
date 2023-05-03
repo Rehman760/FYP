@@ -1,6 +1,6 @@
 import React , {useState} from 'react';
 import Hamburger from 'hamburger-react'
-import { StudentNavbarData, getMyEmail } from './StudentNavbarData';
+import { StudentNavbarData,} from './StudentNavbarData';
 import { NavLink, Outlet } from 'react-router-dom';
 
 function StudentNavbar() {
@@ -22,7 +22,7 @@ function StudentNavbar() {
                     <div className="flex items-center">
                         <div className="ml-4 flex items-center">
 
-                            <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${getMyEmail()}`}</h2>
+                            <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${'ERROR'}`}</h2>
                             <img className="w-8 h-8 rounded-full border-2 border-green-500" src="https://dummyimage.com/100x100/000/fff" alt="User"/>
                         </div>
                     </div>

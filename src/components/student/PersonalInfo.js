@@ -5,7 +5,7 @@ import FatherInfo from './FatherInfo';
 import AddressInfo from './AddressInfo';
 import NationalityInfo from './NationalityInfo';
 // import { getMyEmail } from './StudentNavbarData';
-import { savePersonalInfo } from '../Firebase/SaveData';
+import { savePersonalInfo, saveProfileImage } from '../Firebase/SaveData';
 
 
 function checkForEmptyField(obj){
@@ -26,6 +26,9 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
     // showMe();
     //Task-2 -Save data to the database
     // alert(`email is ${email}`);
+    const image = selfData.image;
+    delete selfData.image;
+    saveProfileImage(image);
     savePersonalInfo([selfData, bioData, fatherData, addressData, nationalityData]);
     //Task 3 -Move to next page
     setActiveSection(activeSectionNo+1);
@@ -43,7 +46,7 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   }
   const onBioDataFetch = (data)=>{
     // console.log(data);
-    setBioData(data);    
+    setBioData(data); 
   }
   const onFatherDataFetch =(data)=>{
     // console.log(data);

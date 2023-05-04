@@ -1,10 +1,10 @@
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "./FirebaseConfig";
 import { collection, getDocs } from 'firebase/firestore';
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 // import { getMyEmail } from "../student/StudentNavbarData";
 
-const email = 'rehman@muet.edu.pk';
+const email = 'sajjad@muet.edu.pk';
 
 export const savePersonalInfo= async([selfData, bioData,fatherData, addressData, nationalityData])=>{
     // const email = getMyEmail();
@@ -19,9 +19,17 @@ export const saveProfileImage= async(image)=>{
     await uploadBytes(imageRef, image).then((response)=>{
         console.log(response);
     }).catch((err)=>{
-        console.log(err);
+        console.log(`set profile ${err}`);
     });
+}
 
+export const getProfileImage = async(setUrl)=>{
+    const imageRef = ref(storage, `images/profiles/${email}`);
+    await getDownloadURL(imageRef).then((response)=>{
+        setUrl(response);
+    }).catch((err)=>{
+        console.log(`get profile ${err}`);
+    });
 
 }
 

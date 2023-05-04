@@ -2,10 +2,18 @@ import React , {useState} from 'react';
 import Hamburger from 'hamburger-react'
 import { StudentNavbarData,} from './StudentNavbarData';
 import { NavLink, Outlet } from 'react-router-dom';
+import { getProfileImage } from '../Firebase/SaveData';
 
 function StudentNavbar() {
     const [isOpenHumSign , setOpenHumSign] = useState(false);
+    const [URL, setURL] = useState('');
+    
+    const setURLByMe= (url)=>{
+        setURL(url)
+    }
 
+    const image = getProfileImage(setURLByMe);
+    
     // const toggleFn = ()=>setOpenHumSign(!isOpenHumSign);
 
     return (
@@ -23,7 +31,7 @@ function StudentNavbar() {
                         <div className="ml-4 flex items-center">
 
                             <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${'ERROR'}`}</h2>
-                            <img className="w-8 h-8 rounded-full border-2 border-green-500" src="https://dummyimage.com/100x100/000/fff" alt="User"/>
+                            <img className="w-8 h-8 rounded-full border-2 border-green-500" src={URL} alt="User"/>
                         </div>
                     </div>
                 </div>

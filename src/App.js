@@ -63,7 +63,7 @@ export default function App() {
             <Route path=":catId" element={<Container/>}/>
         </Route>
 
-        <Route path="donor" element={<DonorForm/>}>
+        <Route path="donor" element={<DonorDashboard/>}>
 
         </Route>
   

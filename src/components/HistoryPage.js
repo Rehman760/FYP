@@ -32,8 +32,8 @@ const HistoryPage = (props) => {
         <div className="container">
         <h1 className="text-center my-3 font-medium text-3xl">{props.title}</h1>
         <div className="row">
-            {students.map((student) => (
-              <StudentView id={student.id} name={student.name} bio={student.bio} picture={student.picture} status={student.status} />
+            {students.map((student, index) => (
+              <StudentView key={index} id={student.id} name={student.name} bio={student.bio} picture={student.picture} status={student.status} />
             ))}
         </div>
     </div>

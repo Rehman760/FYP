@@ -24,6 +24,8 @@ import Container from './components/student/Container';
 import DonorDashboard from './components/donor/DonorDashboard';
 import DonorProfile from './components/donor/DonorProfile';
 import DonorForm from './components/donor/DonorForm';
+import DonorNavbar from './components/donor/DonorNavbar';
+import AvailableStds from './components/donor/AvailableStds';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
@@ -63,9 +65,12 @@ export default function App() {
             <Route path=":catId" element={<Container/>}/>
         </Route>
 
-        <Route path="donor" element={<DonorDashboard/>}>
+        <Route path="donor" element={<DonorNavbar/>}>
 
         </Route>
+
+        <Route path='donor/availableStds' element={<AvailableStds/>}/>
+        <Route path='donor/sponsored' element={<>Sponsored List of Student</>}/>
   
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}
 

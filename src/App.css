@@ -97,6 +97,7 @@ main{
   color: #08b425;
   transition: all 0.25s;
 }
+
 .active{
   background-color: white;
   color: #08b425;

@@ -19,7 +19,7 @@ function BasicComponentForData() {
   return (
     <div>
         {/* <Navbar/> */}
-        {/* <Donor/> */}
+        <Donor/>
         {/* <StudentProfile/> */}
         {/* <DonorProfile/> */}
         {/* <DonorForm/> */}
@@ -31,7 +31,7 @@ function BasicComponentForData() {
         {/* <UserProfile/> */}
         {/* <UniversityForm/> */}
       {/* <Details/> */}
-      <University/>
+      {/* <University/> */}
     </div>
   )
 }

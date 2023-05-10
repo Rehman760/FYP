@@ -39,14 +39,14 @@ function DonorForm({ handleSubmit }) {
             <p className="mt-1 text-lg text-gray-600">Please provide your personal information.</p>
           </div>
         </div>
-        <div className="mt-5 md:mt-0 md:col-span-2">
+        <div className="mt-2 md:mt-0 md:col-span-2">
           <form onSubmit={handleSubmitForm}>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-3 m-2">
               <div>
                 <label htmlFor="name" className="block text-lg font-medium text-gray-700">
                   Name
                 </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
+                <div className="mt-1 relative rounded-md shadow-sm ">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <FaUser className="h-6 w-6 text-gray-400" aria-hidden="true" />
                   </div>
@@ -204,7 +204,7 @@ Copy code
               <div className="flex justify-end ">
                 <button
                   type="submit"
-                  className="ml-3 inline-flex border-green-600 justify-center py-2 px-4 border  border-green-300 shadow-sm text-lg font-medium rounded-md text-black  hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                  className="ml-3 inline-flex border-green-600 justify-center py-2 px-4 border  border-green-300 shadow-sm text-lg font-medium rounded-md  hover:text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
                   Save
                 </button>

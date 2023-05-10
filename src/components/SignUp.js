@@ -43,9 +43,12 @@ function SignUp() {
     <div className="min-h-screen bg-green-500 flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md"
+        className="bg-white p-6 rounded-lg shadow-md w-50 m-4"
       >
-        <h2 className="text-2xl font-bold mb-6 text-green-500">Sign Up</h2>
+        <div className="flex flex-col items-center">
+          <h1 className="text-4xl font-bold text-green-500 ">Finance for Education</h1>
+          <p className="text-xl font-semibold mt-2 mb-8 text-gray-500">Sign up</p>
+        </div>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="first-name">
             First Name

@@ -13,13 +13,14 @@ import UserProfile from './UserProfile'
 import UniversityForm from './university/UniversityForm'
 import Details from './university/Details'
 import University from './university/Index'
+import NotFound from './NotFound'
 
 
 function BasicComponentForData() {
   return (
     <div>
         {/* <Navbar/> */}
-        <Donor/>
+        {/* <Donor/> */}
         {/* <StudentProfile/> */}
         {/* <DonorProfile/> */}
         {/* <DonorForm/> */}
@@ -32,6 +33,7 @@ function BasicComponentForData() {
         {/* <UniversityForm/> */}
       {/* <Details/> */}
       {/* <University/> */}
+      <NotFound/>
     </div>
   )
 }

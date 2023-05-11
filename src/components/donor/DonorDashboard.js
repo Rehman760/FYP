@@ -3,6 +3,7 @@ import Notification from '../Notification';
 import { FaSearch, FaMoneyBill, FaComments, FaBell,FaBars, FaTimes, FaSignOutAlt } from 'react-icons/fa';
 import logo from '../images/logo2.jpg'
 import HistoryPage from '../HistoryPage';
+import { Link } from 'react-router-dom';
 
 function Navbar({ name }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -58,10 +59,10 @@ function Navbar({ name }) {
           {showMenu && (
             <div className="sm:block sm:px-8 absolute top-40 right-0 w-2/3 bg-white border-t border-green-200 shadow-lg z-20">
               <div className="flex flex-col space-y-2">
-                <a href="#" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Notification</a>
-                <a href="#" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Chats</a>
-                <a href="#" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Profile</a>
-                <a href="#" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Settings</a>
+                <Link to={Notification} className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Notification</Link>
+                <Link to="donor" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Chats</Link>
+                <Link to="/" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Profile</Link>
+                <Link to="/" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Settings</Link>
                 <button onClick={handleLogout} className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100 focus:outline-none">
                   <FaSignOutAlt className="h-5 w-5" />
                   Logout

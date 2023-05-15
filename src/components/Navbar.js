@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-white">
+      <nav className="bg-white animate-fade-in">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between flex-wrap">
             <div className="flex items-center flex-shrink-0 mr-6">

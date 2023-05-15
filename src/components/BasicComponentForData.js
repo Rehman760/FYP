@@ -14,6 +14,9 @@ import UniversityForm from './university/UniversityForm'
 import Details from './university/Details'
 import University from './university/Index'
 import NotFound from './NotFound'
+import PaymentPage from './PaymentPage'
+import StudentTable from './StudentTable'
+import DonatePage from './donor/DonatePage'
 
 
 function BasicComponentForData() {
@@ -33,7 +36,10 @@ function BasicComponentForData() {
         {/* <UniversityForm/> */}
       {/* <Details/> */}
       {/* <University/> */}
-      <NotFound/>
+      {/* <NotFound/> */}
+      {/* <PaymentPage/> */}
+      {/* <StudentTable/> */}
+      <DonatePage/>
     </div>
   )
 }

@@ -1,11 +1,17 @@
 import React from 'react';
+import { useSpring, animated } from 'react-spring';
 import AboutImg1 from './images/mission3.jpg';
 import AboutImg2 from './images/mission.jpg';
 
 const AboutUs = () => {
+  const containerAnimation = useSpring({
+    from: { opacity: 0, transform: 'translate3d(0,-100px,0)' },
+    to: { opacity: 1, transform: 'translate3d(0,0,0)' },
+  });
+
   return (
     <section className="py-12">
-      <div className="container mx-auto">
+      <animated.div className="container mx-auto" style={containerAnimation}>
         <h2 className="text-3xl font-medium mb-4 flex justify-center">About Us</h2>
         <div className="flex flex-wrap -mx-3">
           <div className="w-full md:w-1/2 px-3 mb-6">
@@ -27,7 +33,7 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-      </div>
+      </animated.div>
     </section>
   );
 };

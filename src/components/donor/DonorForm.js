@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { FaUser, FaEnvelope, FaPhone, FaDollarSign, FaMoneyCheck, FaBriefcase, FaImage, FaUserCircle } from 'react-icons/fa';
+import { saveDonorData } from '../Firebase/SaveData';
 
 
-function DonorForm({ handleSubmit }) {
+function DonorForm() {
   const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
+  // const [address, setAddress] = useState('');
   const [income, setIncome] = useState('');
   const [bankAccount, setBankAccount] = useState('');
   const [job, setJob] = useState('');
@@ -18,16 +19,18 @@ function DonorForm({ handleSubmit }) {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('name', name);
-    data.append('address', address);
-    data.append('income', income);
-    data.append('bankAccount', bankAccount);
-    data.append('job', job);
-    data.append('phone', phone);
-    data.append('email', email);
-    data.append('image', image);
-    handleSubmit(data);
+    // const data = new FormData();
+    // data.append('name', name);
+    // data.append('address', address);
+    // data.append('income', income);
+    // data.append('bankAccount', bankAccount);
+    // data.append('job', job);
+    // data.append('phone', phone);
+    // data.append('email', email);
+    // data.append('image', image);
+    const obj = {name, income, bankAccount, job, phone, email, image};
+    saveDonorData(obj);
+    // handleSubmit(data);
   }
 
   return (
@@ -117,7 +120,7 @@ function DonorForm({ handleSubmit }) {
                     autoComplete="off"
                     value={income}
                     onChange={(e) => setIncome(e.target.value)}
-                 className="block w-full p-2 px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
+                    className="block w-full p-2 px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
                 </div>

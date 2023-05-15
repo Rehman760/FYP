@@ -4,7 +4,11 @@ import { collection, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 // import { getMyEmail } from "../student/StudentNavbarData";
 
-const email = 'sajjad@muet.edu.pk';
+let email = '';
+
+export const saveEmail = (myemail)=>{
+    email = myemail;
+}
 
 export const savePersonalInfo = async ([selfData, bioData, fatherData, addressData, nationalityData]) => {
     // const email = getMyEmail();
@@ -111,4 +115,9 @@ export const getImage = async (email, setUrl) => {
         console.log(`get profile ${err}`);
     });
 
+}
+
+export const saveDonorData = async (donor)=>{
+    const document = doc(db, 'donors', email);
+    await setDoc(document, donor);
 }

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Hamburger from 'hamburger-react';
 import { StudentNavbarData } from './StudentNavbarData';
 import { NavLink, Outlet } from 'react-router-dom';
-import { getProfileImage } from '../Firebase/SaveData';
+import { getProfileImage, saveEmail } from '../Firebase/SaveData';
 import logo from "../images/logo2.jpg";
 
-function StudentNavbar() {
+function StudentNavbar({myEmail}) {
   const [isOpenHumSign, setOpenHumSign] = useState(false);
   const [URL, setURL] = useState('');
 
@@ -13,7 +13,12 @@ function StudentNavbar() {
     setURL(url);
   };
 
-  const image = getProfileImage(setURLByMe);
+  useEffect(()=>{
+    saveEmail(myEmail);
+    getProfileImage(setURLByMe);
+  }, []);
+
+  
 
   return (
     <>
@@ -29,7 +34,7 @@ function StudentNavbar() {
           </div>
           <div className="flex items-center">
             <div className="ml-4 flex items-center">
-              <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${'ERROR'}`}</h2>
+              <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${myEmail}`}</h2>
               <img className="w-8 h-8 rounded-full border-2 border-green-500" src={URL} alt="User" />
             </div>
           </div>
@@ -56,7 +61,7 @@ function StudentNavbar() {
           ))}
         </div>
         <main style={{ marginLeft: isOpenHumSign ? "250px" : "50px" }}>
-          <Outlet />
+          <Outlet/>
         </main>
       </div>
     </>

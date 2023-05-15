@@ -29,7 +29,9 @@ import AvailableStds from './components/donor/AvailableStds';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
-  
+  const [email, setEmail] = useState('');
+
+
  
   //code for removing the scroll
   // useEffect(() => {
@@ -55,21 +57,21 @@ export default function App() {
           <Route path='/UniversityPage' element={<UniversityPage />} />
           <Route path='/Services' element={<Services />}/>
           <Route path='/Contact' element={<Contact/>}/>          
-          <Route path='/LogIn' element={<LogIn/>}/>
+          <Route path='/LogIn' element={<LogIn myEmail={setEmail}/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
           <Route path="*" element={<h1>Page not found</h1>} />
         </Route>
-        <Route path="student" element={<StudentNavbar/>}>
-            <Route path=":catId" element={<Container/>}/>
+        <Route path="student" element={<StudentNavbar myEmail={email}/>}>
+            <Route path=":catId" element={<Container email={email}/>}/>
         </Route>
 
-        <Route path="donor" element={<DonorNavbar/>}>
+        <Route path="donor" element={<LogIn role='donor'/>}>
 
         </Route>
 
-        <Route path='donor/availableStds' element={<AvailableStds/>}/>
+        <Route path='donor/nav-bar' element={<DonorDashboard/>}/>
         <Route path='donor/sponsored' element={<>Sponsored List of Student</>}/>
   
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}

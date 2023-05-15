@@ -4,11 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 // import { setMyEmail } from "./student/StudentNavbarData";
 
-const LogIn = () => {
+const LogIn = ({role, myEmail}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -27,7 +28,15 @@ const LogIn = () => {
       .then((response) => {
         // Signed in 
         // alert(response.user.email+" is login");
-        navigate("/student/dashboard");
+        if(role==='donor'){
+          navigate("/donor/nav-bar");
+
+        }
+        else{
+          navigate("/student/dashboard");
+          myEmail(response.user.email);
+        }
+        
         // setMyEmail(response.user.email);
       
         //set email to the studentNavBar:

@@ -14,6 +14,10 @@ function StudentNavbar({myEmail}) {
   };
 
   useEffect(()=>{
+    if(myEmail===''){
+      alert("Page not found!");
+      return;
+    }
     saveEmail(myEmail);
     getProfileImage(setURLByMe);
   }, []);

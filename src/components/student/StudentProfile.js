@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaGraduationCap, FaMoneyBillWave, FaBook, FaBriefcase } from 'react-icons/fa';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import { getProfileData } from '../Firebase/SaveData';
 
 function StudentProfile(props) {

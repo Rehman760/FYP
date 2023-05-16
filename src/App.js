@@ -75,7 +75,7 @@ export default function App() {
 
         <Route path='donor/nav-bar' element={<DonorDashboard/>}/>
         <Route path='donor/student/'>
-          <Route path=':stdID' element={<StudentProfile stdEmail={email}/>}/>
+          <Route path=':stdID' element={<StudentProfile/>}/>
         </Route>
         <Route path='donor/sponsored' element={<>Sponsored List of Student</>}/>
   

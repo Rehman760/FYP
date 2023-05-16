@@ -124,3 +124,11 @@ export const saveDonorData = async (donor)=>{
     const document = doc(db, 'donors', email);
     await setDoc(document, donor);
 }
+
+export const getProfileData = async (email, setProfile)=>{
+    const document = doc(db, 'students', email);
+    const unsub = onSnapshot(document, (document)=>{
+        setProfile(document.data());
+    })
+
+}

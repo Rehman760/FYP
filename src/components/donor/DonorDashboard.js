@@ -4,13 +4,16 @@ import { FaSearch, FaMoneyBill, FaComments, FaBell,FaBars, FaTimes, FaSignOutAlt
 import logo from '../images/logo2.jpg'
 import { Link } from 'react-router-dom';
 import AvailableStds from './AvailableStds';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar({ name }) {
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // Add your logout logic here
     console.log('Logout clicked');
+    navigate('/');
   };
 
   return (

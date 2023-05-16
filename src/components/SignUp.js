@@ -15,27 +15,31 @@ function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
-    const auth = getAuth();    
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((response) => {
-      console.log(response.user);
-      // response.user.sendEmailVerification();
-      auth.signOut();
-      alert("Account Created Succesfully");
-      navigate("/LogIn");     
-    })
-    .catch((error) => {
-      // const errorMessage = error.message;
-      if(error.code === 'auth/email-already-in-use'){
-        setErrorMessage('Please use another email. This email is already in use.');
-      }      
+    if(password === confirmPassword){
+      const auth = getAuth();    
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        console.log(response.user);
+        // response.user.sendEmailVerification();
+        auth.signOut();
+        alert("Account Created Succesfully");
+        navigate("/LogIn");     
+      })
+      .catch((error) => {
+        // const errorMessage = error.message;
+        if(error.code === 'auth/email-already-in-use'){
+          setErrorMessage('Please use another email. This email is already in use.');
+        }      
 
-      if(error.code === 'auth/weak-password'){
-        setErrorMessage('Please use strong password');
-      }
-           
-      // alert(error.code);
-    });
+        else if(error.code === 'auth/weak-password'){
+          setErrorMessage('Please use strong password');
+        }
+            
+        // alert(error.code);
+      });
+    }else{
+      setErrorMessage('Password does not match');
+    }
 
   };
 
@@ -58,7 +62,7 @@ function SignUp() {
             type="text"
             id="first-name"
             value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)} required
           />
         </div>
         <div className="mb-4">
@@ -70,7 +74,7 @@ function SignUp() {
             type="text"
             id="last-name"
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => setLastName(e.target.value)} required
           />
         </div>
         <div className="mb-4">
@@ -82,7 +86,7 @@ function SignUp() {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)} required
           />
         </div>
         <div className="mb-4">
@@ -95,6 +99,7 @@ function SignUp() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <div className="mb-6">
@@ -107,6 +112,7 @@ function SignUp() {
             id="confirm-password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
           />
         </div>
 

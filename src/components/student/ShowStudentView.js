@@ -12,9 +12,9 @@ function ShowStudentView({id,email, picture,name,bio,status}) {
         <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>{bio}</Card.Text>
-                <Card.Text className="text-muted">Graduation Year: {status}</Card.Text>
+                <Card.Text className="text-muted">Status: {status}</Card.Text>
             <Button variant="success" style={{background:'green'}}>
-                <Link to={`/donor/student/${id}`} state={{stdEmail:{email}, stdImgUrl:{picture}}}>View Profile</Link>
+                <Link to={`/donor/student/${id}`} state={{stdEmail:email, stdImgUrl:picture}}>View Profile</Link>
             </Button>
         </Card.Body>
     </Card>

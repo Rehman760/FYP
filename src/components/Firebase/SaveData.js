@@ -79,7 +79,7 @@ export const getAllStudents = async (setStudents) => {
     console.log('Started');
     const q = query(collection(db, "students"));
     
-    const querySnapshot = await getDocs(q);
+    await getDocs(q);
     onSnapshot(q, (querySnapshot) => {
         const students = [];
         querySnapshot.forEach((doc) => {
@@ -95,15 +95,18 @@ export const getAllStudents = async (setStudents) => {
             getImage(email, function(imageUrl){
                 student['imageUrl'] = imageUrl;
                 students.push(student);
-                if(students.length === 4){
+                if(students.length == 5){
                     setStudents(students);
+                    return;
                 }
             })  
             
-            // console.log(doc.id, " => ", doc.data());
+            console.log(doc.id, " => ", doc.data());
+            // students.push(student);
         });
 
-        
+        // setStudents(students);
+
     });
 }
 
@@ -120,4 +123,12 @@ export const getImage = async (email, setUrl) => {
 export const saveDonorData = async (donor)=>{
     const document = doc(db, 'donors', email);
     await setDoc(document, donor);
+}
+
+export const getProfileData = async (email, setProfile)=>{
+    const document = doc(db, 'students', email);
+    const unsub = onSnapshot(document, (document)=>{
+        setProfile(document.data());
+    })
+
 }

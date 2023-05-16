@@ -26,10 +26,13 @@ import DonorProfile from './components/donor/DonorProfile';
 import DonorForm from './components/donor/DonorForm';
 import DonorNavbar from './components/donor/DonorNavbar';
 import AvailableStds from './components/donor/AvailableStds';
+import NotFound from './components/NotFound';
+import DonorContainer from './components/donor/DonorContainer';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
   const [email, setEmail] = useState('');
+  const [stdEmail, setStdEmail] = useState('');
 
 
  
@@ -49,6 +52,7 @@ export default function App() {
 
     <BrowserRouter>
       <Routes>
+        <Route path="*" element={<NotFound/>} />
         <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
           <Route path="/AboutUs" element={<AboutUs />} />
@@ -61,17 +65,19 @@ export default function App() {
           <Route path='/SignUp' element={<SignUp/>}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
-          <Route path="*" element={<h1>Page not found</h1>} />
         </Route>
         <Route path="student" element={<StudentNavbar myEmail={email}/>}>
             <Route path=":catId" element={<Container email={email}/>}/>
         </Route>
 
-        <Route path="donor" element={<LogIn role='donor'/>}>
-
+        <Route path="donor" element={<LogIn role='donor'/>}/>
+      
+        <Route path='donor/nav-bar' element={<DonorDashboard/>}>
+          <Route path=":donorID" element={<DonorContainer/>}/>
         </Route>
-
-        <Route path='donor/nav-bar' element={<DonorDashboard/>}/>
+        <Route path='donor/student/'>
+          <Route path=':stdID' element={<StudentProfile/>}/>
+        </Route>
         <Route path='donor/sponsored' element={<>Sponsored List of Student</>}/>
   
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}

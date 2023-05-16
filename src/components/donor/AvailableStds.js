@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAllStudents } from "../Firebase/SaveData";
-import StudentView from "../StudentView";
+// import StudentView from "../StudentView";
+import ShowStudentView from "../student/ShowStudentView";
 
-export default function AvailableStds(){
+export default function AvailableStds({setStdEmail}){
     const [students, setStudents] = useState([]);
     
     useEffect(()=>{
@@ -21,7 +22,7 @@ export default function AvailableStds(){
             <div className="row">
                 {students.map((student, index) => (
                     // console.log(`${student.imageUrl}: image URL`)
-                    <StudentView key={index} id={index} name={student.name} bio={student.schoolName} picture={student.imageUrl} status={student.gradYear} />
+                    <ShowStudentView key={index} id={index} name={student.name} bio={student.schoolName} picture={student.imageUrl} status={student.gradYear} email={student.email} />
                 ))}
             </div>
         </div>

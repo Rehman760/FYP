@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Notification from '../Notification';
 import { FaSearch, FaMoneyBill, FaComments, FaBell,FaBars, FaTimes, FaSignOutAlt } from 'react-icons/fa';
 import logo from '../images/logo2.jpg'
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import AvailableStds from './AvailableStds';
 import { useNavigate } from 'react-router-dom';
 
@@ -47,12 +47,12 @@ function Navbar({ name }) {
           </div>
           <div className={`hidden sm:flex sm:items-center ${showMenu ? 'block' : 'hidden'}`}>
             <div className="flex flex-row sm:flex-row sm:flex-col space-y-2 sm:space-y-0 sm:space-x-10">
-              <FaMoneyBill className="h-6 w-6 text-gray-600" />
-              <FaComments className="h-6 w-6 text-gray-600" />
-              <FaBell className="h-6 w-6 text-gray-600" />
+              <Link to="record"> <FaMoneyBill className="h-6 w-6 text-gray-600" /></Link>
+              <Link to="chat"> <FaComments className="h-6 w-6 text-gray-600" /></Link>
+              <Link to="notification"> <FaBell className="h-6 w-6 text-gray-600" /></Link>
             </div>
             <div className="sm:flex sm:items-center">
-              <img className="w-8 h-8 rounded-full border-2 border-green-500 ml-4" src="https://dummyimage.com/100x100/000/" alt="User" />
+              <Link to="profile"> <img className="w-8 h-8 rounded-full border-2 border-green-500 ml-4" src="https://dummyimage.com/100x100/000/" alt="User" /></Link>
               <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${name}`}</h2>
               <button onClick={handleLogout} className="ml-4 text-gray-500 hover:text-green-700 font-medium focus:outline-none">
                 <FaSignOutAlt className="h-5 w-5" />
@@ -63,9 +63,9 @@ function Navbar({ name }) {
             <div className="sm:block sm:px-8 absolute top-40 right-0 w-2/3 bg-white border-t border-green-200 shadow-lg z-20">
               <div className="flex flex-col space-y-2">
                 <Link to={Notification} className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Records</Link>
-                <Link to="donor" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Chats</Link>
-                <Link to="/" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Notification</Link>
-                <Link to="/" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Profile</Link>
+                <Link to="chat" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Chats</Link>
+                <Link to="notification" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Notification</Link>
+                <Link to="profile" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Profile</Link>
                 <button onClick={handleLogout} className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100 focus:outline-none">
                   <FaSignOutAlt className="h-5 w-5" />
                   Logout
@@ -114,7 +114,8 @@ function DonorDashboard() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-2">
-            <AvailableStds category={category} />
+            <Outlet/>
+            {/* <AvailableStds category={category} /> */}
           </div>
         </div>
       </div>

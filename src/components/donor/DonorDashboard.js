@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Notification from '../Notification';
 import { FaSearch, FaMoneyBill, FaComments, FaBell,FaBars, FaTimes, FaSignOutAlt } from 'react-icons/fa';
 import logo from '../images/logo2.jpg'
-import HistoryPage from '../HistoryPage';
 import { Link } from 'react-router-dom';
+import AvailableStds from './AvailableStds';
 
 function Navbar({ name }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -111,7 +111,7 @@ function DonorDashboard() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-2">
-            <HistoryPage category={category} />
+            <AvailableStds category={category} />
           </div>
         </div>
       </div>

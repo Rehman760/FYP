@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useLocation } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { saveSponsoredStudent } from '../Firebase/SaveData';
 
 const banks = [
   { name: 'Bank A', logo: 'https://dummyimage.com/50x50/000/fff', value: 'bankA' },
@@ -12,6 +14,9 @@ function DonationPage() {
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
+  // const location = useLocation();
+  // const {state} = location;
 
  
 
@@ -30,6 +35,15 @@ function DonationPage() {
 
   const handlePopupClose = () => {
     setShowPopup(false);
+    //Save the student to sponsored student and delete it from the available list.
+    //and move to the sponosred list.
+    const donorEmail = sessionStorage.getItem('donorEmail');
+    const stdEmail = sessionStorage.getItem('stdEmail');
+    const student = JSON.parse(sessionStorage.getItem('student'));
+    console.log(student);
+    saveSponsoredStudent(donorEmail, stdEmail, student);
+    navigate("/donor/nav-bar/notification");
+
   };
 
   return (

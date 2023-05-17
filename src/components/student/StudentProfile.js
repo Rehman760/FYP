@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaGraduationCap, FaMoneyBillWave, FaBook, FaBriefcase } from 'react-icons/fa';
 import { useLocation, useNavigate} from 'react-router-dom';
-import { getProfileData, saveSponsoredStudent } from '../Firebase/SaveData';
+import { getProfileData } from '../Firebase/SaveData';
 
 function StudentProfile(props) {
   // const { name, education, marks, income, hometown, hobbies, imageUrl } = props;
@@ -38,8 +38,12 @@ function StudentProfile(props) {
     alert('The student is succesfully sponsored by you.');
     //Navigate to the sponosred student page.
     console.log(state);
-    saveSponsoredStudent(state?.donorEmail, state?.stdEmail, student);
-    navigate('/donor/nav-bar/notification');
+    // saveSponsoredStudent(state?.donorEmail, state?.stdEmail, student);
+    // navigate('/donor/nav-bar/notification');
+    sessionStorage.setItem('stdEmail', state?.stdEmail);
+    sessionStorage.setItem('student', JSON.stringify(student));
+    navigate("/donor/donate");
+
   }
 
   return (

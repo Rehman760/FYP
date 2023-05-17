@@ -28,6 +28,8 @@ import DonorNavbar from './components/donor/DonorNavbar';
 import AvailableStds from './components/donor/AvailableStds';
 import NotFound from './components/NotFound';
 import DonorContainer from './components/donor/DonorContainer';
+import PaymentPage from './components/PaymentPage';
+import DonationPage from './components/donor/DonatePage';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
@@ -79,6 +81,7 @@ export default function App() {
           <Route path=':stdID' element={<StudentProfile/>}/>
         </Route>
         <Route path='donor/sponsored' element={<>Sponsored List of Student</>}/>
+        <Route path='donor/donate' element={<DonationPage/>}/>
   
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}
 

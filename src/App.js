@@ -32,7 +32,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
   const [email, setEmail] = useState('');
-  const [stdEmail, setStdEmail] = useState('');
+  const [donorEmail, setDonorEmail] = useState('');
 
 
  
@@ -70,10 +70,10 @@ export default function App() {
             <Route path=":catId" element={<Container email={email}/>}/>
         </Route>
 
-        <Route path="donor" element={<LogIn role='donor'/>}/>
+        <Route path="donor" element={<LogIn role='donor' setDonorEmail={setDonorEmail}/>}/>
       
-        <Route path='donor/nav-bar' element={<DonorDashboard/>}>
-          <Route path=":donorID" element={<DonorContainer/>}/>
+        <Route path='donor/nav-bar' element={<DonorDashboard donorEmail={donorEmail}/>}>
+          <Route path=":donorID" element={<DonorContainer donorEmail={donorEmail}/>}/>
         </Route>
         <Route path='donor/student/'>
           <Route path=':stdID' element={<StudentProfile/>}/>

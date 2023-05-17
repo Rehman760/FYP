@@ -1,7 +1,8 @@
-import { doc, setDoc, updateDoc, query, onSnapshot } from "firebase/firestore";
+import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where } from "firebase/firestore";
 import { db, storage } from "./FirebaseConfig";
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, getCountFromServer } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import SponsoredStudent from "../donor/SponsoredStudents";
 // import { getMyEmail } from "../student/StudentNavbarData";
 
 let email = '';
@@ -75,8 +76,17 @@ export const getOpportunities = async () => {
     return oppsList;
 }
 
+
+
 export const getAllStudents = async (setStudents) => {
-    console.log('Started');
+    let length = 0;
+    const size = async()=>{
+        const coll = collection(db, "students");
+        const snapshot = await getCountFromServer(coll);
+        console.log('count: ', snapshot.data().count);
+        length = snapshot.data().count;
+    }
+    size();    
     const q = query(collection(db, "students"));
     
     await getDocs(q);
@@ -95,7 +105,7 @@ export const getAllStudents = async (setStudents) => {
             getImage(email, function(imageUrl){
                 student['imageUrl'] = imageUrl;
                 students.push(student);
-                if(students.length == 5){
+                if(students.length == length){
                     setStudents(students);
                     return;
                 }
@@ -127,8 +137,43 @@ export const saveDonorData = async (donor)=>{
 
 export const getProfileData = async (email, setProfile)=>{
     const document = doc(db, 'students', email);
-    const unsub = onSnapshot(document, (document)=>{
+    onSnapshot(document, (document)=>{
         setProfile(document.data());
     })
+}
+export const saveSponsoredStudent = async(donorEmail, stdEmail, stdDoc)=>{
+    stdDoc['sponsoredBy'] = donorEmail;
+    // console.log(stdDoc);
+    const document = doc(db, 'sponsored', stdEmail);
+    await setDoc(document, stdDoc).then((res)=>{
+        const delDoc = async(mail)=>{
+            await deleteDoc(doc(db, "students", mail));
+        }
+        delDoc(stdEmail);
+        
+    }).catch((err)=>console.log(err));
+}
+
+export const getStudentsDonated = async(donorEmail, setSponsoredStudent)=>{
+
+    const sponosredRef = collection(db, "sponsored");
+    const q = query(sponosredRef, where("sponsoredBy", "==", donorEmail));
+    const querySnapshot = await getDocs(q);
+    const studentsSponsored = [];
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const data = doc.data();
+        const name = data?.personalInfo?.selfData?.name;
+        const schoolName = data?.educationInfo?.schoolName;
+        const program = data?.educationInfo?.degree +" "+ data?.educationInfo?.fieldOfStudy;
+        const student = { name, schoolName, program, status:"approved" };
+        studentsSponsored.push(student);
+        console.log('call me '+donorEmail);
+        if(studentsSponsored.length === 1){
+            setSponsoredStudent(studentsSponsored);
+        }        
+        console.log(doc.id, " : ", data);
+    });
+
 
 }

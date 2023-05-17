@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { FaGraduationCap, FaMoneyBillWave, FaBook, FaBriefcase } from 'react-icons/fa';
-import { useLocation} from 'react-router-dom';
-import { getProfileData } from '../Firebase/SaveData';
+import { useLocation, useNavigate} from 'react-router-dom';
+import { getProfileData, saveSponsoredStudent } from '../Firebase/SaveData';
 
 function StudentProfile(props) {
   // const { name, education, marks, income, hometown, hobbies, imageUrl } = props;
   const [profile, setProfile] = useState();
+  const [student, setStudent] = useState({});
+  const navigate = useNavigate();
   const location = useLocation();
   const {state} = location;
 
   useEffect(function(){
-    const data = getProfileData(state?.stdEmail, function(data){
+    let email = '';
+    if(state?.stdEmail === undefined){
+      email = 'junaid@gmail.com';
+    }    
+    else{
+      email = state?.stdEmail;
+    }
+    getProfileData(email, function(data){
       console.log(data);
       const profile = {};
       profile['name'] = data?.personalInfo?.selfData?.name;
@@ -20,6 +29,7 @@ function StudentProfile(props) {
       profile['hobby'] = data?.otherInfo?.hobbies;
       profile['hometown'] = data?.personalInfo?.addressData?.city;
       setProfile(profile)
+      setStudent(data);
     });
     
   },[]);
@@ -27,11 +37,13 @@ function StudentProfile(props) {
   function donateFunction(e){
     alert('The student is succesfully sponsored by you.');
     //Navigate to the sponosred student page.
+    console.log(state);
+    saveSponsoredStudent(state?.donorEmail, state?.stdEmail, student);
+    navigate('/donor/nav-bar/notification');
   }
 
   return (
       <div className=" mx-auto px-4 sm:px-6 lg:px-8">
-        { state && (
         <div className="max-w-7xl mx-auto py-12">
           <div className="lg:text-center">
             <h2 className="text-base text-green-500 font-semibold tracking-wide uppercase">{profile?.name}</h2>
@@ -45,7 +57,7 @@ function StudentProfile(props) {
 
           <div className="mt-10">
             <div className="flex items-center justify-center">
-              <img className="h-62 w-56 rounded-full" src={state.stdImgUrl} alt="" />
+              <img className="h-62 w-56 rounded-full" src={state?.stdImgUrl} alt="" />
             </div>
             <dl className="mt-10 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
               <div className="relative">
@@ -94,7 +106,6 @@ function StudentProfile(props) {
           </div>
           
         </div>
-        )}
     </div>
   );
 }

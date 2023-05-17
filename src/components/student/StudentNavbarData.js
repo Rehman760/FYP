@@ -58,7 +58,7 @@ export const StudentNavbarData = [
         title:'Profile',
         icons:<FaAccessibleIcon/>,
         link:'profile',
-        body:<h1>Profile</h1>
+        body:<StudentProfile/>
     },
 
     {

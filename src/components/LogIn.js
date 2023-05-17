@@ -83,6 +83,7 @@ const LogIn = ({role, myEmail}) => {
       })
       .catch((error) => {
         console.log(error);
+        setErrorMessage(error.code);
       });
   };
 

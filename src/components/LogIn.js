@@ -104,7 +104,7 @@ const LogIn = ({role, myEmail, setDonorEmail}) => {
             <Link to="/ForgotPassword" className="text-green-500 font-medium hover:text-green-700">Forgot password?</Link>
           </div>
 
-          {errorMessage &&  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          {errorMessage &&  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             {/* <strong class="font-bold">Error!</strong> */}
             <span className="block sm:inline">{errorMessage}</span>
           </div>

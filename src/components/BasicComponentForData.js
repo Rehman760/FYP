@@ -26,7 +26,7 @@ function BasicComponentForData() {
         {/* <Donor/> */}
         {/* <StudentProfile/> */}
         {/* <DonorProfile/> */}
-        <DonorForm/>
+        {/* <DonorForm/> */}
         {/* <LoadingComponent/> */}
         {/* <PopUp/> */}
         {/* <Dashboard/> */}
@@ -35,7 +35,7 @@ function BasicComponentForData() {
         {/* <UserProfile/> */}
         {/* <UniversityForm/> */}
       {/* <Details/> */}
-      {/* <University/> */}
+      <University/>
       {/* <NotFound/> */}
       {/* <PaymentPage/> */}
       {/* <StudentTable/> */}

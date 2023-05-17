@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 // import { setMyEmail } from "./student/StudentNavbarData";
 
-const LogIn = ({role, myEmail}) => {
+const LogIn = ({role, myEmail, setDonorEmail}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,7 +30,7 @@ const LogIn = ({role, myEmail}) => {
         // alert(response.user.email+" is login");
         if(role==='donor'){
           navigate("/donor/nav-bar");
-
+          setDonorEmail(response.user.email);
         }
         else{
           navigate("/student/dashboard");

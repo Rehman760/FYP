@@ -1,6 +1,6 @@
-import { doc, setDoc, updateDoc, query, onSnapshot } from "firebase/firestore";
+import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc } from "firebase/firestore";
 import { db, storage } from "./FirebaseConfig";
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, getCountFromServer } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 // import { getMyEmail } from "../student/StudentNavbarData";
 
@@ -75,8 +75,17 @@ export const getOpportunities = async () => {
     return oppsList;
 }
 
+
+
 export const getAllStudents = async (setStudents) => {
-    console.log('Started');
+    let length = 0;
+    const size = async()=>{
+        const coll = collection(db, "students");
+        const snapshot = await getCountFromServer(coll);
+        console.log('count: ', snapshot.data().count);
+        length = snapshot.data().count;
+    }
+    size();    
     const q = query(collection(db, "students"));
     
     await getDocs(q);
@@ -95,7 +104,7 @@ export const getAllStudents = async (setStudents) => {
             getImage(email, function(imageUrl){
                 student['imageUrl'] = imageUrl;
                 students.push(student);
-                if(students.length == 5){
+                if(students.length == length){
                     setStudents(students);
                     return;
                 }
@@ -127,8 +136,19 @@ export const saveDonorData = async (donor)=>{
 
 export const getProfileData = async (email, setProfile)=>{
     const document = doc(db, 'students', email);
-    const unsub = onSnapshot(document, (document)=>{
+    onSnapshot(document, (document)=>{
         setProfile(document.data());
     })
-
+}
+export const saveSponsoredStudent = async(donorEmail, stdEmail, stdDoc)=>{
+    stdDoc['sponsoredBy'] = donorEmail;
+    // console.log(stdDoc);
+    const document = doc(db, 'sponsored', stdEmail);
+    await setDoc(document, stdDoc).then((res)=>{
+        const delDoc = async(mail)=>{
+            await deleteDoc(doc(db, "students", mail));
+        }
+        delDoc(stdEmail);
+        
+    }).catch((err)=>console.log(err));
 }

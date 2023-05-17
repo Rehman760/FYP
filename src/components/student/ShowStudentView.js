@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function ShowStudentView({id,email, picture,name,bio,status}) {
+function ShowStudentView({id,email, picture,name,bio,status, donorEmail}) {
   return (
     <div className="col-sm-4 my-2" key={id}>
     <Card>
@@ -14,7 +14,7 @@ function ShowStudentView({id,email, picture,name,bio,status}) {
             <Card.Text>{bio}</Card.Text>
                 <Card.Text className="text-muted">Status: {status}</Card.Text>
             <Button variant="success" style={{background:'green'}}>
-                <Link to={`/donor/student/${id}`} state={{stdEmail:email, stdImgUrl:picture}}>View Profile</Link>
+                <Link to={`/donor/student/${id}`} state={{stdEmail:email, stdImgUrl:picture, donorEmail:donorEmail}}>View Profile</Link>
             </Button>
         </Card.Body>
     </Card>

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { FaGraduationCap, FaMoneyBillWave, FaBook, FaBriefcase } from 'react-icons/fa';
-import { useLocation} from 'react-router-dom';
-import { getProfileData } from '../Firebase/SaveData';
+import { useLocation, useNavigate} from 'react-router-dom';
+import { getProfileData, saveSponsoredStudent } from '../Firebase/SaveData';
 
 function StudentProfile(props) {
   // const { name, education, marks, income, hometown, hobbies, imageUrl } = props;
   const [profile, setProfile] = useState();
+  const [student, setStudent] = useState({});
+  const navigate = useNavigate();
   const location = useLocation();
   const {state} = location;
 
   useEffect(function(){
-    const data = getProfileData(state?.stdEmail, function(data){
+    getProfileData(state?.stdEmail, function(data){
       console.log(data);
       const profile = {};
       profile['name'] = data?.personalInfo?.selfData?.name;
@@ -20,6 +22,7 @@ function StudentProfile(props) {
       profile['hobby'] = data?.otherInfo?.hobbies;
       profile['hometown'] = data?.personalInfo?.addressData?.city;
       setProfile(profile)
+      setStudent(data);
     });
     
   },[]);
@@ -27,6 +30,9 @@ function StudentProfile(props) {
   function donateFunction(e){
     alert('The student is succesfully sponsored by you.');
     //Navigate to the sponosred student page.
+    console.log(state);
+    saveSponsoredStudent(state?.donorEmail, state?.stdEmail, student);
+    navigate('/donor/nav-bar/notification');
   }
 
   return (

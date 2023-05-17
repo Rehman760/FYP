@@ -71,7 +71,7 @@ const LogIn = ({role, myEmail, setDonorEmail}) => {
   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
     <path fillRule="evenodd" d="M18.533 7.678H10v4.644h4.149a4.376 4.376 0 01-1.896 2.864v2.381h3.072c1.797-1.659 2.835-4.098 2.835-6.809a6.764 6.764 0 00-.712-3.48zM9.999 8.134v3.445l-2.74 1.756a6.736 6.736 0 01-.24-2.042c0-1.815.702-3.542 1.976-4.834L9.999 8.134zm0-7.678a6.76 6.76 0 015.304 2.604l-2.441 2.428a3.877 3.877 0 00-2.863-1.301c-2.14 0-3.897 1.743-3.897 3.897 0 .44.076.865.209 1.266l-2.245 1.399A6.751 6.751 0 019.999.456z" clipRule="evenodd" />
   </svg>
-  Log in with Gmail
+  Log in with Google Account
 </button>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col mb-6">

@@ -48,7 +48,7 @@ const LogIn = ({role, myEmail}) => {
         // alert(response.user.email+" is login");
         if(role==='donor'){
           navigate("/donor/nav-bar");
-
+          sessionStorage.setItem('donorEmail', response.user.email);
         }
         else{
           navigate("/student/dashboard");

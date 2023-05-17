@@ -1,7 +1,8 @@
-import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where } from "firebase/firestore";
 import { db, storage } from "./FirebaseConfig";
 import { collection, getDocs, getCountFromServer } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import SponsoredStudent from "../donor/SponsoredStudents";
 // import { getMyEmail } from "../student/StudentNavbarData";
 
 let email = '';
@@ -151,4 +152,35 @@ export const saveSponsoredStudent = async(donorEmail, stdEmail, stdDoc)=>{
         delDoc(stdEmail);
         
     }).catch((err)=>console.log(err));
+}
+
+export const getStudentsDonated = async(donorEmail, setSponsoredStudent)=>{
+    let length = 0;
+    const size = async()=>{
+        const coll = collection(db, "sponsored");
+        const snapshot = await getCountFromServer(coll);
+        console.log('count sponsored', snapshot.data().count);
+        length = snapshot.data().count;
+    }
+    size();
+    const sponosredRef = collection(db, "sponsored");
+    const q = query(sponosredRef, where("sponsoredBy", "==", donorEmail));
+    const querySnapshot = await getDocs(q);
+    const studentsSponsored = [];
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const data = doc.data();
+        const name = data?.personalInfo?.selfData?.name;
+        const schoolName = data?.educationInfo?.schoolName;
+        const program = data?.educationInfo?.degree +" "+ data?.educationInfo?.fieldOfStudy;
+        const student = { name, schoolName, program, status:"approved" };
+        studentsSponsored.push(student);
+        console.log('call me '+donorEmail);
+        if(studentsSponsored.length === 1){
+            setSponsoredStudent(SponsoredStudent);
+        }        
+        console.log(doc.id, " : ", data);
+    });
+
+
 }

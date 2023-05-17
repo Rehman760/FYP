@@ -12,7 +12,14 @@ function StudentProfile(props) {
   const {state} = location;
 
   useEffect(function(){
-    getProfileData(state?.stdEmail, function(data){
+    let email = '';
+    if(state?.stdEmail === undefined){
+      email = 'junaid@gmail.com';
+    }    
+    else{
+      email = state?.stdEmail;
+    }
+    getProfileData(email, function(data){
       console.log(data);
       const profile = {};
       profile['name'] = data?.personalInfo?.selfData?.name;
@@ -37,7 +44,6 @@ function StudentProfile(props) {
 
   return (
       <div className=" mx-auto px-4 sm:px-6 lg:px-8">
-        { state && (
         <div className="max-w-7xl mx-auto py-12">
           <div className="lg:text-center">
             <h2 className="text-base text-green-500 font-semibold tracking-wide uppercase">{profile?.name}</h2>
@@ -51,7 +57,7 @@ function StudentProfile(props) {
 
           <div className="mt-10">
             <div className="flex items-center justify-center">
-              <img className="h-62 w-56 rounded-full" src={state.stdImgUrl} alt="" />
+              <img className="h-62 w-56 rounded-full" src={state?.stdImgUrl} alt="" />
             </div>
             <dl className="mt-10 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
               <div className="relative">
@@ -100,7 +106,6 @@ function StudentProfile(props) {
           </div>
           
         </div>
-        )}
     </div>
   );
 }

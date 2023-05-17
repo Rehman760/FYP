@@ -16,7 +16,8 @@ function DonorContainer({donorEmail}) {
     return <h1>I am a chat</h1>
   }
   else if(donorID === 'notification'){
-    return <SponsoredStudent/>
+    console.log(donorEmail);
+    return <SponsoredStudent donorEmail={donorEmail}/>
   }
   else if(donorID==='profile'){
     return <DonorProfile/>

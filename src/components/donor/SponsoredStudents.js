@@ -3,16 +3,19 @@ import { Table } from 'react-bootstrap';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { getStudentsDonated } from '../Firebase/SaveData';
 
-const SponsoredStudent = ({donorEmail}) => {
-    const [students, setStudents] = useState();
+const SponsoredStudent = () => {
+  const donorEmail = sessionStorage.getItem('donorEmail');
+  const [students, setStudents] = useState();
   
   useEffect(function(){
-    getStudentsDonated(donorEmail, function(students){
-        console.log(students)
-        setStudents(students);
-    });
-
+    console.log(`Email of donor is: ${donorEmail}`);
+    getStudentsDonated(donorEmail, setStds);
   },[]);
+
+  function setStds(students){
+    setStudents(students);
+
+  }
 
   return (
     <Table responsive bordered hover>
@@ -28,7 +31,7 @@ const SponsoredStudent = ({donorEmail}) => {
         {students?.map((student, index) => (
           <tr key={index}>
             <td>{student.name}</td>
-            <td>${student.schoolName}</td>
+            <td>{student.schoolName}</td>
             <td>{student.program}</td>
             <td>
               {student.status === "approved" ? (

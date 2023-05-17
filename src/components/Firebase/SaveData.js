@@ -155,14 +155,7 @@ export const saveSponsoredStudent = async(donorEmail, stdEmail, stdDoc)=>{
 }
 
 export const getStudentsDonated = async(donorEmail, setSponsoredStudent)=>{
-    let length = 0;
-    const size = async()=>{
-        const coll = collection(db, "sponsored");
-        const snapshot = await getCountFromServer(coll);
-        console.log('count sponsored', snapshot.data().count);
-        length = snapshot.data().count;
-    }
-    size();
+
     const sponosredRef = collection(db, "sponsored");
     const q = query(sponosredRef, where("sponsoredBy", "==", donorEmail));
     const querySnapshot = await getDocs(q);
@@ -177,7 +170,7 @@ export const getStudentsDonated = async(donorEmail, setSponsoredStudent)=>{
         studentsSponsored.push(student);
         console.log('call me '+donorEmail);
         if(studentsSponsored.length === 1){
-            setSponsoredStudent(SponsoredStudent);
+            setSponsoredStudent(studentsSponsored);
         }        
         console.log(doc.id, " : ", data);
     });

@@ -30,6 +30,8 @@ const LogIn = ({role, myEmail, setDonorEmail}) => {
         // alert(response.user.email+" is login");
         if(role==='donor'){
           navigate("/donor/nav-bar");
+          sessionStorage.setItem("donorEmail", response.user.email);
+          console.log('DonorEmail in login' +response.user.email);
           setDonorEmail(response.user.email);
         }
         else{

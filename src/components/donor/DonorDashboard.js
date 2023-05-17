@@ -79,8 +79,8 @@ function Navbar({ name }) {
   );
 }
 
-function DonorDashboard({donorEmail}) {
-  const name = donorEmail;
+function DonorDashboard() {
+  const name = sessionStorage.getItem('donorEmail');
   
 
   return (

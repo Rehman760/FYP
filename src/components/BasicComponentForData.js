@@ -35,11 +35,11 @@ function BasicComponentForData() {
         {/* <UserProfile/> */}
         {/* <UniversityForm/> */}
       {/* <Details/> */}
-      {/* <University/> */}
+      <University/>
       {/* <NotFound/> */}
       {/* <PaymentPage/> */}
       {/* <StudentTable/> */}
-      <DonatePage/>
+      {/* <DonatePage/> */}
     </div>
   )
 }

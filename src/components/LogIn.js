@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import {app} from "./Firebase/FirebaseConfig";
-import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// import { setMyEmail } from "./student/StudentNavbarData";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
+import { Row, Col, Form, Button, Alert } from "react-bootstrap";
 
-const LogIn = ({role, myEmail, setDonorEmail}) => {
+const LogIn = ({role, myEmail}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const handleGmailLogin=(e)=>{}
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -18,7 +25,18 @@ const LogIn = ({role, myEmail, setDonorEmail}) => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  const handleGmailLogin=(e)=>{}
+
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
+    if (e.target.checked) {
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
+    } else {
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
+    }
+  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,9 +48,7 @@ const LogIn = ({role, myEmail, setDonorEmail}) => {
         // alert(response.user.email+" is login");
         if(role==='donor'){
           navigate("/donor/nav-bar");
-          sessionStorage.setItem("donorEmail", response.user.email);
-          console.log('DonorEmail in login' +response.user.email);
-          setDonorEmail(response.user.email);
+
         }
         else{
           navigate("/student/dashboard");
@@ -48,17 +64,26 @@ const LogIn = ({role, myEmail, setDonorEmail}) => {
         // navigate("/AfterLogin", {state:{email:email}});
       })
       .catch((error) => {
-        if(error.code === 'auth/wrong-password'){
-          setErrorMessage('Please check the Password');
-        }
-        if(error.code === 'auth/user-not-found'){
-          setErrorMessage('Please check the Email');
-        }
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
+        console.log(error);
       });
   };
 
+ 
+  useEffect(() => {
+    // Check if rememberMe is set in local storage
+    const rememberMeValue = localStorage.getItem("rememberMe");
+    if (rememberMeValue) {
+      setRememberMe(JSON.parse(rememberMeValue));
+      setEmail(localStorage.getItem("email") || "");
+      setPassword(localStorage.getItem("password") || "");
+    }
+  }, []);
+  
+  useEffect(() => {
+    // Save rememberMe to local storage when rememberMe changes
+    localStorage.setItem("rememberMe", JSON.stringify(rememberMe));
+  }, [rememberMe]);
+  
   return (
     <div className="flex flex-col h-screen justify-center items-center bg-green-500">
       <div className="bg-white p-10 rounded-lg shadow-md">
@@ -100,8 +125,16 @@ const LogIn = ({role, myEmail, setDonorEmail}) => {
           </div>
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
-              <input type="checkbox" id="remember" className="mr-2" />
-              <label htmlFor="remember" className="text-gray-600 font-medium">Remember me</label>
+               <input
+              type="checkbox"
+              id="remember"
+              checked={rememberMe}
+              onChange={handleRememberMeChange}
+              className="mr-2 success"
+            />
+            <label htmlFor="remember" className="text-gray-600 font-medium">
+              Remember me
+            </label>
             </div>
             <Link to="/ForgotPassword" className="text-green-500 font-medium hover:text-green-700">Forgot password?</Link>
           </div>

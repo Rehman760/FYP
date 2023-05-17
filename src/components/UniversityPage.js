@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Image } from 'react-bootstrap';
+import { Row, Col, Card, Image, Button } from 'react-bootstrap';
 
 const Universities = [
   {
@@ -28,9 +28,24 @@ const Universities = [
 ];
 
 const UniversityPage = () => {
+  const handleAddUniversity = () => {
+    // Add your logic for adding a university here
+    console.log('Add university clicked');
+  };
+
   return (
     <div className="container mt-5">
-    <h2 className="text-center mb-4 text-3xl font-medium">Our Universities</h2>
+      <h2 className="text-center mb-4 text-3xl font-medium">Our Universities</h2>
+      <Row className="mb-3">
+        <Col xs={12} sm={12}>
+          <button
+            className="btn btn-success float-end"
+            onClick={handleAddUniversity}
+          >
+            Add University
+          </button>
+        </Col>
+      </Row>
       {Universities.map((university, index) => (
         <Row key={index} className="mb-3">
           <Col xs={12} sm={12}>

@@ -33,8 +33,6 @@ import DonationPage from './components/donor/DonatePage';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
-  const [email, setEmail] = useState('');
-  const [donorEmail, setDonorEmail] = useState('');
 
 
  
@@ -63,19 +61,19 @@ export default function App() {
           <Route path='/UniversityPage' element={<UniversityPage />} />
           <Route path='/Services' element={<Services />}/>
           <Route path='/Contact' element={<Contact/>}/>          
-          <Route path='/LogIn' element={<LogIn myEmail={setEmail}/>}/>
+          <Route path='/LogIn' element={<LogIn/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
         </Route>
-        <Route path="student" element={<StudentNavbar myEmail={email}/>}>
-            <Route path=":catId" element={<Container email={email}/>}/>
+        <Route path="student" element={<StudentNavbar/>}>
+            <Route path=":catId" element={<Container/>}/>
         </Route>
 
-        <Route path="donor" element={<LogIn role='donor' setDonorEmail={setDonorEmail}/>}/>
+        <Route path="donor" element={<LogIn role='donor'/>}/>
       
-        <Route path='donor/nav-bar' element={<DonorDashboard donorEmail={donorEmail}/>}>
-          <Route path=":donorID" element={<DonorContainer donorEmail={donorEmail}/>}/>
+        <Route path='donor/nav-bar' element={<DonorDashboard/>}>
+          <Route path=":donorID" element={<DonorContainer/>}/>
         </Route>
         <Route path='donor/student/'>
           <Route path=':stdID' element={<StudentProfile/>}/>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {app} from "./Firebase/FirebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { saveProfile } from "./Firebase/SaveData";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -10,10 +11,12 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     // Handle form submission
     if(password === confirmPassword){
       const auth = getAuth();    
@@ -21,7 +24,11 @@ function SignUp() {
       .then((response) => {
         console.log(response.user);
         // response.user.sendEmailVerification();
-        auth.signOut();
+        saveProfile({firstname: firstName, secondname: lastName, email:email}, email, function(value){
+          console.log(value);
+          setLoading(value);
+        });
+        // auth.signOut();
         alert("Account Created Succesfully");
         navigate("/LogIn");     
       })
@@ -124,7 +131,7 @@ function SignUp() {
         <button
           type="submit"
           className="w-full h-12 font-bold  text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white">
-          Sign Up     
+          {loading ? "Loading..." : "Sign Up"}
         </button>         
       </form>
     </div>

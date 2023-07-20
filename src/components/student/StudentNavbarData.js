@@ -3,6 +3,7 @@ import Dashboard from './Dashboard';
 import StudentProfile from './StudentProfile';
 import Notification from '../Notification';
 import StudentInformation from './StudentInformation';
+import UserProfile from './UserProfile';
 
 // let email='';
 
@@ -58,7 +59,7 @@ export const StudentNavbarData = [
         title:'Profile',
         icons:<FaAccessibleIcon/>,
         link:'profile',
-        body:<StudentProfile/>
+        body:<UserProfile/>
     },
 
     {

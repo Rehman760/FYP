@@ -5,21 +5,22 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { getProfileImage, saveEmail } from '../Firebase/SaveData';
 import logo from "../images/logo2.jpg";
 
-function StudentNavbar({myEmail}) {
+function StudentNavbar() {
   const [isOpenHumSign, setOpenHumSign] = useState(false);
   const [URL, setURL] = useState('');
+  const myEmail = sessionStorage.getItem("studentEmail");
 
   const setURLByMe = (url) => {
     setURL(url);
   };
 
   useEffect(()=>{
-    if(myEmail===''){
-      alert("Page not found!");
-      return;
-    }
-    saveEmail(myEmail);
-    getProfileImage(setURLByMe);
+    
+    // if(myEmail===''){
+    //   alert("Page not found!");
+    //   return;
+    // }
+    getProfileImage(myEmail,setURLByMe);
   }, []);
 
   

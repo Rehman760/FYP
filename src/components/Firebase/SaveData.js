@@ -1,7 +1,7 @@
-import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where } from "firebase/firestore";
+import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where, getDoc } from "firebase/firestore";
 import { db, storage } from "./FirebaseConfig";
 import { collection, getDocs, getCountFromServer } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import SponsoredStudent from "../donor/SponsoredStudents";
 // import { getMyEmail } from "../student/StudentNavbarData";
 
@@ -19,7 +19,7 @@ export const savePersonalInfo = async ([selfData, bioData, fatherData, addressDa
     console.log("Data added");
 }
 
-export const saveProfileImage = async (image) => {
+export const saveProfileImage = async (image, email) => {
     const imageRef = ref(storage, `images/profiles/${email}`);
     await uploadBytes(imageRef, image).then((response) => {
         console.log(response);
@@ -28,7 +28,7 @@ export const saveProfileImage = async (image) => {
     });
 }
 
-export const getProfileImage = async (setUrl) => {
+export const getProfileImage = async (email, setUrl) => {
     const imageRef = ref(storage, `images/profiles/${email}`);
     await getDownloadURL(imageRef).then((response) => {
         setUrl(response);
@@ -105,7 +105,7 @@ export const getAllStudents = async (setStudents) => {
             getImage(email, function(imageUrl){
                 student['imageUrl'] = imageUrl;
                 students.push(student);
-                if(students.length == length){
+                if(students.length === length){
                     setStudents(students);
                     return;
                 }
@@ -174,6 +174,36 @@ export const getStudentsDonated = async(donorEmail, setSponsoredStudent)=>{
         }        
         console.log(doc.id, " : ", data);
     });
+}
 
+export const saveProfile = async(data, email, setLoading)=>{
+    console.log(data);
+    console.log(email);
+    setLoading(true);
+    if(data?.profileImage !== undefined){
+        saveProfileImage(data?.profileImage, email);
+    }
+    delete data?.profileImage
+    const document = doc(db, 'studentProfiles', email);
+    await setDoc(document, data).then((res)=>{
+        alert('Data is updated');
+        console.log('Data is updated');
+        setLoading(false);
+    }).catch(err=>console.log(err.message))
+}
+
+export const getProfile = async(email, setProfile)=>{
+    const document = doc(db, 'studentProfiles', email);
+    await getDoc(document).then((res)=>{
+        console.log(res.data());
+        setProfile(res.data());
+    }).catch((err)=>console.log(err));
+
+    // if (docSnap.exists()) {
+    //     return docSnap.data();
+    // } else {
+    //     // doc.data() will be undefined in this case
+    //     console.log("No such document!");
+    // }
 
 }

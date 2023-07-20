@@ -1,13 +1,29 @@
 import React, { useEffect , useState} from 'react';
 import InputField from './InputField';
 
-function BioInfo({sendData}) {
-  const [bioInfo, setBioInfo] = useState({});
+function BioInfo({sendData, data}) {
+  const [bioInfo, setBioInfo] = useState({
+    bloodGroup:'',
+    cnic:'',
+    dob:'',
+    placeOfBirth:''
+  });
+
+  useEffect(()=>{
+    setBioInfo(data);
+  }, [data])
 
 
   useEffect(()=>{
     sendData(bioInfo);
   });
+
+  const handleValueChange = (e)=>{
+    const key = e.target.name;
+    const value = e.target.value;
+    setBioInfo({...bioInfo, [key]:value})
+  }
+
   return (
     <div className=" p-4 mb-4 rounded-lg shadow-md">
       <h2 className="text-lg font-medium mb-4">Biological Information</h2>
@@ -16,18 +32,20 @@ function BioInfo({sendData}) {
           <InputField
             label="Blood Group"
             type="text"
+            value={bioInfo?.bloodGroup}
             name="bloodGroup"
             placeholder="Enter blood group"
-            onChange={(e)=>setBioInfo({...bioInfo, bloodGroup:e.target.value})}
+            onChange={handleValueChange}
           />
         </div>
         <div className="w-full md:w-1/2 px-2">
           <InputField
             label="CNIC"
             type="text"
+            value={bioInfo?.cnic}
             name="cnic"
             placeholder="Enter CNIC"
-            onChange={(e)=>setBioInfo({...bioInfo, cnic:e.target.value})}
+            onChange={handleValueChange}
           />
         </div>
       </div>
@@ -36,18 +54,20 @@ function BioInfo({sendData}) {
           <InputField
             label="Date of Birth"
             type="date"
+            value={bioInfo?.dob}
             name="dob"
             placeholder="Select date of birth"
-            onChange={(e)=>setBioInfo({...bioInfo, birth:e.target.value})}
+            onChange={handleValueChange}
           />
         </div>
         <div className="w-full md:w-1/2 px-2">
           <InputField
             label="Place of Birth"
             type="text"
+            value={bioInfo?.placeOfBirth}
             name="placeOfBirth"
             placeholder="Enter place of birth"
-            onChange={(e)=>setBioInfo({...bioInfo, placeBirth:e.target.value})}
+            onChange={handleValueChange}
           />
         </div>
       </div>

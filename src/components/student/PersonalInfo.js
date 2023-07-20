@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SelfInfo from './SelfInfo';
 import BioInfo from './BioInfo';
 import FatherInfo from './FatherInfo';
 import AddressInfo from './AddressInfo';
 import NationalityInfo from './NationalityInfo';
 // import { getMyEmail } from './StudentNavbarData';
-import { savePersonalInfo, saveProfileImage } from '../Firebase/SaveData';
+import { getFormData, savePersonalInfo, saveProfileImage } from '../Firebase/SaveData';
 
 
 function checkForEmptyField(obj){
@@ -19,17 +19,32 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   const [fatherData, setFatherData] = useState();
   const [addressData, setAddressData] = useState();
   const [nationalityData, setNationalityData] = useState();
+  const [placeSelfData, setPlaceSelfData] = useState();
+  const [placeBioData, setPlaceBioData] = useState();
+  const [placeFatherData, setPlaceFatherData] = useState();
+  const [placeAddressData, setPlaceAddressData] = useState();
+  const [placeNationalityData, setPlaceNationalityData] = useState();
   
+
+  useEffect(()=>{
+    const email = sessionStorage.getItem('studentEmail');
+    getFormData(email, function(data){
+      setPlaceSelfData(data?.personalInfo?.selfData);
+      setPlaceBioData(data?.personalInfo?.bioData);
+      setPlaceFatherData(data?.personalInfo?.fatherData);
+      setPlaceAddressData(data?.personalInfo?.addressData);
+      setPlaceNationalityData(data?.personalInfo?.nationalityData);
+    })
+  }, [])
   const handleNextPage = () => {
     //Task-1 -Check if any field is null then generate an indicator message.
     // checkForEmptyField(selfData);
     // showMe();
     //Task-2 -Save data to the database
     // alert(`email is ${email}`);
-    const image = selfData.image;
-    delete selfData.image;
-    saveProfileImage(image);
-    savePersonalInfo([selfData, bioData, fatherData, addressData, nationalityData]);
+    const email = sessionStorage.getItem('studentEmail');
+    // showMe();
+    savePersonalInfo([selfData, bioData, fatherData, addressData, nationalityData], email);
     //Task 3 -Move to next page
     setActiveSection(activeSectionNo+1);
     // showMe();
@@ -78,15 +93,15 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   return (
     
     <div className="bg-green-50 p-8 rounded-lg shadow-md">
-      <SelfInfo sendData={onSelfDataFetch}/>
+      <SelfInfo data={placeSelfData} sendData={onSelfDataFetch}/>
       <hr className="my-8" />
-      <BioInfo sendData={onBioDataFetch}/>
+      <BioInfo data={placeBioData} sendData={onBioDataFetch}/>
       <hr className="my-8" />
-      <FatherInfo sendData={onFatherDataFetch}/>
+      <FatherInfo data={placeFatherData} sendData={onFatherDataFetch}/>
       <hr className="my-8" />
-      <AddressInfo sendData={onAddressDataFetch}/>
+      <AddressInfo data={placeAddressData} sendData={onAddressDataFetch}/>
       <hr className="my-8" />
-      <NationalityInfo sendData={onNationalityDataFetch}/>
+      <NationalityInfo data={placeNationalityData} sendData={onNationalityDataFetch}/>
 
       <div className="flex justify-between mt-8">
         <button

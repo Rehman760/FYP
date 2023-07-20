@@ -2,45 +2,31 @@ import React, { useState } from 'react';
 import InputField from './InputField';
 import { useEffect } from 'react';
 
-const SelfInfo = ({sendData}) => {
-  const [selfInfo, setSelfInfo] = useState({}); 
+const SelfInfo = ({sendData, data}) => {
+  const [selfInfo, setSelfInfo] = useState({
+    name:'',
+    email:'',
+    phone:''
+  }); 
+
+  useEffect(()=>{
+    setSelfInfo(data);
+  }, [data])
 
   useEffect(()=>{
     sendData(selfInfo);
   });
 
+  const handleValueChange = (e)=>{
+    const key = e.target.name;
+    const value = e.target.value;
+    setSelfInfo({...selfInfo, [key]:value});
+  }
+
   return (
     <div className="p-6 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold mb-4">Self Information</h2>
-      <div className="flex items-center mb-4">
-        <label htmlFor="profile-image" className="w-32 mr-4">
-          Profile Image:
-        </label>
-        <div className="flex items-center">
-          <input
-            type="file"
-            id="profile-image"
-            onChange={(e)=>setSelfInfo({image:e.target.files[0]})}
-            className="hidden md:w-1/2"
-          />
-          <label
-            htmlFor="profile-image"
-            className="bg-green-500 text-white px-3 py-2 rounded cursor-pointer"
-          >
-            Upload Image
-          </label>
-          {selfInfo.image && (
-            <div className="ml-4 flex items-center">
-              <img
-                src={URL.createObjectURL(selfInfo.image)}
-                alt="Profile"
-                className="w-16 h-16 object-cover rounded-full"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-
+      
       <div className="flex items-center mb-4">
         <label htmlFor="name" className="w-32 mr-4">
           Name:
@@ -48,8 +34,9 @@ const SelfInfo = ({sendData}) => {
         <InputField
           type="text"
           name="name"
+          value={selfInfo?.name}
           placeholder="Enter name"
-          onChange={(e) => setSelfInfo({...selfInfo, name:e.target.value})}
+          onChange={handleValueChange}
         />
       </div>
       <div className="flex items-center mb-4">
@@ -59,8 +46,9 @@ const SelfInfo = ({sendData}) => {
         <InputField
           type="email"
           name="email"
+          value={selfInfo?.email}
           placeholder="Enter email"
-          onChange={(e) => setSelfInfo({...selfInfo, email:e.target.value})}
+          onChange={handleValueChange}
         />
       </div>
       <div className="flex items-center mb-4">
@@ -70,12 +58,9 @@ const SelfInfo = ({sendData}) => {
         <InputField
           type="tel"
           name="phone"
+          value={selfInfo?.phone}
           placeholder="Enter phone"
-          onChange={(e) => {
-            setSelfInfo({...selfInfo, phone:e.target.value})
-            // console.log(selfInfo);
-            // setSelfData(selfInfo);
-          }}
+          onChange={handleValueChange}
         />
       </div>
     </div>

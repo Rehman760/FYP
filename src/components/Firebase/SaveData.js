@@ -11,7 +11,7 @@ export const saveEmail = (myemail)=>{
     email = myemail;
 }
 
-export const savePersonalInfo = async ([selfData, bioData, fatherData, addressData, nationalityData]) => {
+export const savePersonalInfo = async ([selfData, bioData, fatherData, addressData, nationalityData], email) => {
     // const email = getMyEmail();
     const document = doc(db, "students", email);
     const data = { selfData, bioData, fatherData, addressData, nationalityData };
@@ -127,6 +127,19 @@ export const getImage = async (email, setUrl) => {
     }).catch((err) => {
         console.log(`get profile ${err}`);
     });
+
+}
+
+export const getFormData = async(email, setFormData)=>{
+    const docRef = doc(db, "students", email);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data())
+        setFormData(docSnap.data())
+    } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+    }
 
 }
 

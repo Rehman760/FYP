@@ -4,7 +4,12 @@ import { getImage, getProfile, saveProfile } from '../Firebase/SaveData';
 
 const UserProfile = () => {
     const [loading, setLoading] = useState(false);
-    const [profile, setProfile] = useState({}); 
+    const [profile, setProfile] = useState({
+      profileImage: '',
+      firstname:'',
+      secondname:'',
+      email:'' 
+    }); 
     const myemail = sessionStorage.getItem('studentEmail');
 
 

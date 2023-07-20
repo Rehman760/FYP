@@ -11,12 +11,13 @@ import {
 } from "firebase/auth";
 import { Row, Col, Form, Button, Alert } from "react-bootstrap";
 
-const LogIn = ({role, myEmail}) => {
+const LogIn = ({role}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleGmailLogin = (e) => {
     e.preventDefault();
@@ -29,7 +30,6 @@ const LogIn = ({role, myEmail}) => {
           navigate("/donor/nav-bar");
         } else {
           navigate("/student/dashboard");
-          myEmail(result.user.email);
         }
       })
       .catch((error) => {
@@ -58,6 +58,7 @@ const LogIn = ({role, myEmail}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     // Handle login submission
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
@@ -70,8 +71,10 @@ const LogIn = ({role, myEmail}) => {
         }
         else{
           navigate("/student/dashboard");
-          myEmail(response.user.email);
+          sessionStorage.setItem('studentEmail', response.user.email);
         }
+
+        setLoading(false);
         
         // setMyEmail(response.user.email);
       
@@ -84,6 +87,7 @@ const LogIn = ({role, myEmail}) => {
       .catch((error) => {
         console.log(error);
         setErrorMessage(error.code);
+        setLoading(false);
       });
   };
 
@@ -186,7 +190,7 @@ const LogIn = ({role, myEmail}) => {
             type="submit"
             className="w-full h-12 font-bold text-green-500 border border-green-100 rounded-lg hover:text-white-500 hover:bg-green-600 hover:text-white"
           >
-            Log In
+            {loading ? "Loading..." : "Log In"}
           </button>
         </form>
         <div className="flex justify-center items-center mt-6">

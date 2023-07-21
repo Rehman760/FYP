@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InputField from './InputField';
 import { saveEducationInfo } from '../Firebase/SaveData';
+import { getFormData } from '../Firebase/SaveData';
 
 const EducationInfo = ({setActiveSection, activeSectionNo}) => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    schoolName:'',
+    degree:'',
+    fieldOfStudy:'',
+    graduationYear:'',
+    percentage:''
+  });
+
+  useEffect(()=>{
+    const email = sessionStorage.getItem('studentEmail');
+    getFormData(email, function(data){
+      setFormData(data?.educationInfo);
+    });
+  }, []);
+
 
   const handleNextPage = () => {
     // Save data to database and move to next page
-    saveEducationInfo(formData);
+    const email = sessionStorage.getItem('studentEmail');
+    saveEducationInfo(formData, email);
     setActiveSection(activeSectionNo+1);
     showMe();
   };
@@ -20,38 +36,49 @@ const EducationInfo = ({setActiveSection, activeSectionNo}) => {
     console.log(formData);
   }
 
+  const handleValueChange = (e)=>{
+    const key = e.target.name;
+    const value = e.target.value;
+    setFormData({...formData, [key]:value});
+  }
+
   return (
     <div className="bg-green-50 shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
       <div className="grid grid-cols-2 gap-4">
         <InputField
           label="School Name"
           name="schoolName"
+          value={formData?.schoolName}
           placeholder="Enter your School name"
-          onChange={(e)=>setFormData({...formData, schoolName: e.target.value})}
+          onChange={handleValueChange}
         />
         <InputField
           label="Degree"
           name="degree"
+          value={formData?.degree}
           placeholder="Enter your Degree"
-          onChange={(e)=>setFormData({...formData, degree: e.target.value})}
+          onChange={handleValueChange}
         />
         <InputField
           label="Field of Study"
           name="fieldOfStudy"
+          value={formData?.fieldOfStudy}
           placeholder="Enter your Field of Study"
-          onChange={(e)=>setFormData({...formData, fieldOfStudy: e.target.value})}
+          onChange={handleValueChange}
         />
         <InputField
           label="Graduation Year"
           name="graduationYear"
+          value={formData?.graduationYear}
           placeholder="Enter your Graduation Year"
-          onChange={(e)=>setFormData({...formData, graduationYear: e.target.value})}
+          onChange={handleValueChange}
         />
         <InputField
           label="Percentage"
           name="percentage"
+          value = {formData?.percentage}
           placeholder="Enter your Percent"
-          onChange={(e)=>setFormData({...formData, percentage: e.target.value})}
+          onChange={handleValueChange}
         />
       </div>
       <div className="flex justify-between mt-8">

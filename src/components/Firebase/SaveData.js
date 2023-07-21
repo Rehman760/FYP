@@ -45,14 +45,14 @@ export const saveEducationInfo = async (data, email) => {
     console.log(data);
 }
 
-export const saveFamilyInfo = async (data) => {
+export const saveFamilyInfo = async (data, email) => {
     // const email = getMyEmail();
     const document = doc(db, 'students', email);
     await updateDoc(document, { familyInfo: data });
     console.log(data);
 }
 
-export const saveExpenditureInfo = async (data) => {
+export const saveExpenditureInfo = async (data, email) => {
     // const email = getMyEmail();
     const document = doc(db, 'students', email);
     await updateDoc(document, { expenditureInfo: data });

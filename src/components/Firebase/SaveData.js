@@ -38,7 +38,7 @@ export const getProfileImage = async (email, setUrl) => {
 
 }
 
-export const saveEducationInfo = async (data) => {
+export const saveEducationInfo = async (data, email) => {
     // const email = getMyEmail();
     const document = doc(db, 'students', email);
     await updateDoc(document, { educationInfo: data });

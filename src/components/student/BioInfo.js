@@ -1,7 +1,7 @@
 import React, { useEffect , useState} from 'react';
 import InputField from './InputField';
 
-function BioInfo({sendData, data}) {
+function BioInfo({sendData, data, edit}) {
   const [bioInfo, setBioInfo] = useState({
     bloodGroup:'',
     cnic:'',
@@ -19,6 +19,7 @@ function BioInfo({sendData, data}) {
   });
 
   const handleValueChange = (e)=>{
+    edit(true);
     const key = e.target.name;
     const value = e.target.value;
     setBioInfo({...bioInfo, [key]:value})

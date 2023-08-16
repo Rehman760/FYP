@@ -11,6 +11,7 @@ const FamilyInfo = ({setActiveSection, activeSectionNo}) => {
     motherOccupation:'',
     annualIncome:''
   });
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(()=>{
     const email = sessionStorage.getItem('studentEmail');
@@ -21,8 +22,10 @@ const FamilyInfo = ({setActiveSection, activeSectionNo}) => {
 
   const handleNextPage = () => {
     // Save data to database and move to next page
-    const email = sessionStorage.getItem('studentEmail');
-    saveFamilyInfo(familyInfo, email);
+    if(isEdit){
+      const email = sessionStorage.getItem('studentEmail');
+      saveFamilyInfo(familyInfo, email);
+    }
     setActiveSection(activeSectionNo+1);
     showMe();
   };
@@ -38,6 +41,7 @@ const FamilyInfo = ({setActiveSection, activeSectionNo}) => {
   }
 
   const handleValueChange = (e)=>{
+    setIsEdit(true);
     const key = e.target.name;
     const value = e.target.value;
     setFamilyInfo({...familyInfo, [key]:value});
@@ -97,7 +101,7 @@ const FamilyInfo = ({setActiveSection, activeSectionNo}) => {
         <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         onClick={handleNextPage}
         >
-          Next
+          {isEdit ? "Save & Next" : "Next"}
         </button>
       </div>
     </div>

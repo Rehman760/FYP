@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputField from './InputField';
 
-const FatherInfo = ({sendData, data}) => {
+const FatherInfo = ({sendData, data, edit}) => {
   const [fatherInfo, setFatherInfo] = useState({
     fatherName:'',
     fatherOccupation:'',
@@ -18,6 +18,7 @@ const FatherInfo = ({sendData, data}) => {
   });
 
   const handleValueChange = (e)=>{
+    edit(true);
     const key = e.target.name;
     const value = e.target.value;
     setFatherInfo({...fatherInfo, [key]:value});

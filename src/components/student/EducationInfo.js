@@ -11,6 +11,7 @@ const EducationInfo = ({setActiveSection, activeSectionNo}) => {
     graduationYear:'',
     percentage:''
   });
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(()=>{
     const email = sessionStorage.getItem('studentEmail');
@@ -22,8 +23,10 @@ const EducationInfo = ({setActiveSection, activeSectionNo}) => {
 
   const handleNextPage = () => {
     // Save data to database and move to next page
-    const email = sessionStorage.getItem('studentEmail');
-    saveEducationInfo(formData, email);
+    if(isEdit){
+      const email = sessionStorage.getItem('studentEmail');
+      saveEducationInfo(formData, email);
+    }
     setActiveSection(activeSectionNo+1);
     showMe();
   };
@@ -37,6 +40,7 @@ const EducationInfo = ({setActiveSection, activeSectionNo}) => {
   }
 
   const handleValueChange = (e)=>{
+    setIsEdit(true);
     const key = e.target.name;
     const value = e.target.value;
     setFormData({...formData, [key]:value});
@@ -92,7 +96,7 @@ const EducationInfo = ({setActiveSection, activeSectionNo}) => {
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           onClick={handleNextPage}
         >
-          Next
+          {isEdit ? 'Save & Next' : 'Next'}
         </button>
       </div>
     </div>

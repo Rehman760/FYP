@@ -1,14 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import InputField from './InputField';
 import { saveExpenditureInfo } from '../Firebase/SaveData';
+import { getFormData } from '../Firebase/SaveData';
 
 const ExpendituresInfo = ({setActiveSection, activeSectionNo}) => {
-  const [expInfo, setExpInfo] = useState({});
+  const [expInfo, setExpInfo] = useState({
+    tuitionFee:'',
+    accommodation:'',
+    booksAndSupplies:'',
+    transportation:'',
+    otherExpenses:''
+  });
+  const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(()=>{
+    const email = sessionStorage.getItem('studentEmail');
+    getFormData(email, function(data){
+      setExpInfo(data?.expenditureInfo);
+    });
+
+  }, [])
 
   const handleNextPage = () => {
     // Save data to database and move to next page
-    const email = sessionStorage.getItem('studentEmail');
-    saveExpenditureInfo(expInfo, email);
+    if(isEdit){
+      const email = sessionStorage.getItem('studentEmail');
+      saveExpenditureInfo(expInfo, email);
+    }
     setActiveSection(activeSectionNo+1);      
     showMe();
   };
@@ -24,6 +42,7 @@ const ExpendituresInfo = ({setActiveSection, activeSectionNo}) => {
   }
 
   const handleValueChange = (e)=>{
+    setIsEdit(true);
     const key = e.target.name;
     const value = e.target.value;
     setExpInfo({...expInfo, [key]:value});
@@ -89,7 +108,7 @@ const ExpendituresInfo = ({setActiveSection, activeSectionNo}) => {
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline sm:ml-2"
           onClick={handleNextPage}
         >
-          Next
+          {isEdit ? 'Save & Next' : 'Next'}
         </button>
       </div>
     </div>

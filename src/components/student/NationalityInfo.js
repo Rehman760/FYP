@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputField from './InputField';
 
-const NationalityInfo = ({ sendData, data}) => {
+const NationalityInfo = ({ sendData, data, edit}) => {
   const [nationalityInfo, setNationalityInfo] = useState({
     nationality:'',
     passportNumber:'',
@@ -18,6 +18,7 @@ const NationalityInfo = ({ sendData, data}) => {
     sendData(nationalityInfo);
   });
   const handleValueChange = (e)=>{
+    edit(true);
     const key = e.target.name;
     const value = e.target.value;
     setNationalityInfo({...nationalityInfo, [key]:value});

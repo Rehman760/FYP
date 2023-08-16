@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputField from './InputField';
 
-const AddressInfo = ({sendData, data}) => {
+const AddressInfo = ({sendData, data, edit}) => {
   const [address, setAddress] = useState({
     houseNumber:'',
     streetAddress:'',
@@ -20,6 +20,7 @@ const AddressInfo = ({sendData, data}) => {
   });
 
   const handleValueChange = (e)=>{
+    edit(true);
     const key = e.target.name;
     const value= e.target.value;
     setAddress({...address, [key]:value});

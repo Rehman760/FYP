@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import InputField from './InputField';
 import { useEffect } from 'react';
 
-const SelfInfo = ({sendData, data}) => {
+const SelfInfo = ({sendData, data, edit}) => {
   const [selfInfo, setSelfInfo] = useState({
     name:'',
     email:'',
@@ -18,6 +18,7 @@ const SelfInfo = ({sendData, data}) => {
   });
 
   const handleValueChange = (e)=>{
+    edit(true);
     const key = e.target.name;
     const value = e.target.value;
     setSelfInfo({...selfInfo, [key]:value});

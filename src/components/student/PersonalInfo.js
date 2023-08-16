@@ -24,6 +24,7 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   const [placeFatherData, setPlaceFatherData] = useState();
   const [placeAddressData, setPlaceAddressData] = useState();
   const [placeNationalityData, setPlaceNationalityData] = useState();
+  const [isEdit, setIsEdit] = useState(false);
   
 
   useEffect(()=>{
@@ -36,15 +37,20 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
       setPlaceNationalityData(data?.personalInfo?.nationalityData);
     })
   }, [])
+
+  const handleEdit = (value)=>{
+    setIsEdit(value);
+  }
   const handleNextPage = () => {
     //Task-1 -Check if any field is null then generate an indicator message.
     // checkForEmptyField(selfData);
     // showMe();
     //Task-2 -Save data to the database
     // alert(`email is ${email}`);
-    const email = sessionStorage.getItem('studentEmail');
-    // showMe();
-    savePersonalInfo([selfData, bioData, fatherData, addressData, nationalityData], email);
+    if(isEdit){
+      const email = sessionStorage.getItem('studentEmail');
+      savePersonalInfo([selfData, bioData, fatherData, addressData, nationalityData], email);
+    }
     //Task 3 -Move to next page
     setActiveSection(activeSectionNo+1);
     // showMe();
@@ -93,15 +99,15 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
   return (
     
     <div className="bg-green-50 p-8 rounded-lg shadow-md">
-      <SelfInfo data={placeSelfData} sendData={onSelfDataFetch}/>
+      <SelfInfo data={placeSelfData} sendData={onSelfDataFetch} edit={handleEdit}/>
       <hr className="my-8" />
-      <BioInfo data={placeBioData} sendData={onBioDataFetch}/>
+      <BioInfo data={placeBioData} sendData={onBioDataFetch} edit={handleEdit}/>
       <hr className="my-8" />
-      <FatherInfo data={placeFatherData} sendData={onFatherDataFetch}/>
+      <FatherInfo data={placeFatherData} sendData={onFatherDataFetch} edit={handleEdit}/>
       <hr className="my-8" />
-      <AddressInfo data={placeAddressData} sendData={onAddressDataFetch}/>
+      <AddressInfo data={placeAddressData} sendData={onAddressDataFetch} edit={handleEdit}/>
       <hr className="my-8" />
-      <NationalityInfo data={placeNationalityData} sendData={onNationalityDataFetch}/>
+      <NationalityInfo data={placeNationalityData} sendData={onNationalityDataFetch} edit={handleEdit}/>
 
       <div className="flex justify-between mt-8">
         <button
@@ -115,7 +121,7 @@ function PersonalInfo({setActiveSection, activeSectionNo}) {
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           onClick={handleNextPage}
         >
-          Next
+          {isEdit ? "Save & Next" : "Next"}
         </button>
       </div>
     </div>

@@ -1,28 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "./InputField";
-import { saveOtherInfo } from "../Firebase/SaveData";
+import { saveOtherInfo, getFormData } from "../Firebase/SaveData";
+
 
 const OtherDetails = ({setActiveSection, activeSectionNo}) => {
-  const [interests, setInterests] = useState("");
-  const [achievements, setAchievements] = useState("");
-  const [hobbies, setHobbies] = useState("");
+  const [formData, setFormData] = useState({
+    interests:'',
+    achievements:'',
+    hobbies:''
+  })
+  const [isEdit, setIsEdit] = useState(false);
 
-  const handleInterestsChange = (event) => {
-    setInterests(event.target.value);
-  };
 
-  const handleAchievementsChange = (event) => {
-    setAchievements(event.target.value);
-  };
+  useEffect(()=>{
+    const email = sessionStorage.getItem('studentEmail');
+    getFormData(email, function(data){
+      setFormData(data?.otherInfo);
+    });
+  }, [])
 
-  const handleHobbiesChange = (event) => {
-    setHobbies(event.target.value);
-  };
+
+  const handleValueChange = (e)=>{
+    setIsEdit(true);
+    const key = e.target.name;
+    const value = e.target.value;
+    setFormData({...formData, [key]:value});
+  }
 
   const handleSavePage = () => {
     // Save data to database and move to next page
-    saveOtherInfo({interests, achievements, hobbies});
-    alert("Data is saved to the database");
+    if(isEdit){
+      const email = sessionStorage.getItem('studentEmail');
+      saveOtherInfo(formData, email);
+      alert("Data is saved to the database");
+    }
   };
 
   const handlePreviousPage = () => {
@@ -43,8 +54,9 @@ const OtherDetails = ({setActiveSection, activeSectionNo}) => {
             label="Interests"
             type="text"
             placeholder="Enter your interests"
-            value={interests}
-            onChange={handleInterestsChange}
+            name={"interests"}
+            value={formData?.interests}
+            onChange={handleValueChange}
           />
         </div>
         <div>
@@ -52,8 +64,9 @@ const OtherDetails = ({setActiveSection, activeSectionNo}) => {
             label="Achievements"
             type="text"
             placeholder="Enter your achievements"
-            value={achievements}
-            onChange={handleAchievementsChange}
+            name={"achievements"}
+            value={formData?.achievements}
+            onChange={handleValueChange}
           />
         </div>
       </div>
@@ -62,8 +75,9 @@ const OtherDetails = ({setActiveSection, activeSectionNo}) => {
           label="Hobbies"
           type="text"
           placeholder="Enter your hobbies"
-          value={hobbies}
-          onChange={handleHobbiesChange}
+          name={"hobbies"}
+          value={formData?.hobbies}
+          onChange={handleValueChange}
         />
       </div>
 

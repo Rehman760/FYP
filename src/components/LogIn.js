@@ -66,7 +66,7 @@ const LogIn = ({role}) => {
         // Signed in 
         // alert(response.user.email+" is login");
         if(role==='donor'){
-          navigate("/donor/nav-bar");
+          navigate("/donor/nav-bar/record");
           sessionStorage.setItem('donorEmail', response.user.email);
         }
         else{

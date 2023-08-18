@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FaGraduationCap, FaMoneyBillWave, FaBook, FaBriefcase } from 'react-icons/fa';
 import { useLocation, useNavigate} from 'react-router-dom';
-import { getProfileData } from '../Firebase/SaveData';
+import { getImage, getProfileData } from '../Firebase/SaveData';
 
 function StudentProfile(props) {
   // const { name, education, marks, income, hometown, hobbies, imageUrl } = props;
   const [profile, setProfile] = useState();
   const [student, setStudent] = useState({});
+  const [image, setImage] = useState();
   const navigate = useNavigate();
   const location = useLocation();
   const {state} = location;
@@ -14,11 +15,12 @@ function StudentProfile(props) {
   useEffect(function(){
     let email = '';
     if(state?.stdEmail === undefined){
-      email = 'junaid@gmail.com';
+      email = 'dani@gmail.com';
     }    
     else{
       email = state?.stdEmail;
     }
+    getImage(email, setImage);
     getProfileData(email, function(data){
       console.log(data);
       const profile = {};
@@ -61,7 +63,7 @@ function StudentProfile(props) {
 
           <div className="mt-10">
             <div className="flex items-center justify-center">
-              <img className="h-62 w-56 rounded-full" src={state?.stdImgUrl} alt="" />
+              <img className="h-62 w-56 rounded-full" src={image} alt="" />
             </div>
             <dl className="mt-10 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
               <div className="relative">

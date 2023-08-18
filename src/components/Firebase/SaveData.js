@@ -15,7 +15,7 @@ export const savePersonalInfo = async ([selfData, bioData, fatherData, addressDa
     // const email = getMyEmail();
     const document = doc(db, "students", email);
     const data = { selfData, bioData, fatherData, addressData, nationalityData };
-    await setDoc(document, { personalInfo: data });
+    await setDoc(document, { personalInfo: data }, {merge:true});
     console.log("Data added");
 }
 
@@ -58,7 +58,7 @@ export const saveExpenditureInfo = async (data, email) => {
     await updateDoc(document, { expenditureInfo: data });
     console.log(data);
 }
-export const saveOtherInfo = async (data) => {
+export const saveOtherInfo = async (data, email) => {
     // const email = getMyEmail();
     const document = doc(db, 'students', email);
     await updateDoc(document, { otherInfo: data });
@@ -79,44 +79,24 @@ export const getOpportunities = async () => {
 
 
 export const getAllStudents = async (setStudents) => {
-    let length = 0;
-    const size = async()=>{
-        const coll = collection(db, "students");
-        const snapshot = await getCountFromServer(coll);
-        console.log('count: ', snapshot.data().count);
-        length = snapshot.data().count;
-    }
-    size();    
     const q = query(collection(db, "students"));
-    
     await getDocs(q);
     onSnapshot(q, (querySnapshot) => {
         const students = [];
+        let id= 1;
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            const email = doc.id;
             const { personalInfo } = doc.data();
             const name = personalInfo?.selfData?.name;
-            const fatherName = personalInfo?.fatherData?.fatherName;
             const { educationInfo } = doc.data();
             const schoolName = educationInfo?.schoolName;
             const gradYear = educationInfo?.graduationYear;
-            const student = { email, name, fatherName, schoolName, gradYear };
-            getImage(email, function(imageUrl){
-                student['imageUrl'] = imageUrl;
-                students.push(student);
-                if(students.length === length){
-                    setStudents(students);
-                    return;
-                }
-            })  
-            
+            const student = { id, name, schoolName, gradYear, city:'Larkana', email: doc.id };
             console.log(doc.id, " => ", doc.data());
-            // students.push(student);
+            id++;
+            students.push(student);
         });
-
-        // setStudents(students);
-
+        setStudents(students);
     });
 }
 

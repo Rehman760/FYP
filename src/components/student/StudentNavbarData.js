@@ -4,6 +4,7 @@ import StudentProfile from './StudentProfile';
 import Notification from '../Notification';
 import StudentInformation from './StudentInformation';
 import UserProfile from './UserProfile';
+import Logout from '../Logout';
 
 // let email='';
 
@@ -65,8 +66,8 @@ export const StudentNavbarData = [
     {
         title:'Logout',
         icons:<FaLock/>,
-        link:'/',
-        body:'Exit'
+        link:'logout',
+        body:<Logout/>
     }
 ]
 

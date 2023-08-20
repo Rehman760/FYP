@@ -61,7 +61,7 @@ export default function App() {
           <Route path='/UniversityPage' element={<UniversityPage />} />
           <Route path='/Services' element={<Services />}/>
           <Route path='/Contact' element={<Contact/>}/>          
-          <Route path='/LogIn' element={<LogIn/>}/>
+          <Route path='/LogIn' element={<LogIn role='student'/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
           <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>

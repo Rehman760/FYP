@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllStudents } from '../Firebase/SaveData';
 import { Link } from 'react-router-dom';
-
 import { FaSearch } from 'react-icons/fa';
 
 const ResponsiveTable = () => {
@@ -24,23 +23,20 @@ const ResponsiveTable = () => {
         <thead>
           <tr>
             <th className="px-4 py-2" colSpan="6">
-            <div className="flex mb-4">
-          <div className="relative flex-1">
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-              <FaSearch className="h-5 w-5 text-gray-500" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search by name, institution, or city"
-              className="w-full p-2 border rounded pr-10"
-              onChange={e => setSearchTerm(e.target.value)}
-            />
-            
-          </div>
-        </div>
+              <div className="flex mb-4">
+                <div className="relative flex-1">
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <FaSearch className="h-5 w-5 text-gray-500" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search by name, institution, or city"
+                    className="w-full p-2 border rounded pr-10"
+                    onChange={e => setSearchTerm(e.target.value)}
+                  />
               
-              
-              
+                </div>
+              </div>            
             </th>
           </tr>
           <tr>

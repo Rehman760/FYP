@@ -9,15 +9,19 @@ import {
   browserSessionPersistence,
   signInWithPopup,
 } from "firebase/auth";
+import { db } from "./Firebase/FirebaseConfig";
 import { Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { loginUser } from "./Firebase/SaveData";
 
 const LogIn = ({role}) => {
+  console.log('Role is '+role);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
+  
 
   const handleGmailLogin = (e) => {
     e.preventDefault();
@@ -26,6 +30,7 @@ const LogIn = ({role}) => {
     signInWithPopup(auth, provider)
       .then((result) => {
         // Signed in with Google
+        
         if (role === "donor") {
           navigate("/donor/nav-bar");
         } else {
@@ -65,24 +70,27 @@ const LogIn = ({role}) => {
       .then((response) => {
         // Signed in 
         // alert(response.user.email+" is login");
-        if(role==='donor'){
-          navigate("/donor/nav-bar/record");
-          sessionStorage.setItem('donorEmail', response.user.email);
-        }
-        else{
-          navigate("/student/dashboard");
-          sessionStorage.setItem('studentEmail', response.user.email);
-        }
+        // Replace "userIdToRetrieve" with the actual user ID you want to retrieve
+        const userEmail = response.user.email;
+        loginUser(userEmail, function(userType){
+          console.log("User type is "+userType);
+          if(userType === role){
+            if (role === "donor") {
+              sessionStorage.setItem('donorEmail', response.user.email);
+              navigate("/donor/nav-bar/record");
+            } else if(role==="student"){
+              sessionStorage.setItem('studentEmail', response.user.email);
+              navigate("/student/dashboard");
+            }
+          }
+          
+          else{
+            setErrorMessage("You are not registered");
+            setLoading(false);
+          }
 
+        });
         setLoading(false);
-        
-        // setMyEmail(response.user.email);
-      
-        //set email to the studentNavBar:
-        
-
-
-        // navigate("/AfterLogin", {state:{email:email}});
       })
       .catch((error) => {
         console.log(error);
@@ -180,7 +188,7 @@ const LogIn = ({role}) => {
             </Link>
           </div>
 
-          {errorMessage &&  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          {errorMessage &&  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             {/* <strong class="font-bold">Error!</strong> */}
             <span className="block sm:inline">{errorMessage}</span>
           </div>
@@ -195,7 +203,7 @@ const LogIn = ({role}) => {
         </form>
         <div className="flex justify-center items-center mt-6">
           <span className="text-gray-600">Don't have an account?</span>
-          <Link
+          <Link state={{role:role}}
             to="/SignUp"
             className="text-green-500 font-medium ml-2 hover:text-green-700"
           >

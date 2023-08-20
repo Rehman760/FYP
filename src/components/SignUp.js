@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {app} from "./Firebase/FirebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { saveProfile } from "./Firebase/SaveData";
 
 function SignUp() {
+  const location = useLocation();
+  const role = location?.state?.role;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,7 +26,7 @@ function SignUp() {
       .then((response) => {
         console.log(response.user);
         // response.user.sendEmailVerification();
-        saveProfile({firstname: firstName, secondname: lastName, email:email}, email, function(value){
+        saveProfile({firstname: firstName, secondname: lastName, email:email, userType:role}, email, function(value){
           console.log(value);
           setLoading(value);
         });
@@ -58,7 +60,7 @@ function SignUp() {
       >
         <div className="flex flex-col items-center">
           <h1 className="text-4xl font-bold text-green-500 ">Finance for Education</h1>
-          <p className="text-xl font-semibold mt-2 mb-8 text-gray-500">Sign up</p>
+          <p className="text-xl font-semibold mt-2 mb-8 text-gray-500">Sign up {role}</p>
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="first-name">
@@ -123,9 +125,9 @@ function SignUp() {
           />
         </div>
 
-        {errorMessage &&  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        {errorMessage &&  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
           {/* <strong class="font-bold">Error!</strong> */}
-          <span class="block sm:inline">{errorMessage}</span>
+          <span className="block sm:inline">{errorMessage}</span>
         </div>}
             
         <button

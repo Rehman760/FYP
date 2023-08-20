@@ -177,16 +177,16 @@ export const saveProfile = async(data, email, setLoading)=>{
         saveProfileImage(data?.profileImage, email);
     }
     delete data?.profileImage
-    const document = doc(db, 'studentProfiles', email);
+    const document = doc(db, 'users', email);
     await setDoc(document, data).then((res)=>{
         alert('Data is updated');
         console.log('Data is updated');
-        setLoading(false);
     }).catch(err=>console.log(err.message))
+    setLoading(false);
 }
 
 export const getProfile = async(email, setProfile)=>{
-    const document = doc(db, 'studentProfiles', email);
+    const document = doc(db, 'users', email);
     await getDoc(document).then((res)=>{
         console.log(res.data());
         setProfile(res.data());
@@ -198,5 +198,19 @@ export const getProfile = async(email, setProfile)=>{
     //     // doc.data() will be undefined in this case
     //     console.log("No such document!");
     // }
+
+}
+export const loginUser = async(email, setLogin)=>{
+    const document = doc(db, 'users', email);
+    await getDoc(document).then((res)=>{
+        if(res.data() !== undefined){
+            setLogin(res.data().userType);
+        }
+        else{
+            setLogin(null);
+        }
+
+    }).catch((err)=>{})
+
 
 }

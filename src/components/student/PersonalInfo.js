@@ -14,11 +14,37 @@ function checkForEmptyField(obj){
 
 function PersonalInfo({setActiveSection, activeSectionNo}) {
   // const email = getMyEmail();
-  const [selfData, setSelfData] = useState();
-  const [bioData, setBioData] = useState();
-  const [fatherData, setFatherData] = useState();
-  const [addressData, setAddressData] = useState();
-  const [nationalityData, setNationalityData] = useState();
+  const [selfData, setSelfData] = useState({
+    name:'',
+    email:'',
+    phone:''
+  });
+  const [bioData, setBioData] = useState({
+      bloodGroup:'',
+      cnic:'',
+      dob:'',
+      placeOfBirth:''
+    });
+  const [fatherData, setFatherData] = useState({
+    fatherName:'',
+    fatherOccupation:'',
+    fatherPhone:'',
+    fathernEmail :''
+  });
+  const [addressData, setAddressData] = useState({
+    houseNumber:'',
+    streetAddress:'',
+    city:'',
+    stateProvince:'',
+    postalZipCode:'',
+    country:''
+  });
+  const [nationalityData, setNationalityData] = useState({
+    nationality:'',
+    passportNumber:'',
+    countryOfIssue:'',
+    expiryDate:''
+  });
   const [placeSelfData, setPlaceSelfData] = useState();
   const [placeBioData, setPlaceBioData] = useState();
   const [placeFatherData, setPlaceFatherData] = useState();

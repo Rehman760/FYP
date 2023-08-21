@@ -14,9 +14,11 @@ const UserProfile = () => {
 
 
     useEffect(()=>{
+      if(myemail){
         getProfile(myemail, function(data){
           setProfile({...data, email:myemail});
         })
+      }
     }, [])
 
 

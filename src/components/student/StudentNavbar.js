@@ -2,19 +2,27 @@ import React, { useEffect, useState } from 'react';
 import Hamburger from 'hamburger-react';
 import { StudentNavbarData } from './StudentNavbarData';
 import { NavLink, Outlet } from 'react-router-dom';
-import { getProfileImage, saveEmail } from '../Firebase/SaveData';
+import { getProfileImage} from '../Firebase/SaveData';
+import { useNavigate } from 'react-router-dom';
 import logo from "../images/logo2.jpg";
 
 function StudentNavbar() {
   const [isOpenHumSign, setOpenHumSign] = useState(false);
   const [URL, setURL] = useState('');
   const myEmail = sessionStorage.getItem("studentEmail");
+  const navigate = useNavigate();
 
   const setURLByMe = (url) => {
     setURL(url);
   };
 
   useEffect(()=>{
+    
+    if(!myEmail){
+      // console.log('Email not found');
+      navigate('/login');
+      return;
+    }
     
     // if(myEmail===''){
     //   alert("Page not found!");

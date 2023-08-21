@@ -30,6 +30,9 @@ import NotFound from './components/NotFound';
 import DonorContainer from './components/donor/DonorContainer';
 import PaymentPage from './components/PaymentPage';
 import DonationPage from './components/donor/DonatePage';
+import UniversityForm from './components/university/UniversityForm';
+import TabbedSignupPage from './Test';
+import SignUpPage from './components/university/UniversitySignUpPage';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
@@ -84,6 +87,8 @@ export default function App() {
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}
 
         {/* <Route path='/components/student/Dashboard' element={<Dashboard/>}/> */}
+        <Route path='/university/dashboard' element={<SignUpPage/>}/>
+        <Route path='test' element={<TabbedSignupPage/>}/>
       </Routes>
 
     </BrowserRouter>

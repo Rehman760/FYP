@@ -17,6 +17,8 @@ import NotFound from './NotFound'
 import PaymentPage from './PaymentPage'
 import StudentTable from './StudentTable'
 import DonatePage from './donor/DonatePage'
+import ChatList from './ChatList'
+import ChatWindow from './ChatWindow'
 
 
 function BasicComponentForData() {
@@ -35,11 +37,13 @@ function BasicComponentForData() {
         {/* <UserProfile/> */}
         {/* <UniversityForm/> */}
       {/* <Details/> */}
-      <University/>
+      {/* <University/> */}
       {/* <NotFound/> */}
       {/* <PaymentPage/> */}
       {/* <StudentTable/> */}
       {/* <DonatePage/> */}
+      <ChatList/>
+      {/* <ChatWindow/> */}
     </div>
   )
 }

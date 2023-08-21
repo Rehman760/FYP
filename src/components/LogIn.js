@@ -64,6 +64,7 @@ const LogIn = ({role}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMessage('');
     // Handle login submission
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
@@ -74,14 +75,16 @@ const LogIn = ({role}) => {
         const userEmail = response.user.email;
         loginUser(userEmail, function(userType){
           console.log("User type is "+userType);
-          if(userType === role){
-            if (role === "donor") {
-              sessionStorage.setItem('donorEmail', response.user.email);
-              navigate("/donor/nav-bar/record");
-            } else if(role==="student"){
-              sessionStorage.setItem('studentEmail', response.user.email);
-              navigate("/student/dashboard");
-            }
+          if (userType === "donor") {
+            sessionStorage.setItem('donorEmail', response.user.email);
+            navigate("/donor/nav-bar/record");
+          } else if(userType==="student"){
+            sessionStorage.setItem('studentEmail', response.user.email);
+            navigate("/student/dashboard");
+          }
+          else if(userType === "university"){
+            sessionStorage.setItem('universityEmail', response.user.email);
+            navigate("/university/dashboard");
           }
           
           else{

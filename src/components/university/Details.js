@@ -27,7 +27,8 @@ const Details = () => {
     { id: 3, name: 'Nursing', description: 'Learn healthcare and patient care' },
   ];
   useEffect(()=>{
-    getDonorsStudents('Sindh', setDonors, setStudents, setPrograms);
+    const name = sessionStorage.getItem('universityName');
+    getDonorsStudents(name, setDonors, setStudents, setPrograms);
     
   }, [])
 

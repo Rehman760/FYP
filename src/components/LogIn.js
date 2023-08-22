@@ -73,7 +73,7 @@ const LogIn = ({role}) => {
         // alert(response.user.email+" is login");
         // Replace "userIdToRetrieve" with the actual user ID you want to retrieve
         const userEmail = response.user.email;
-        loginUser(userEmail, function(userType){
+        loginUser(userEmail, function(userType, univName){
           console.log("User type is "+userType);
           if (userType === "donor") {
             sessionStorage.setItem('donorEmail', response.user.email);
@@ -84,6 +84,8 @@ const LogIn = ({role}) => {
           }
           else if(userType === "university"){
             sessionStorage.setItem('universityEmail', response.user.email);
+            console.log(univName);
+            sessionStorage.setItem('universityName', univName);
             navigate("/university/nav-bar/details");
           }
           

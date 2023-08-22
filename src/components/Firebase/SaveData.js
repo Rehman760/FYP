@@ -203,7 +203,7 @@ export const loginUser = async(email, setLogin)=>{
     const document = doc(db, 'users', email);
     await getDoc(document).then((res)=>{
         if(res.data() !== undefined){
-            setLogin(res.data().userType);
+            setLogin(res.data().userType, res.data().universityName);
         }
         else{
             setLogin(null);

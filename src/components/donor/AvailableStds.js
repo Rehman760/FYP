@@ -62,7 +62,7 @@ const ResponsiveTable = () => {
                   Donate
                 </button>
                 <button className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded">
-                  Chat
+                  <Link to={`/chat/list/${item.id}`} state={{stdEmail:item.email}}>Chat</Link>
                 </button>
               </td>
             </tr>

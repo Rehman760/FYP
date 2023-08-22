@@ -33,6 +33,10 @@ import DonationPage from './components/donor/DonatePage';
 import UniversityForm from './components/university/UniversityForm';
 import TabbedSignupPage from './Test';
 import SignUpPage from './components/university/UniversitySignUpPage';
+import ChatList from './components/ChatList';
+import ChatWindow from './components/ChatWindow';
+import UniversityIndex from './components/university/Index';
+import UniversityContainer from './components/university/UniversityContainer';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
@@ -81,13 +85,19 @@ export default function App() {
         <Route path='donor/student/'>
           <Route path=':stdID' element={<StudentProfile/>}/>
         </Route>
+        <Route path='chat/list/'>
+          <Route path=':chatId' element={<ChatWindow/>}/>
+        </Route>        
         <Route path='donor/sponsored' element={<>Sponsored List of Student</>}/>
         <Route path='donor/donate' element={<DonationPage/>}/>
   
           {/* <Route path='/components/student/StudentProfile' element={<StudentProfile/>}/> */}
 
         {/* <Route path='/components/student/Dashboard' element={<Dashboard/>}/> */}
-        <Route path='/university/dashboard' element={<SignUpPage/>}/>
+        <Route path='/university/nav-bar' element={<UniversityIndex/>}>
+          <Route path=':universityID' element={<UniversityContainer/>}/>
+        </Route>
+        <Route path='/university/signup' element={<SignUpPage/>}/>
         <Route path='test' element={<TabbedSignupPage/>}/>
       </Routes>
 

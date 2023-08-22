@@ -1,7 +1,7 @@
-import React, { useState, useLocation } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { saveSponsoredStudent, setStdNotification } from '../Firebase/SaveData';
+import { getProfile, saveSponsoredStudent, setStdNotification } from '../Firebase/SaveData';
 
 const banks = [
   { name: 'Bank A', logo: 'https://dummyimage.com/50x50/000/fff', value: 'bankA' },
@@ -32,6 +32,14 @@ function DonationPage() {
     event.preventDefault();
     setShowPopup(true);
   };
+  useEffect(()=>{
+    getProfile(sessionStorage.getItem('donorEmail'), function(data){
+      console.log(data);
+      sessionStorage.setItem('name', data.firstname + ' ' + data.secondname);
+    });
+
+
+  }, [])
 
   const handlePopupClose = () => {
     setShowPopup(false);
@@ -39,9 +47,11 @@ function DonationPage() {
     //and move to the sponosred list.
     const donorEmail = sessionStorage.getItem('donorEmail');
     const stdEmail = sessionStorage.getItem('stdEmail');
+    const donorName = sessionStorage.getItem('name');
     const student = JSON.parse(sessionStorage.getItem('student'));
     console.log(student);
-    saveSponsoredStudent(donorEmail, stdEmail, student);
+    const data = {isSponsored: true, donors:[{donorEmail, amount, message, donorName}]}
+    saveSponsoredStudent(stdEmail, data);
     //Set Student Notifcation here:
     const messages = ['Congratulations! You have received a donation of $' + amount + ' for your education.'];
     const donationMessage = {donorEmail, messages}

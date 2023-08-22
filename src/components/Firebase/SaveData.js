@@ -1,8 +1,7 @@
-import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where, getDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where, getDoc, arrayUnion } from "firebase/firestore";
 import { db, storage } from "./FirebaseConfig";
-import { collection, getDocs, getCountFromServer } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
-import SponsoredStudent from "../donor/SponsoredStudents";
+import { collection, getDocs } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes} from "firebase/storage";
 // import { getMyEmail } from "../student/StudentNavbarData";
 
 let email = '';
@@ -214,3 +213,48 @@ export const loginUser = async(email, setLogin)=>{
 
 
 }
+
+export const setStdNotification = async(stdEmail, data)=>{
+    const document = doc(db, 'notifications', stdEmail);
+    await setDoc(document, data);
+}
+
+export const getStdNotifcations = async(stdEmail, setNotifications)=>{
+    const document = doc(db, 'notifications', stdEmail);
+    await getDoc(document).then((res)=>{
+        if(res.data() !== undefined){
+            console.log(res.data());
+            setNotifications(res.data()?.messages);
+        }
+        else{
+            setNotifications(null);
+        }
+
+    }).catch((err)=>{})
+
+}
+// add a new message/notification in the notifications collections array firestore
+export const addNewMessage = async(stdEmail, message)=>{
+    console.log('Hello');
+    const document = doc(db, 'notifications', stdEmail);
+    //Using arrayUnion
+    await updateDoc(document, {
+        messages: arrayUnion(message)
+    });
+}
+
+export const getDonorsStudents = async(universityName, setStudents)=>{
+    const sponsoredStdsRef = collection(db, "sponsored")
+    const q = query(sponsoredStdsRef, where("educationInfo.schoolName", "==", "Su"));
+    const querySnapshot = await getDocs(q);
+    const students = [];
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const data = doc.data();
+        const donorEmail = data?.sponsoredBy;
+        const amount =100;
+        console.log(doc.id, " aa: ", data);
+    })
+}
+
+

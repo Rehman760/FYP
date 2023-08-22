@@ -5,6 +5,7 @@ import Notification from '../Notification';
 import StudentInformation from './StudentInformation';
 import UserProfile from './UserProfile';
 import Logout from '../Logout';
+import ChatList from '../ChatList';
 
 // let email='';
 
@@ -28,7 +29,7 @@ export const StudentNavbarData = [
         title:'Chats',
         icons:<FaCalendar/>,
         link:'chat',
-        body:<h1>Not Available yet</h1>
+        body: <ChatList/>
     },
     {
         title:'Register',

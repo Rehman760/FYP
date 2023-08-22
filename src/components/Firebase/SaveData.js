@@ -2,6 +2,7 @@ import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where, getDoc, ar
 import { db, storage } from "./FirebaseConfig";
 import { collection, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes} from "firebase/storage";
+import { update } from "react-spring";
 // import { getMyEmail } from "../student/StudentNavbarData";
 
 let email = '';
@@ -14,7 +15,7 @@ export const savePersonalInfo = async ([selfData, bioData, fatherData, addressDa
     // const email = getMyEmail();
     const document = doc(db, "students", email);
     const data = { selfData, bioData, fatherData, addressData, nationalityData };
-    await setDoc(document, { personalInfo: data }, {merge:true});
+    await setDoc(document, { personalInfo: data, isSponsored:false }, {merge:true});
     console.log("Data added");
 }
 
@@ -78,7 +79,7 @@ export const getOpportunities = async () => {
 
 
 export const getAllStudents = async (setStudents) => {
-    const q = query(collection(db, "students"));
+    const q = query(collection(db, "students"), where("isSponsored", "==", false));
     await getDocs(q);
     onSnapshot(q, (querySnapshot) => {
         const students = [];
@@ -133,23 +134,19 @@ export const getProfileData = async (email, setProfile)=>{
         setProfile(document.data());
     })
 }
-export const saveSponsoredStudent = async(donorEmail, stdEmail, stdDoc)=>{
-    stdDoc['sponsoredBy'] = donorEmail;
+export const saveSponsoredStudent = async(stdEmail, data)=>{
     // console.log(stdDoc);
-    const document = doc(db, 'sponsored', stdEmail);
-    await setDoc(document, stdDoc).then((res)=>{
-        const delDoc = async(mail)=>{
-            await deleteDoc(doc(db, "students", mail));
-        }
-        delDoc(stdEmail);
-        
-    }).catch((err)=>console.log(err));
+    const document = doc(db, 'students', stdEmail);
+    await updateDoc(document, data).then((res)=>{
+        console.log('Student is sponsored');
+        console.log(res);
+    }).catch((err)=>console.log(err.message));
 }
 
 export const getStudentsDonated = async(donorEmail, setSponsoredStudent)=>{
 
-    const sponosredRef = collection(db, "sponsored");
-    const q = query(sponosredRef, where("sponsoredBy", "==", donorEmail));
+    const sponosredRef = collection(db, "students");
+    const q = query(sponosredRef, where("isSponsored", "==", true));
     const querySnapshot = await getDocs(q);
     const studentsSponsored = [];
     querySnapshot.forEach((doc) => {
@@ -159,13 +156,16 @@ export const getStudentsDonated = async(donorEmail, setSponsoredStudent)=>{
         const schoolName = data?.educationInfo?.schoolName;
         const program = data?.educationInfo?.degree +" "+ data?.educationInfo?.fieldOfStudy;
         const student = { name, schoolName, program, status:"approved" };
-        studentsSponsored.push(student);
-        console.log('call me '+donorEmail);
-        if(studentsSponsored.length === 1){
-            setSponsoredStudent(studentsSponsored);
-        }        
-        console.log(doc.id, " : ", data);
+        if(data?.donors[0].donorEmail === donorEmail){
+            console.log('call me '+donorEmail);
+            console.log(doc.id, " : ", data);
+            studentsSponsored.push(student);
+        }
+        
     });
+    setSponsoredStudent(studentsSponsored);
+    
+    // console.log(studentsSponsored);
 }
 
 export const saveProfile = async(data, email, setLoading)=>{
@@ -243,18 +243,45 @@ export const addNewMessage = async(stdEmail, message)=>{
     });
 }
 
-export const getDonorsStudents = async(universityName, setStudents)=>{
-    const sponsoredStdsRef = collection(db, "sponsored")
-    const q = query(sponsoredStdsRef, where("educationInfo.schoolName", "==", "Su"));
+export const getDonorsStudents = async(universityName, setDonors, setStudents, setPrograms)=>{
+    const sponsoredStdsRef = collection(db, "students")
+    const q = query(sponsoredStdsRef, where("educationInfo.schoolName", "==", universityName), where('isSponsored', '==', true));
     const querySnapshot = await getDocs(q);
     const students = [];
+    const donors = [];
+    const programs = [];
+    let id = 1;
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
+        const email = doc.id;
         const data = doc.data();
-        const donorEmail = data?.sponsoredBy;
-        const amount =100;
-        console.log(doc.id, " aa: ", data);
+        const donor = getDonor(data, id);
+        const student = getStudent(data,email, id);
+        const program = getProgram(data, id);
+        donors.push(donor);
+        students.push(student);
+        programs.push(program);
+        id++;
     })
+    setDonors(donors);
+    setStudents(students);
+    setPrograms(programs);
+}
+
+function getDonor(data, id){
+    const name = data?.donors[0].donorName;
+    const email = data?.donors[0].donorEmail;
+    const amount = data?.donors[0].amount;
+    return {id, email, amount, name}
+}
+function getStudent(data, email, id){
+    const name = data?.personalInfo?.selfData?.name;
+    const program = data?.educationInfo?.degree +" "+ data?.educationInfo?.fieldOfStudy;
+    return {id, email, name, program}
+}
+function getProgram(data, id){
+    const name = data?.educationInfo?.degree +" "+ data?.educationInfo?.fieldOfStudy;
+    return {id, name, description:''}
 }
 
 

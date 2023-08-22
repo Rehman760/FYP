@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {getDonorsStudents} from '../Firebase/SaveData';
 
 const Details = () => {
   const [selectedDonor, setSelectedDonor] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [selectedProgram, setSelectedProgram] = useState(null);
+  const [donors, setDonors] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [programs, setPrograms] = useState([]);
 
-  const donors = [
+  const donors1 = [
     { id: 1, name: 'John Doe', email: 'johndoe@example.com', amount: 100 },
     { id: 2, name: 'Jane Smith', email: 'janesmith@example.com', amount: 50 },
     { id: 3, name: 'Bob Johnson', email: 'bobjohnson@example.com', amount: 200 },
   ];
 
-  const students = [
+  const students1 = [
     { id: 1, name: 'Alice Brown', email: 'alicebrown@example.com', program: 'Computer Science' },
     { id: 2, name: 'Tom Wilson', email: 'tomwilson@example.com', program: 'Business Administration' },
     { id: 3, name: 'Sara Lee', email: 'saralee@example.com', program: 'Nursing' },
   ];
 
-  const programs = [
+  const programs1 = [
     { id: 1, name: 'Computer Science', description: 'Learn programming and software development' },
     { id: 2, name: 'Business Administration', description: 'Learn management and entrepreneurship' },
     { id: 3, name: 'Nursing', description: 'Learn healthcare and patient care' },
   ];
+  useEffect(()=>{
+    getDonorsStudents('Sindh', setDonors, setStudents, setPrograms);
+    
+  }, [])
 
   const handleDonorClick = (donor) => {
     setSelectedDonor(donor);

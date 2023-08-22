@@ -11,7 +11,7 @@ function Navbar() {
       </div>
       <div>
         <span className="text-white mr-4">John Doe</span>
-        <button onClick={(e)=>{getDonorsStudents()}} className="bg-white text-green-500 font-bold py-2 px-4 rounded-lg">
+        <button onClick={(e)=>{}} className="bg-white text-green-500 font-bold py-2 px-4 rounded-lg">
           <NavLink to={'logout'}>Log Out</NavLink>
         </button>
       </div>

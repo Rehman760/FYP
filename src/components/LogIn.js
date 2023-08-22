@@ -84,7 +84,7 @@ const LogIn = ({role}) => {
           }
           else if(userType === "university"){
             sessionStorage.setItem('universityEmail', response.user.email);
-            navigate("/university/dashboard");
+            navigate("/university/nav-bar/details");
           }
           
           else{

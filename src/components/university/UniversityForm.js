@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import { getProfile, saveProfile } from '../Firebase/SaveData';
 
 const UniversityForm = () => {
+  const universityEmail = sessionStorage.getItem('universityEmail');
   const [university, setUniversity] = useState({
-    name: '',
+    universityName: '',
     address: '',
     location: '',
     number: '',
     programs: [],
   });
+  const [loading, setLoading] = useState(false);
 
   const [program, setProgram] = useState('');
+
+  useEffect(()=>{
+    //fetch data from database
+    getProfile(universityEmail, setUniversity);
+  }, [])
 
   const handleChange = (e) => {
     setUniversity({ ...university, [e.target.name]: e.target.value });
@@ -29,6 +37,7 @@ const UniversityForm = () => {
     e.preventDefault();
     console.log(university);
     // Submit the form data to your API or backend
+    saveProfile(university, universityEmail, setLoading);
   };
 
   return (
@@ -40,8 +49,8 @@ const UniversityForm = () => {
           <input
             type="text"
             id="name"
-            name="name"
-            value={university.name}
+            name="universityName"
+            value={university.universityName}
             onChange={handleChange}
             className="border border-green-600 p-2 w-full rounded-md"
           />
@@ -53,17 +62,6 @@ const UniversityForm = () => {
             id="address"
             name="address"
             value={university.address}
-            onChange={handleChange}
-            className="border border-green-600 p-2 w-full rounded-md"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="location" className="block mb-2">Location</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={university.location}
             onChange={handleChange}
             className="border border-green-600 p-2 w-full rounded-md"
           />
@@ -99,7 +97,7 @@ const UniversityForm = () => {
             </button>
           </div>
           <ul className="mt-4">
-            {university.programs.map((program, index) => (
+            {university?.programs?.map((program, index) => (
               <li key={index} className="mb-2">
                 {program}
               </li>

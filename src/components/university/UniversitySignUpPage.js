@@ -2,10 +2,12 @@
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import React, { useState } from 'react';
 import { saveProfile } from '../Firebase/SaveData';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
     const [data, setData] = useState({
         universityName:'',
         address:'',
@@ -25,7 +27,8 @@ const SignUpPage = () => {
             .then((response) => {
                 console.log(response.user);
                 const {universityName, address, email} = data;
-                saveProfile({universityName, address, userType:'university'}, email, setLoading);
+                saveProfile({universityName, address, userType:'university', programs:[]}, email, setLoading);
+                navigate("/LogIn");  
                 
             }).catch((error) => {
                 if(error.code === 'auth/email-already-in-use'){

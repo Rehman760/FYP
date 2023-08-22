@@ -1,6 +1,9 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { getDonorsStudents } from '../Firebase/SaveData';
 
 function Navbar() {
+
   return (
     <nav className="bg-green-500 p-4 flex items-center justify-between">
       <div>
@@ -8,7 +11,9 @@ function Navbar() {
       </div>
       <div>
         <span className="text-white mr-4">John Doe</span>
-        <button className="bg-white text-green-500 font-bold py-2 px-4 rounded-lg">Log Out</button>
+        <button onClick={(e)=>{getDonorsStudents()}} className="bg-white text-green-500 font-bold py-2 px-4 rounded-lg">
+          <NavLink to={'logout'}>Log Out</NavLink>
+        </button>
       </div>
     </nav>
   );

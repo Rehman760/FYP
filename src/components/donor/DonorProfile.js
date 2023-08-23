@@ -1,15 +1,31 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { FaUser, FaMapMarkerAlt, FaDollarSign, FaMoneyCheck, FaBriefcase } from 'react-icons/fa';
+import { getProfile, getProfileImage } from '../Firebase/SaveData';
 
 
 function DonorProfile(props) {
+  const donorEmail = sessionStorage.getItem('donorEmail');
   const { name, address, income, bankAccount, job } = props;
+  const [data, setData] = useState({});
+  const [imageURL, setImageURL]=useState('');
+
+  useEffect(()=>{
+    getProfile(donorEmail, function(data){
+      const {otherInfo} = data;
+      console.log('HERE');
+      console.log(otherInfo);
+      setData(otherInfo);
+    })
+    getProfileImage(donorEmail, setImageURL);
+
+  }, [])
+
 
   return (
     <div className="bg-white mx-auto px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto py-12">
         <div className="lg:text-center">
-          <h2 className="text-base text-green-600 font-semibold tracking-wide uppercase">{name}</h2>
+          <h2 className="text-base text-green-600 font-semibold tracking-wide uppercase">{data?.name}</h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-green-500 sm:text-4xl">
             Donor Profile
           </p>
@@ -20,7 +36,7 @@ function DonorProfile(props) {
 
         <div className="mt-10">
           <div className="flex items-center justify-center">
-            <img className="h-62 w-56 rounded-full" src="https://dummyimage.com/100x100/000/fff" alt="" />
+            <img className="h-62 w-56 rounded-full" src={imageURL} alt="" />
           </div>
           <dl className="mt-10 space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
           <div className="relative">
@@ -30,8 +46,9 @@ function DonorProfile(props) {
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">Name</p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-gray-500">{name}</dd>
+              <dd className="mt-2 ml-16 text-base text-gray-500">{data?.name}</dd>
             </div>
+            
 
             <div className="relative">
               <dt>
@@ -40,7 +57,7 @@ function DonorProfile(props) {
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">Address</p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-gray-500">{address}</dd>
+              <dd className="mt-2 ml-16 text-base text-gray-500">{data?.phone}</dd>
             </div>
             <div className="relative">
               <dt>
@@ -49,7 +66,7 @@ function DonorProfile(props) {
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">Annual Income</p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-gray-500">{income}</dd>
+              <dd className="mt-2 ml-16 text-base text-gray-500">{data?.income}</dd>
             </div>
             <div className="relative">
               <dt>
@@ -58,7 +75,7 @@ function DonorProfile(props) {
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">Bank Account</p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-gray-500">{bankAccount}</dd>
+              <dd className="mt-2 ml-16 text-base text-gray-500">{data?.bankAccount}</dd>
             </div>
             <div className="relative">
               <dt>
@@ -67,15 +84,15 @@ function DonorProfile(props) {
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">Job</p>
               </dt>
-              <dd className="mt-2 ml-16 text-base text-gray-500">{job}</dd>
+              <dd className="mt-2 ml-16 text-base text-gray-500">{data?.job}</dd>
             </div>
           </dl>
         </div>
-        <div className="mt-10 text-center">
+        {/* <div className="mt-10 text-center">
           <a href="#" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-            Contact {name}
+            Contact {data?.name}
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );

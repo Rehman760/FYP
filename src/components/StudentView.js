@@ -1,9 +1,8 @@
 import React from 'react'
-import { Card, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function StudentView({id,picture,name,bio,status,email}) {
-    const navigate = useNavigate();
   return (
     <div className="col-sm-4 my-2" key={id}>
     <Card>

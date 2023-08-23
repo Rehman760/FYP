@@ -71,7 +71,7 @@ export default function App() {
           <Route path='/LogIn' element={<LogIn role='student'/>}/>
           <Route path='/SignUp' element={<SignUp/>}/>
           <Route path='/ForgotPassword' element={<ForgotPassword />}/>
-          <Route path='/BasicComponentForData' element={<BasicComponentForData />}/>
+          {/* <Route path='/BasicComponentForData' element={<BasicComponentForData />}/> */}
         </Route>
         <Route path="student" element={<StudentNavbar/>}>
             <Route path=":catId" element={<Container/>}/>

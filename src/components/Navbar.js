@@ -57,12 +57,12 @@ const Navbar = () => {
               <Link to="/Services" className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}>Services</Link>
               <Link to="/Contact" className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}>Contact</Link>
 
-                <Link
+                {/* <Link
                   to="/BasicComponentForData"
                   className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}
                 >
                   New component
-                </Link>
+                </Link> */}
               </div>
               <div>
                 <Link to="/logIn">

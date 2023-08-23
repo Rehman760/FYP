@@ -1,8 +1,12 @@
 import { Card, Button } from 'react-bootstrap';
 import StudentView from './StudentView';
+import { useEffect, useState } from 'react';
+import { getLandPageData } from './Firebase/SaveData';
+
 
 const HistoryPage = (props) => {
-    const students = [
+    const [students, setStudents] = useState([]);
+    const students1 = [
         {
             id: 1,
             name: "Abdul Rehman",
@@ -29,6 +33,10 @@ const HistoryPage = (props) => {
         }
         // ... more students
     ]
+
+    useEffect(()=>{
+        getLandPageData('student', setStudents);
+    }, [])
 
     return (
         <div className="container">

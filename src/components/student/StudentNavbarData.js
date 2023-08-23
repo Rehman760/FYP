@@ -6,6 +6,7 @@ import StudentInformation from './StudentInformation';
 import UserProfile from './UserProfile';
 import Logout from '../Logout';
 import ChatList from '../ChatList';
+import PaymentNotifcation from './PaymentNotification';
 
 // let email='';
 
@@ -41,7 +42,7 @@ export const StudentNavbarData = [
         title:'Payment',
         icons:<FaMoneyBill/>,
         link:'payment',
-        body:<h1>Payment</h1>
+        body:<PaymentNotifcation/>
     },
     {
         title:'Notifications',
@@ -51,14 +52,14 @@ export const StudentNavbarData = [
     },
 
     {
-        title:'Information',
+        title:'View Profile',
         icons:<FaBookOpen/>,
         link:'information',
-        body:<h1>Information</h1>
+        body:<StudentProfile/>
     },
 
     {
-        title:'Profile',
+        title:'Edit Profile',
         icons:<FaAccessibleIcon/>,
         link:'profile',
         body:<UserProfile/>

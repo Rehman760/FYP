@@ -3,23 +3,29 @@ import { FaGraduationCap, FaMoneyBillWave, FaBook, FaBriefcase } from 'react-ico
 import { useLocation, useNavigate} from 'react-router-dom';
 import { getImage, getProfileData } from '../Firebase/SaveData';
 
-function StudentProfile(props) {
+function StudentProfile() {
   // const { name, education, marks, income, hometown, hobbies, imageUrl } = props;
   const [profile, setProfile] = useState();
   const [student, setStudent] = useState({});
+  const [isDonating, setIsDonating] = useState(false);
   const [image, setImage] = useState();
   const navigate = useNavigate();
   const location = useLocation();
   const {state} = location;
+  const donorEmail = sessionStorage.getItem('donorEmail');
 
   useEffect(function(){
-    let email = '';
+    let email = 'std1@gmail.com';
     if(state?.stdEmail === undefined){
-      email = 'dani@gmail.com';
+      email = sessionStorage.getItem('studentEmail');
     }    
-    else{
+    else {
       email = state?.stdEmail;
     }
+    if(donorEmail){
+      setIsDonating(true);
+    }  
+    
     getImage(email, setImage);
     getProfileData(email, function(data){
       console.log(data);
@@ -101,15 +107,16 @@ function StudentProfile(props) {
               </div>
             </dl>
           </div>
-          
-          <div className="mt-10 text-center">
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mr-3">
-              Contact {profile?.name}
-            </button>
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" onClick={donateFunction}>
-              Donate {profile?.name}
-            </button>
-          </div>
+          {isDonating &&
+            <div className="mt-10 text-center">
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mr-3">
+                Contact {profile?.name}
+              </button>
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" onClick={donateFunction}>
+                Donate {profile?.name}
+              </button>
+            </div>          
+          }
           
         </div>
     </div>

@@ -113,7 +113,7 @@ const UserProfile = () => {
           onChange={handleValue}
         />
       </div>
-      {loading?<button className='btn btn-primary' disabled={true}>Loading...</button>:<button className='btn btn-primary' onClick={handleSave}>Save</button>}
+      {loading?<button className='btn btn-success' disabled={true}>Loading...</button>:<button className='btn btn-success' onClick={handleSave}>Save</button>}
     </div>
   );
 };

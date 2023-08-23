@@ -76,10 +76,19 @@ export const getOpportunities = async () => {
     return oppsList;
 }
 
+export const setStudentStatus = async(status, studentEmail)=>{
+    const document = doc(db, 'students', studentEmail);
+    await updateDoc(document, { allowed: status }).then(()=>{
+        if(status)
+            alert('Student is allowed');
+        else{
+            alert('Student is disallowed');
+        }
+    });
+}
 
-
-export const getAllStudents = async (setStudents) => {
-    const q = query(collection(db, "students"), where("isSponsored", "==", false));
+export const showStudentsToDonor = async(setStudents)=>{
+    const q = query(collection(db, "students"), where("isSponsored", "==", false), where('allowed', '==', true));
     await getDocs(q);
     onSnapshot(q, (querySnapshot) => {
         const students = [];
@@ -91,7 +100,43 @@ export const getAllStudents = async (setStudents) => {
             const { educationInfo } = doc.data();
             const schoolName = educationInfo?.schoolName;
             const gradYear = educationInfo?.graduationYear;
-            const student = { id, name, schoolName, gradYear, city:'Larkana', email: doc.id };
+            const city = personalInfo?.addressData?.city;
+            const student = { id, name, schoolName, gradYear, city, email: doc.id};
+            
+            students.push(student);
+        });
+        console.log(students);
+        setStudents(students);
+    });
+
+
+}
+
+export const getAllStudents = async (universityName, setStudents) => {
+    const q = query(collection(db, "students"), where("isSponsored", "==", false), where("educationInfo.schoolName", "==", universityName));
+    await getDocs(q);
+    onSnapshot(q, (querySnapshot) => {
+        const students = [];
+        let id= 1;
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            let status = doc.data()?.allowed;
+            if(status){
+                status = 'Allowed'
+            }
+            else if(status===false)
+                status = 'Disallowed';
+            else
+                status = 'Select';
+            
+            const { personalInfo } = doc.data();
+            const name = personalInfo?.selfData?.name;
+            const { educationInfo } = doc.data();
+            const schoolName = educationInfo?.schoolName;
+            const gradYear = educationInfo?.graduationYear;
+            const city = personalInfo?.addressData?.city;
+            const student = { id, name, schoolName, gradYear, city, email: doc.id};
+
             console.log(doc.id, " => ", doc.data());
             id++;
             students.push(student);

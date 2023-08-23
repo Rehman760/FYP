@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllStudents } from '../Firebase/SaveData';
+import { showStudentsToDonor } from '../Firebase/SaveData';
 import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 
@@ -8,7 +8,7 @@ const ResponsiveTable = () => {
   const [data, setData] = useState([]);
 
   useEffect(function(){
-    getAllStudents(setData);
+    showStudentsToDonor(setData);
   }, [])
 
   const filteredData = data.filter((item) =>

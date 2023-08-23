@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Notification from '../Notification';
-import { FaSearch, FaMoneyBill, FaComments, FaBell,FaBars, FaTimes, FaSignOutAlt } from 'react-icons/fa';
+import { FaSearch, FaMoneyBill, FaComments, FaBell,FaBars, FaTimes, FaSignOutAlt, FaEdit } from 'react-icons/fa';
 import logo from '../images/logo2.jpg'
 import { Link, Outlet } from 'react-router-dom';
-import AvailableStds from './AvailableStds';
+import { getProfileImage } from '../Firebase/SaveData';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar({ name }) {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
+  const [imageURL, setImageURL] = useState('https://dummyimage.com/100x100/000/');
+  useEffect(()=>{
+      getProfileImage(sessionStorage.getItem('donorEmail'), setImageURL);
+  }, [])
 
   const handleLogout = () => {
     // Add your logout logic here
@@ -50,9 +54,10 @@ function Navbar({ name }) {
               <Link to="record"> <FaMoneyBill className="h-6 w-6 text-gray-600" /></Link>
               <Link to="chat"> <FaComments className="h-6 w-6 text-gray-600" /></Link>
               <Link to="notification"> <FaBell className="h-6 w-6 text-gray-600" /></Link>
+              <Link to="editProfile"> <FaEdit className="h-6 w-6 text-gray-600" /></Link>
             </div>
             <div className="sm:flex sm:items-center">
-              <Link to="profile"> <img className="w-8 h-8 rounded-full border-2 border-green-500 ml-4" src="https://dummyimage.com/100x100/000/" alt="User" /></Link>
+              <Link to="profile"> <img className="w-8 h-8 rounded-full border-2 border-green-500 ml-4" src={imageURL} alt="User" /></Link>
               <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${name}`}</h2>
               <button onClick={handleLogout} className="ml-4 text-gray-500 hover:text-green-700 font-medium focus:outline-none">
                 <FaSignOutAlt className="h-5 w-5" />
@@ -65,7 +70,8 @@ function Navbar({ name }) {
                 <Link to={Notification} className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Records</Link>
                 <Link to="chat" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Chats</Link>
                 <Link to="notification" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Notification</Link>
-                <Link to="profile" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Profile</Link>
+                <Link to="profile" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">View Profile</Link>
+                <Link to="editProfile" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Edit Profile</Link>
                 <button onClick={handleLogout} className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100 focus:outline-none">
                   <FaSignOutAlt className="h-5 w-5" />
                   Logout
@@ -80,7 +86,7 @@ function Navbar({ name }) {
 }
 
 function DonorDashboard() {
-  const name = sessionStorage.getItem('donorEmail');
+  const name = sessionStorage.getItem('donorName');
   
 
   return (

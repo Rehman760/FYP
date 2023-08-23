@@ -398,7 +398,7 @@ export const getLandPageData = (role, setData)=>{
                 email:'std.1.1@gmail.com',
                 bio: "Ameer Hamza is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
                 picture: std1,
-                status: "sponsored"
+                status: role
             },
             {
                 id: 2,
@@ -406,7 +406,7 @@ export const getLandPageData = (role, setData)=>{
                 email:'std.1.2@gmail.com',
                 bio: "Qasim is a dedicated student who is currently pursuing a degree in medicine at ABC University. He is committed to making a positive impact on her community through his profession.",
                 picture: std2,
-                status: "sponsored"
+                status: role
             },
 
             {
@@ -415,7 +415,7 @@ export const getLandPageData = (role, setData)=>{
                 email:'std.1.3@gmail.com',
                 bio: "Abdul Hakeem is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
                 picture: std3,
-                status: "sponsored"
+                status: role
             }
             // ... more students
         ]    

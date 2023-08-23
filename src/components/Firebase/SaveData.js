@@ -123,9 +123,13 @@ export const getFormData = async(email, setFormData)=>{
 
 }
 
-export const saveDonorData = async (donor)=>{
-    const document = doc(db, 'donors', email);
-    await setDoc(document, donor);
+export const saveDonorData = async (donorEmail, donorData, setAlert)=>{
+    //Update user profile
+    const document = doc(db, 'users', donorEmail);
+    await updateDoc(document, { otherInfo: donorData }).then(()=>{
+        setAlert(true);
+    });
+    // console.log(data);
 }
 
 export const getProfileData = async (email, setProfile)=>{
@@ -203,7 +207,7 @@ export const loginUser = async(email, setLogin)=>{
     const document = doc(db, 'users', email);
     await getDoc(document).then((res)=>{
         if(res.data() !== undefined){
-            setLogin(res.data().userType, res.data().universityName);
+            setLogin(res.data());
         }
         else{
             setLogin(null);

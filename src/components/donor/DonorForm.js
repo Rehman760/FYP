@@ -1,17 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaUser, FaEnvelope, FaPhone, FaDollarSign, FaMoneyCheck, FaBriefcase, FaImage, FaUserCircle } from 'react-icons/fa';
-import { saveDonorData } from '../Firebase/SaveData';
+import { saveDonorData, saveProfileImage, getProfile } from '../Firebase/SaveData';
 
 
 function DonorForm() {
+  const donorEmail = sessionStorage.getItem('donorEmail');
   const [name, setName] = useState('');
   // const [address, setAddress] = useState('');
   const [income, setIncome] = useState('');
   const [bankAccount, setBankAccount] = useState('');
   const [job, setJob] = useState('');
   const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
   const [image, setImage] = useState(null);
+
+  useEffect(()=>{
+    getProfile(donorEmail, function(data){
+      console.log(data);
+      setName(data?.otherInfo?.name);
+      setIncome(data?.otherInfo?.income);
+      setBankAccount(data?.otherInfo?.bankAccount);
+      setJob(data?.otherInfo?.job);
+      setPhone(data?.otherInfo?.phone);
+    });
+
+  }, [])
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -28,8 +40,16 @@ function DonorForm() {
     // data.append('phone', phone);
     // data.append('email', email);
     // data.append('image', image);
-    const obj = {name, income, bankAccount, job, phone, email, image};
-    saveDonorData(obj);
+
+    const obj = {name, income, bankAccount, job, phone, donorEmail};
+    saveProfileImage(image, donorEmail);
+    saveDonorData(donorEmail, obj, function(){
+      alert('Data is updated');
+    });
+    // saveProfile(obj, donorEmail, function(value){
+    //   console.log(value)
+    // });
+    // console.log(obj);
     // handleSubmit(data);
   }
 
@@ -78,8 +98,9 @@ function DonorForm() {
                     name="email"
                     id="email"
                     autoComplete="off"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={donorEmail}
+                    // onChange={(e) => setEmail(e.target.value)}
+                    disabled
                     className="block w-full p-2  px-5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                     required
                   />
@@ -166,10 +187,7 @@ function DonorForm() {
                 </div>
               </div>
               <div>
-                <label htmlFor="image" className="block text-lg font-medium
-php
-Copy code
-              text-gray-700">
+                <label htmlFor="image" className="block text-lg font-medium text-gray-700">
                   Profile Picture
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
@@ -193,8 +211,8 @@ Copy code
                         name="image"
                         id="image"
                         autoComplete="off"
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
+                        // value={image}
+                        onChange={(e)=>setImage(e.target.files[0])}
                         className="block w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-300 ease-in-out"
                         required
                       />

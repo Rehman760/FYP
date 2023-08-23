@@ -83,7 +83,7 @@ const AllowStudents = () => {
                 <button name={item.id} onClick={handleAllow} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
                   Allow
                 </button>
-                <button name={item.id} onClick={handleDeny} className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded">Deny</button>
+                <button name={item.id} onClick={handleDeny} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Deny</button>
               </td>
             </tr>
           ))}

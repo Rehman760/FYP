@@ -16,6 +16,7 @@ function Navbar({ name }) {
 
   const handleLogout = () => {
     // Add your logout logic here
+    setShowMenu(false);
     console.log('Logout clicked');
     navigate('logout');
   };
@@ -67,11 +68,11 @@ function Navbar({ name }) {
           {showMenu && (
             <div className="sm:block sm:px-8 absolute top-40 right-0 w-2/3 bg-white border-t border-green-200 shadow-lg z-20">
               <div className="flex flex-col space-y-2">
-                <Link to={Notification} className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Records</Link>
-                <Link to="chat" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Chats</Link>
-                <Link to="notification" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Notification</Link>
-                <Link to="profile" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">View Profile</Link>
-                <Link to="editProfile" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100">Edit Profile</Link>
+                <Link to='record' className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100" onClick={()=>setShowMenu(false)}>Needy Students</Link>
+                <Link to="chat" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100" onClick={()=>setShowMenu(false)}>Chats</Link>
+                <Link to="notification" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100" onClick={()=>setShowMenu(false)}>Donated</Link>
+                <Link to="profile" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100" onClick={()=>setShowMenu(false)}>View Profile</Link>
+                <Link to="editProfile" className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100" onClick={()=>setShowMenu(false)}>Edit Profile</Link>
                 <button onClick={handleLogout} className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-green-700 hover:bg-green-100 focus:outline-none">
                   <FaSignOutAlt className="h-5 w-5" />
                   Logout

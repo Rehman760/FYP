@@ -18,7 +18,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between flex-wrap">
             <div className="flex items-center flex-shrink-0 mr-6">
-              <a href="#" className="font-bold text-3xl ">
+              <a href="/" className="font-bold text-3xl ">
                 <img src={logo} alt="Finance for Education" className="w-16" />
               </a>
             </div>
@@ -57,16 +57,16 @@ const Navbar = () => {
               <Link to="/Services" className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}>Services</Link>
               <Link to="/Contact" className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}>Contact</Link>
 
-                <Link
+                {/* <Link
                   to="/BasicComponentForData"
                   className="block mt-4 md:inline-block md:mt-0 md:ml-6 hover:text-green-600 cursor-pointer"onClick={closeNav}
                 >
                   New component
-                </Link>
+                </Link> */}
               </div>
               <div>
                 <Link to="/logIn">
-                  <button className="bg-green-500 text-white px-3 py-2 rounded-lg md:ml-4" >
+                  <button className="bg-green-500 text-white px-3 py-2 rounded-lg md:ml-4" onClick={(e)=>setIsNavOpen(false)}>
                     Log in as Student
                   </button>
                 </Link>

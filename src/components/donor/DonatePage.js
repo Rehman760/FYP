@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { getProfile, saveSponsoredStudent, setStdNotification } from '../Firebase/SaveData';
+import { getProfile, saveSponsoredStudent, setPayment, setStdNotification } from '../Firebase/SaveData';
 
 const banks = [
   { name: 'Bank A', logo: 'https://dummyimage.com/50x50/000/fff', value: 'bankA' },
@@ -56,6 +56,7 @@ function DonationPage() {
     const messages = ['Congratulations! You have received a donation of $' + amount + ' for your education.'];
     const donationMessage = {donorEmail, messages}
     setStdNotification(stdEmail, donationMessage);
+    setPayment(stdEmail, {payment:`Payment of $${amount}`, date:Date().toLocaleString()});
     navigate("/donor/nav-bar/notification");
   };
 

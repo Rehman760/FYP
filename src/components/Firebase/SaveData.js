@@ -1,4 +1,4 @@
-import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where, getDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where, getDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db, storage } from "./FirebaseConfig";
 import { collection, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes} from "firebase/storage";
@@ -135,7 +135,7 @@ export const getAllStudents = async (universityName, setStudents) => {
             const schoolName = educationInfo?.schoolName;
             const gradYear = educationInfo?.graduationYear;
             const city = personalInfo?.addressData?.city;
-            const student = { id, name, schoolName, gradYear, city, email: doc.id};
+            const student = { id, name, schoolName, gradYear, city, email: doc.id, status};
 
             console.log(doc.id, " => ", doc.data());
             id++;
@@ -283,8 +283,14 @@ export const getStdNotifcations = async(stdEmail, setNotifications)=>{
 
 }
 // add a new message/notification in the notifications collections array firestore
-export const addNewMessage = async(stdEmail, message)=>{
-    console.log('Hello');
+export const addNewMessage = async(stdEmail, message, deletetext)=>{
+    const deleteMessage = async(email, message)=>{
+        const docRef = doc(db, 'notifications', email);
+        await updateDoc(docRef, {
+            messages: arrayRemove(message)
+        }); 
+    }
+    deleteMessage(stdEmail, deletetext);
     const document = doc(db, 'notifications', stdEmail);
     //Using arrayUnion
     await updateDoc(document, {
@@ -359,7 +365,7 @@ function getStudent(data, email, id){
 }
 function getProgram(data, id){
     const name = data?.educationInfo?.degree +" "+ data?.educationInfo?.fieldOfStudy;
-    return {id, name, description:''}
+    return {id, name, description:'[Description]'}
 }
 
 

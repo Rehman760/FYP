@@ -247,6 +247,35 @@ export const addNewMessage = async(stdEmail, message)=>{
     });
 }
 
+export const setPayment = async(stdEmail, data)=>{
+    const document = doc(db, 'Payments', stdEmail);
+    await setDoc(document, data);
+}
+
+export const getPayments = async(stdEmail, setPayments)=>{
+    const document = doc(db, 'Payments', stdEmail);
+    await getDoc(document).then((res)=>{
+        if(res.data() !== undefined){
+            console.log(res.data());
+            setPayments(res.data()?.messages);
+        }
+        else{
+            setPayments(null);
+        }
+
+    }).catch((err)=>{})
+
+}
+// add a new message/notification in the notifications collections array firestore
+export const addNewPayment = async(stdEmail, payment)=>{
+    const document = doc(db, 'Payments', stdEmail);
+    //Using arrayUnion
+    await updateDoc(document, {
+        payments: arrayUnion(payment)
+    });
+}
+
+
 export const getDonorsStudents = async(universityName, setDonors, setStudents, setPrograms)=>{
     const sponsoredStdsRef = collection(db, "students")
     const q = query(sponsoredStdsRef, where("educationInfo.schoolName", "==", universityName), where('isSponsored', '==', true));

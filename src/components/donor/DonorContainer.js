@@ -7,6 +7,7 @@ import SponsoredStudent from './SponsoredStudents';
 import ResponsiveTable from './AvailableStds';
 import Logout from '../Logout';
 import ChatList from '../ChatList';
+import DonorForm from './DonorForm';
 
 function DonorContainer({donorEmail}) {
   const {donorID} = useParams();
@@ -27,6 +28,9 @@ function DonorContainer({donorEmail}) {
   }
   else if(donorID==='logout'){
     return <Logout/>
+  }
+  else if(donorID==='editProfile'){
+    return <DonorForm/>
   }
 }
 export default DonorContainer;

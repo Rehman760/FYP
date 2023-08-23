@@ -18,7 +18,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between flex-wrap">
             <div className="flex items-center flex-shrink-0 mr-6">
-              <a href="#" className="font-bold text-3xl ">
+              <a href="/" className="font-bold text-3xl ">
                 <img src={logo} alt="Finance for Education" className="w-16" />
               </a>
             </div>

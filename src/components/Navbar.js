@@ -66,7 +66,7 @@ const Navbar = () => {
               </div>
               <div>
                 <Link to="/logIn">
-                  <button className="bg-green-500 text-white px-3 py-2 rounded-lg md:ml-4" >
+                  <button className="bg-green-500 text-white px-3 py-2 rounded-lg md:ml-4" onClick={(e)=>setIsNavOpen(false)}>
                     Log in as Student
                   </button>
                 </Link>

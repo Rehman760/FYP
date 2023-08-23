@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Card, Image, Button } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 const Universities = [
   {
@@ -42,7 +43,9 @@ const UniversityPage = () => {
             className="btn btn-success float-end"
             onClick={handleAddUniversity}
           >
-            Add University
+            <NavLink to={'/universityLogin'}>
+              Add University
+            </NavLink>
           </button>
         </Col>
       </Row>

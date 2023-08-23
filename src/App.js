@@ -78,6 +78,7 @@ export default function App() {
         </Route>
 
         <Route path="donor" element={<LogIn role='donor'/>}/>
+        <Route path="universityLogin" element={<LogIn role='university'/>}/>
       
         <Route path='donor/nav-bar' element={<DonorDashboard/>}>
           <Route path=":donorID" element={<DonorContainer/>}/>

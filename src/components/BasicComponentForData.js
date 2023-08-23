@@ -42,8 +42,8 @@ function BasicComponentForData() {
       {/* <PaymentPage/> */}
       {/* <StudentTable/> */}
       {/* <DonatePage/> */}
-      <ChatList/>
-      {/* <ChatWindow/> */}
+      {/* <ChatList/> */}
+      <ChatWindow/>
     </div>
   )
 }

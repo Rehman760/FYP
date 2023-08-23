@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllStudents, setStudentStatus } from '../Firebase/SaveData';
+import { addNewMessage, getAllStudents, setStudentStatus } from '../Firebase/SaveData';
 import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 
@@ -19,15 +19,19 @@ const AllowStudents = () => {
   const handleAllow = (e)=>{
     e.preventDefault();
     const index = Number(e.target.name)-1;
+    const email = data[index]?.email
     console.log('Student EMAILS', data[index]?.email);
-    setStudentStatus(true, data[index]?.email);
+    setStudentStatus(true, email);
+    addNewMessage(email, 'Your request has been accepted by the university.', 'Your request has been denied by the university.')
     
   }
   const handleDeny = (e)=>{
     e.preventDefault();
     const index = Number(e.target.name)-1;
-    console.log('Student EMAILS', data[index]?.email);
-    setStudentStatus(false, data[index]?.email);
+    const email = data[index]?.email
+    console.log('Student EMAILS', email);
+    setStudentStatus(false, email);
+    addNewMessage(email, 'Your request has been denied by the university.', 'Your request has been accepted by the university.')
 
   }
 

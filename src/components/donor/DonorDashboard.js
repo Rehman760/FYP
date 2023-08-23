@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Notification from '../Notification';
-import { FaSearch, FaMoneyBill, FaComments, FaBell,FaBars, FaTimes, FaSignOutAlt, FaEdit } from 'react-icons/fa';
+import { FaSearch, FaMoneyBill, FaComments,FaHandshake ,FaBars, FaTimes, FaSignOutAlt, FaEdit } from 'react-icons/fa';
 import logo from '../images/logo2.jpg'
 import { Link, Outlet } from 'react-router-dom';
 import { getProfileImage } from '../Firebase/SaveData';
@@ -27,17 +27,7 @@ function Navbar({ name }) {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <img src={logo} alt="Logo" className="h-12 w-12 mr-2" />
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
-                <FaSearch className="h-5 w-5 text-gray-500" />
-              </span>
-              <input
-                className="block w-full pl-10 pr-3 py-2 rounded-lg leading-5 bg-white border border-green-300 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-blue-300 focus:shadow-outline-blue sm:text-sm"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-            </div>
+            
           </div>
           <div className="flex items-center sm:hidden relative">
             <button
@@ -54,7 +44,7 @@ function Navbar({ name }) {
             <div className="flex flex-row sm:flex-row sm:flex-col space-y-2 sm:space-y-0 sm:space-x-10">
               <Link to="record"> <FaMoneyBill className="h-6 w-6 text-gray-600" /></Link>
               <Link to="chat"> <FaComments className="h-6 w-6 text-gray-600" /></Link>
-              <Link to="notification"> <FaBell className="h-6 w-6 text-gray-600" /></Link>
+              <Link to="notification"> <FaHandshake className="h-6 w-6 text-gray-600" /></Link>
               <Link to="editProfile"> <FaEdit className="h-6 w-6 text-gray-600" /></Link>
             </div>
             <div className="sm:flex sm:items-center">

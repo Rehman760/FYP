@@ -108,3 +108,18 @@ main{
 
 
 
+
+/* App.css */
+.chat-container {
+  display: flex;
+}
+
+.chat-list {
+  flex: 2; /* ChatList takes up 2/3 of the width */
+  padding: 16px;
+}
+
+.chat-window {
+  flex: 1; /* ChatWindow takes up 1/3 of the width */
+  padding: 16px;
+}

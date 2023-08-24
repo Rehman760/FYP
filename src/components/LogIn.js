@@ -212,12 +212,20 @@ const LogIn = ({role}) => {
         </form>
         <div className="flex justify-center items-center mt-6">
           <span className="text-gray-600">Don't have an account?</span>
-          <Link state={{role:role}}
+          {
+            role ==='university'?<Link
+            to="/university/signup"
+            className="text-green-500 font-medium ml-2 hover:text-green-700"
+          >
+            Sign Up
+          </Link>:<Link state={{role:role}}
             to="/SignUp"
             className="text-green-500 font-medium ml-2 hover:text-green-700"
           >
             Sign Up
           </Link>
+          }
+          
         </div>
       </div>
     </div>

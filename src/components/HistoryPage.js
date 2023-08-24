@@ -1,8 +1,12 @@
 import { Card, Button } from 'react-bootstrap';
 import StudentView from './StudentView';
+import { useEffect, useState } from 'react';
+import { getLandPageData } from './Firebase/SaveData';
+
 
 const HistoryPage = (props) => {
-    const students = [
+    const [students, setStudents] = useState([]);
+    const students1 = [
         {
             id: 1,
             name: "Abdul Rehman",
@@ -30,12 +34,16 @@ const HistoryPage = (props) => {
         // ... more students
     ]
 
+    useEffect(()=>{
+        getLandPageData('student', setStudents);
+    }, [])
+
     return (
         <div className="container">
         <h1 className="text-center my-3 font-medium text-3xl">{props.title}</h1>
         <div className="row">
             {students.map((student, index) => (
-              <StudentView key={index} id={student.id} name={student.name} bio={student.bio} picture={student.picture} status={student.status} email={student.email} />
+              <StudentView key={index} id={student.id} name={student.name} bio={student.bio} picture={student.picture} status={student.status} email={student.email}/>
             ))}
         </div>
     </div>

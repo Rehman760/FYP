@@ -1,8 +1,10 @@
-import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where, getDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc, updateDoc, query, onSnapshot, deleteDoc, where, getDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db, storage } from "./FirebaseConfig";
 import { collection, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes} from "firebase/storage";
-import { update } from "react-spring";
+import std2 from '../images/std2.jpeg'
+import std1 from '../images/std1.jpeg';
+import std3 from '../images/std3.png';
 // import { getMyEmail } from "../student/StudentNavbarData";
 
 let email = '';
@@ -76,10 +78,19 @@ export const getOpportunities = async () => {
     return oppsList;
 }
 
+export const setStudentStatus = async(status, studentEmail)=>{
+    const document = doc(db, 'students', studentEmail);
+    await updateDoc(document, { allowed: status }).then(()=>{
+        if(status)
+            alert('Student is allowed');
+        else{
+            alert('Student is disallowed');
+        }
+    });
+}
 
-
-export const getAllStudents = async (setStudents) => {
-    const q = query(collection(db, "students"), where("isSponsored", "==", false));
+export const showStudentsToDonor = async(setStudents)=>{
+    const q = query(collection(db, "students"), where("isSponsored", "==", false), where('allowed', '==', true));
     await getDocs(q);
     onSnapshot(q, (querySnapshot) => {
         const students = [];
@@ -91,7 +102,43 @@ export const getAllStudents = async (setStudents) => {
             const { educationInfo } = doc.data();
             const schoolName = educationInfo?.schoolName;
             const gradYear = educationInfo?.graduationYear;
-            const student = { id, name, schoolName, gradYear, city:'Larkana', email: doc.id };
+            const city = personalInfo?.addressData?.city;
+            const student = { id, name, schoolName, gradYear, city, email: doc.id};
+            
+            students.push(student);
+        });
+        console.log(students);
+        setStudents(students);
+    });
+
+
+}
+
+export const getAllStudents = async (universityName, setStudents) => {
+    const q = query(collection(db, "students"), where("isSponsored", "==", false), where("educationInfo.schoolName", "==", universityName));
+    await getDocs(q);
+    onSnapshot(q, (querySnapshot) => {
+        const students = [];
+        let id= 1;
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            let status = doc.data()?.allowed;
+            if(status){
+                status = 'Allowed'
+            }
+            else if(status===false)
+                status = 'Disallowed';
+            else
+                status = 'Select';
+            
+            const { personalInfo } = doc.data();
+            const name = personalInfo?.selfData?.name;
+            const { educationInfo } = doc.data();
+            const schoolName = educationInfo?.schoolName;
+            const gradYear = educationInfo?.graduationYear;
+            const city = personalInfo?.addressData?.city;
+            const student = { id, name, schoolName, gradYear, city, email: doc.id, status};
+
             console.log(doc.id, " => ", doc.data());
             id++;
             students.push(student);
@@ -238,8 +285,14 @@ export const getStdNotifcations = async(stdEmail, setNotifications)=>{
 
 }
 // add a new message/notification in the notifications collections array firestore
-export const addNewMessage = async(stdEmail, message)=>{
-    console.log('Hello');
+export const addNewMessage = async(stdEmail, message, deletetext)=>{
+    const deleteMessage = async(email, message)=>{
+        const docRef = doc(db, 'notifications', email);
+        await updateDoc(docRef, {
+            messages: arrayRemove(message)
+        }); 
+    }
+    deleteMessage(stdEmail, deletetext);
     const document = doc(db, 'notifications', stdEmail);
     //Using arrayUnion
     await updateDoc(document, {
@@ -314,7 +367,65 @@ function getStudent(data, email, id){
 }
 function getProgram(data, id){
     const name = data?.educationInfo?.degree +" "+ data?.educationInfo?.fieldOfStudy;
-    return {id, name, description:''}
+    return {id, name, description:'[Description]'}
+}
+
+export const getLandPageData = (role, setData)=>{
+    // const document = doc(db, 'landPage', 'data');
+    // return document;
+    // const storageRef = ref(storage, 'images/profiles');
+    // const urls = [];
+    // listAll(storageRef).then((res)=>{
+    //     const [item1, item2, item3] = res.items;
+
+    //     getDownloadURL(item1).then(url_link=>{
+    //         console.log(url_link) 
+    //         urls.push({id:1, url:url_link});
+    //     });
+    //     getDownloadURL(item2).then(url_link=>{
+    //         console.log(item2);
+    //     });
+    //     getDownloadURL(item3).then(url_link=>{
+    //         console.log(url_link) 
+    //     });
+    // })
+
+    if(role === 'student'){
+        const students = [
+            {
+                id: 1,
+                name: "Ameer Hamza",
+                email:'std.1.1@gmail.com',
+                bio: "Ameer Hamza is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
+                picture: std1,
+                status: role
+            },
+            {
+                id: 2,
+                name: "Muhammad Qasim",
+                email:'std.1.2@gmail.com',
+                bio: "Qasim is a dedicated student who is currently pursuing a degree in medicine at ABC University. He is committed to making a positive impact on her community through his profession.",
+                picture: std2,
+                status: role
+            },
+
+            {
+                id: 3,
+                name: "Abdul Hakeem",
+                email:'std.1.3@gmail.com',
+                bio: "Abdul Hakeem is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
+                picture: std3,
+                status: role
+            }
+            // ... more students
+        ]    
+        setData(students);
+    }
+    else if(role === 'donor'){
+
+    }
+
+
 }
 
 

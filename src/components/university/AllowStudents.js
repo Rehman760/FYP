@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllStudents } from '../Firebase/SaveData';
+import { addNewMessage, getAllStudents, setStudentStatus } from '../Firebase/SaveData';
 import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 
@@ -8,16 +8,36 @@ const AllowStudents = () => {
   const [data, setData] = useState([]);
 
   useEffect(function(){
-    getAllStudents(setData);
+    const uniName = sessionStorage.getItem('universityName');
+    getAllStudents(uniName,setData);
   }, [])
 
   const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleAllow = (e)=>{
+    e.preventDefault();
+    const index = Number(e.target.name)-1;
+    const email = data[index]?.email
+    console.log('Student EMAILS', data[index]?.email);
+    setStudentStatus(true, email);
+    addNewMessage(email, 'Your request has been accepted by the university.', 'Your request has been denied by the university.')
+    
+  }
+  const handleDeny = (e)=>{
+    e.preventDefault();
+    const index = Number(e.target.name)-1;
+    const email = data[index]?.email
+    console.log('Student EMAILS', email);
+    setStudentStatus(false, email);
+    addNewMessage(email, 'Your request has been denied by the university.', 'Your request has been accepted by the university.')
+
+  }
+
   return (
     <div className="p-6">
-    <h2 className="text-xl font-bold text-center mb-4">All Needy Students</h2>
+    <h2 className="text-xl font-bold text-center mb-4">Select Students</h2>
     <div className="overflow-x-auto">
       <table className="min-w-full border rounded-lg shadow-md bg-white">
         <thead>
@@ -44,6 +64,7 @@ const AllowStudents = () => {
             <th className="px-4 py-2">Institution</th>
             <th className="px-4 py-2">Passing Year</th>
             <th className="px-4 py-2">City</th>
+            <th className="px-4 py-2">Status</th>
             <th className="px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -54,16 +75,15 @@ const AllowStudents = () => {
               <td className="px-4 py-2">{item.schoolName}</td>
               <td className="px-4 py-2">{item.gradYear}</td>
               <td className="px-4 py-2">{item.city}</td>
+              <td className="px-4 py-2">{item.status}</td>
               <td className="px-4 py-2 space-x-2">
                 <button className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
                   <Link to={`/donor/student/${item.id}`} state={{stdEmail:item.email}}>View Profile</Link>
                 </button>
-                <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
+                <button name={item.id} onClick={handleAllow} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
                   Allow
                 </button>
-                <button className="bg-purple-500 hover:bg-purple-600 text-white px-3 py-1 rounded">
-                  <Link to={`/chat/list/${item.id}`} state={{stdEmail:item.email}}>Deny</Link>
-                </button>
+                <button name={item.id} onClick={handleDeny} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Deny</button>
               </td>
             </tr>
           ))}

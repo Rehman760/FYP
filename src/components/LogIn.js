@@ -84,6 +84,7 @@ const LogIn = ({role}) => {
             navigate("/donor/nav-bar/record");
           } else if(userType==="student"){
             sessionStorage.setItem('studentEmail', response.user.email);
+            sessionStorage.setItem('studentName', donorName);
             navigate("/student/dashboard");
           }
           else if(userType === "university"){

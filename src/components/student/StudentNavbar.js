@@ -10,6 +10,7 @@ function StudentNavbar() {
   const [isOpenHumSign, setOpenHumSign] = useState(false);
   const [URL, setURL] = useState('');
   const myEmail = sessionStorage.getItem("studentEmail");
+  const name = sessionStorage.getItem('studentName');
   const navigate = useNavigate();
 
   const setURLByMe = (url) => {
@@ -47,7 +48,7 @@ function StudentNavbar() {
           </div>
           <div className="flex items-center">
             <div className="ml-4 flex items-center">
-              <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${myEmail}`}</h2>
+              <h2 className="ml-2 text-md font-medium text-gray-800">{`Hello, ${name}`}</h2>
               <img className="w-8 h-8 rounded-full border-2 border-green-500" src={URL} alt="User" />
             </div>
           </div>

@@ -7,13 +7,17 @@ function ChatWindow() {
     const [donorEmail, setDonorEmail] = useState('');
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const [showMessage, setShowMessage] = useState(false);
 
 
   useEffect(()=>{
     getMessgesChat(studentEmail, (messages)=>{
         console.log(messages+' <-Messages ');
         setMessages(messages)
-      }, setDonorEmail);
+      }, function(email){
+        setDonorEmail(email)
+        setShowMessage(true);
+      });
   }, [])
 
 
@@ -26,10 +30,9 @@ function ChatWindow() {
       setNewMessage('');
     }
   };  
-  
-  return (
-    <div className="bg-white chat-window p-4">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Chat with: {donorEmail}</h1>
+
+  const chatComp = <>
+    <h1 className="text-2xl font-bold text-gray-800 mb-4">Chat with: {donorEmail}</h1>
       <div className="bg-gray-100 p-4 rounded-lg">
         {messages?.map((message) => (
           <div
@@ -61,6 +64,14 @@ function ChatWindow() {
           </button>
         </div>
       </div>
+  </>
+  
+  return (
+    <div className="bg-white chat-window p-4">
+        {showMessage
+        ? chatComp : <h1>Not Chat! Becuase, donor has not started chat to you.</h1>        
+        }
+      
     </div>
   );
 }

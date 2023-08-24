@@ -3,6 +3,8 @@ import InputField from './InputField';
 import { useEffect } from 'react';
 
 const SelfInfo = ({sendData, data, edit}) => {
+  const stdEmail = sessionStorage.getItem('studentEmail');
+  const name = sessionStorage.getItem('studentName');
   const [selfInfo, setSelfInfo] = useState({
     name:'',
     email:'',
@@ -16,6 +18,9 @@ const SelfInfo = ({sendData, data, edit}) => {
   useEffect(()=>{
     sendData(selfInfo);
   });
+  useEffect(()=>{
+    setSelfInfo({...selfInfo, email:stdEmail, name:name});
+  }, [])
 
   const handleValueChange = (e)=>{
     edit(true);

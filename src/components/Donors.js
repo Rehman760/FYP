@@ -7,7 +7,7 @@ function Donors(props) {
   const [students, setStudents] = useState([]);
   
   useEffect(()=>{
-      getLandPageData('student', setStudents);
+      getLandPageData('donor', setStudents);
   }, [])
 
   return (

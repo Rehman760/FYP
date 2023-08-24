@@ -28,7 +28,7 @@ function Navbar() {
         {/* Navigation Links (Hidden on Small Screens) */}
         <div className={`md:flex space-x-4 ${menuOpen ? 'block' : 'hidden'}`}>
           {/* Home */}
-          <NavLink to={'/'} className="bg-white text-green-500 font-bold py-2 px-4 rounded-lg">
+          <NavLink to={'details'} className="bg-white text-green-500 font-bold py-2 px-4 rounded-lg">
            
             Home
           </NavLink>

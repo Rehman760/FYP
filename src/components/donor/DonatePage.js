@@ -55,8 +55,10 @@ function DonationPage() {
     //Set Student Notifcation here:
     const messages = ['Congratulations! You have received a donation of $' + amount + ' for your education.'];
     const donationMessage = {donorEmail, messages}
-    setStdNotification(stdEmail, donationMessage);
-    setPayment(stdEmail, {payment:`Payment of $${amount}`, date:Date().toLocaleString()});
+    setStdNotification(stdEmail, donationMessage).then(()=>{
+      setPayment(stdEmail, `Payment of $${amount}`);
+    });
+    
     navigate("/donor/nav-bar/notification");
   };
 

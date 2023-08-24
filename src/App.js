@@ -86,7 +86,7 @@ export default function App() {
         <Route path='donor/student/'>
           <Route path=':stdID' element={<StudentProfile/>}/>
         </Route>
-        <Route path='chat/list/'>
+        <Route path='chat/list/' element={<ChatList/>}>
           <Route path=':chatId' element={<ChatWindow/>}/>
         </Route>        
         <Route path='donor/sponsored' element={<>Sponsored List of Student</>}/>

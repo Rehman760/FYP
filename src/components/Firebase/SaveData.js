@@ -300,9 +300,10 @@ export const addNewMessage = async(stdEmail, message, deletetext)=>{
     });
 }
 
-export const setPayment = async(stdEmail, data)=>{
+export const setPayment = async(stdEmail, message)=>{
     const document = doc(db, 'Payments', stdEmail);
-    await setDoc(document, data);
+    const date = new Date().getDate()+"-"+new Date().getMonth()+"-"+new Date().getFullYear();
+    await setDoc(document, {payments:[message, date]});
 }
 
 export const getPayments = async(stdEmail, setPayments)=>{
@@ -323,8 +324,9 @@ export const getPayments = async(stdEmail, setPayments)=>{
 export const addNewPayment = async(stdEmail, payment)=>{
     const document = doc(db, 'Payments', stdEmail);
     //Using arrayUnion
+    const date = new Date().getDate()+"-"+new Date().getMonth()+"-"+new Date().getFullYear();
     await updateDoc(document, {
-        payments: arrayUnion(payment)
+        payments: arrayUnion({date, payment})
     });
 }
 
@@ -422,9 +424,84 @@ export const getLandPageData = (role, setData)=>{
         setData(students);
     }
     else if(role === 'donor'){
+        const students = [
+            {
+                id: 1,
+                name: "Muhammad Ali",
+                email:'std.1.1@gmail.com',
+                bio: "Ali is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
+                picture: std1,
+                status: role
+            },
+            {
+                id: 2,
+                name: "Shoaib Ahmed",
+                email:'std.1.2@gmail.com',
+                bio: "Shoaib is a dedicated student who is currently pursuing a degree in medicine at ABC University. He is committed to making a positive impact on her community through his profession.",
+                picture: std2,
+                status: role
+            },
+
+            {
+                id: 3,
+                name: "Abdul Rehman",
+                email:'std.1.3@gmail.com',
+                bio: "Abdul Rehman is a hardworking student who is currently studying computer science at XYZ University. He is passionate about technology and wants to use his skills to help others.",
+                picture: std3,
+                status: role
+            }
+            // ... more students
+        ]    
+        setData(students);
 
     }
 
+
+}
+
+
+
+
+export const getChatList = async(setChats)=>{
+    // const q = query(collection(db, "students"), where("isSponsored", "==", false), where("educationInfo.schoolName", "==", universityName));
+    // await getDocs(q);
+    // onSnapshot(q, (querySnapshot) => {
+    //     const students = [];
+    //     let id= 1;
+    //     querySnapshot.forEach((doc) => {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         let status = doc.data()?.allowed;
+    //     }
+    //     );
+    // );
+    const q = query(collection(db, "users"));
+    await getDocs(q);
+    onSnapshot(q, (querySnapshot) => {
+        const chats = [];
+        let id =1;
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            const user = doc.data();
+            console.log(doc.id);
+            if(user.userType ==='student'){
+                const userName = user?.firstname;
+                const image = "https://dummyimage.com/100x100/000/"
+                chats.push({ id, userName, image});    
+                id++;
+                
+                // getProfileImage(doc.id, function(image){
+                // });
+            }
+            
+        })
+        console.log(chats);
+        setChats(chats);
+    });
+    // await getDoc(document).then((res)=>{
+    //     console.log(res.data());
+    //     setChats(res.data());
+    // }).catch((err)=>console.log(err));
+    
 
 }
 

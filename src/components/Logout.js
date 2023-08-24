@@ -5,6 +5,7 @@ const Logout = () => {
         sessionStorage.removeItem('studentEmail');
         sessionStorage.removeItem('donorEmail');
         sessionStorage.removeItem('universityEmail');
+        sessionStorage.removeItem('universityName');
         // Replace the current route with a new route (e.g., your login page)
         window.history.replaceState(null, '', '/');
         // Reload the page to reflect the new URL

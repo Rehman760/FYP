@@ -37,6 +37,7 @@ import ChatList from './components/ChatList';
 import ChatWindow from './components/ChatWindow';
 import UniversityIndex from './components/university/Index';
 import UniversityContainer from './components/university/UniversityContainer';
+import ChatLayout from './components/ChatLayout';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState("");
@@ -86,9 +87,9 @@ export default function App() {
         <Route path='donor/student/'>
           <Route path=':stdID' element={<StudentProfile/>}/>
         </Route>
-        <Route path='chat/list/' element={<ChatList/>}>
-          <Route path=':chatId' element={<ChatWindow/>}/>
-        </Route>        
+        {/* <Route path='chat/list/'>
+          <Route path=':chatId' element={<ChatLayout/>}/>
+        </Route>         */}
         <Route path='donor/sponsored' element={<>Sponsored List of Student</>}/>
         <Route path='donor/donate' element={<DonationPage/>}/>
   

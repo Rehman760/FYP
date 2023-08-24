@@ -482,11 +482,11 @@ export const getChatList = async(setChats)=>{
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             const user = doc.data();
-            console.log(doc.id);
+            const email = doc.id;
             if(user.userType ==='student'){
                 const userName = user?.firstname;
                 const image = "https://dummyimage.com/100x100/000/"
-                chats.push({ id, userName, image});    
+                chats.push({ id, userName, image, email});    
                 id++;
                 
                 // getProfileImage(doc.id, function(image){
@@ -505,4 +505,41 @@ export const getChatList = async(setChats)=>{
 
 }
 
+export const setChatNotification = async(stdEmail, donorEmail)=>{
+    console.log(donorEmail+" IN CSET");
+    const document = doc(db, "chats", stdEmail);
+    await setDoc(document, { donorEmail, date: new Date().getTime()}, {merge:true});
+}
 
+export const addMessageChat = async(stdEmail, messageObj)=>{
+    const document = doc(db, 'chats', stdEmail);
+    //Using arrayUnion
+    await updateDoc(document, {
+        messages: arrayUnion(messageObj)
+    });
+}
+
+
+export const getMessgesChat = async(stdEmail, setMessages)=>{
+    try{
+        
+        const document = doc(db, 'chats', stdEmail);
+        await getDoc(document).then((res)=>{
+            if(res.data() !== undefined){
+                const messages = res.data()?.messages;
+                // console.log(res.data().messages)
+                if(messages ===undefined){setMessages([])}
+                else
+                    setMessages(messages);
+            }
+            else{
+                setMessages([]);
+            }
+
+        }).catch((err)=>{
+            setMessages([]);
+        })
+    }catch(e){
+        setMessages([]);
+    }
+}

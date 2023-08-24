@@ -6,7 +6,7 @@ import StudentTable from '../StudentTable';
 import SponsoredStudent from './SponsoredStudents';
 import ResponsiveTable from './AvailableStds';
 import Logout from '../Logout';
-import ChatList from '../ChatList';
+import ChatLayout from '../ChatLayout';
 import DonorForm from './DonorForm';
 
 function DonorContainer({donorEmail}) {
@@ -17,7 +17,7 @@ function DonorContainer({donorEmail}) {
     return <ResponsiveTable/>
   }
   else if(donorID ==='chat'){
-    return <ChatList/>
+    return <ChatLayout/>
   }
   else if(donorID === 'notification'){
     console.log(donorEmail);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { getChatList, getProfile } from './Firebase/SaveData';
+import { getChatList, getProfile, setChatNotification } from './Firebase/SaveData';
 
 // const dummyChats = [
 //   { id: 'chat1', name: 'Chat 1', image: 'user1.jpg', userName: 'User 1' },
@@ -8,27 +8,39 @@ import { getChatList, getProfile } from './Firebase/SaveData';
 //   { id: 'chat3', name: 'Chat 3', image: 'user3.jpg', userName: 'User 3' },
 // ];
 
-function ChatList() {
+function ChatList({setEmail}) {
   const [dummyChats, setChats] = useState([]);
 
   useEffect(()=>{
     getChatList(setChats);
   }, []);
+
+  const handleItemClick = (e)=>{
+    e.preventDefault();
+    const index = Number(e.target.id) -1;
+    const email = dummyChats[index].email;
+    console.log(email);  
+    // SEt chat with donor Email
+    setChatNotification(email, sessionStorage.getItem('donorEmail'));
+    setEmail(email);
+  }
   return (
     <div className="bg-gray-100 chat-list p-4">
       <h1 className="text-2xl font-bold text-green-700 mb-4">Chat List</h1>
       <ul>
         {dummyChats?.map((chat) => (
           <li key={chat.id} className="mb-2 flex items-center">
-            <Link
+            {/* <Link
               to={`/chat/${chat.id}`}
               className="flex items-center space-x-2 bg-white py-2 px-4 rounded-lg hover:bg-gray-200"
-            >
-              <div className="rounded-full overflow-hidden h-10 w-10">
+            > */}
+            <button id={chat.id} className="flex items-center space-x-2 bg-white py-2 px-4 rounded-lg hover:bg-gray-200" onClick={handleItemClick}>
+              <div id={chat.id} className="rounded-full overflow-hidden h-10 w-10">
                 <img src={`${chat.image}`} alt={chat.userName} className="w-full h-full object-cover" />
               </div>
-              <span className="text-gray-800">{chat.userName}</span>
-            </Link>
+              <span id={chat.id}className="text-gray-800">{chat.userName}</span>
+            </button>
+            {/* </Link> */}
           </li>
         ))}
       </ul>

@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FiSend } from 'react-icons/fi';
 import { BsFileEarmarkArrowUp } from 'react-icons/bs';
+import { addMessageChat, getMessgesChat } from './Firebase/SaveData';
 
-function ChatWindow() {
+function ChatWindow({email}) {
   const { chatId } = useParams();
   const [messages, setMessages] = useState([]);
+
+
+  useEffect(()=>{
+    getMessgesChat(email, (messages)=>{
+      console.log(messages+' <-Messages ');
+      setMessages(messages)
+    });
+  }, [email])
 
   const [newMessage, setNewMessage] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleSendMessage = () => {
     if (newMessage.trim() !== '') {
+      //Save message to the messages in the chat
+      addMessageChat(email,{ id: Date.now(), text: newMessage, sender: 'user' });
       setMessages([...messages, { id: Date.now(), text: newMessage, sender: 'user' }]);
       setNewMessage('');
     }
@@ -40,7 +51,7 @@ function ChatWindow() {
     <div className="bg-white chat-window p-4">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Chat Room: {chatId}</h1>
       <div className="bg-gray-100 p-4 rounded-lg">
-        {messages.map((message) => (
+        {messages?.map((message) => (
           <div
             key={message.id}
             className={`mb-2 p-2 rounded-lg ${

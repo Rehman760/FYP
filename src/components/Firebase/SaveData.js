@@ -520,7 +520,7 @@ export const addMessageChat = async(stdEmail, messageObj)=>{
 }
 
 
-export const getMessgesChat = async(stdEmail, setMessages)=>{
+export const getMessgesChat = async(stdEmail, setMessages, setDonorEmail)=>{
     try{
         
         const document = doc(db, 'chats', stdEmail);
@@ -529,8 +529,10 @@ export const getMessgesChat = async(stdEmail, setMessages)=>{
                 const messages = res.data()?.messages;
                 // console.log(res.data().messages)
                 if(messages ===undefined){setMessages([])}
-                else
+                else{
                     setMessages(messages);
+                    setDonorEmail(res.data()?.donorEmail);
+                }
             }
             else{
                 setMessages([]);

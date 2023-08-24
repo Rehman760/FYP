@@ -10,9 +10,14 @@ function ChatWindow({email}) {
 
 
   useEffect(()=>{
+    console.log('In the effec');
+    console.log(email);
     getMessgesChat(email, (messages)=>{
-      console.log(messages+' <-Messages ');
+      console.log('Messges-->')
+      console.log(messages);
       setMessages(messages)
+    }, function(email){
+      console.log('Donor Email is: '+email);
     });
   }, [email])
 

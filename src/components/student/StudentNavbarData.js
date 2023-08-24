@@ -15,7 +15,7 @@ import {
   import StudentInformation from './StudentInformation';
   import UserProfile from './UserProfile';
   import Logout from '../Logout';
-  import ChatList from '../ChatList';
+  import Chat from './Chat';
   import PaymentNotifcation from './PaymentNotification';
   
   export const StudentNavbarData = [
@@ -29,7 +29,7 @@ import {
       title: 'Chats',
       icons: <FaComment />,
       link: 'chat',
-      body: <ChatList />,
+      body: <Chat/>
     },
     {
       title: 'Register',

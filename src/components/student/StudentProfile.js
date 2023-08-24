@@ -54,6 +54,10 @@ function StudentProfile() {
 
   }
 
+  function contactFunction(e){
+    navigate("/donor/nav-bar/chat");
+  }
+
   return (
       <div className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto py-12">
@@ -109,7 +113,7 @@ function StudentProfile() {
           </div>
           {isDonating &&
             <div className="mt-10 text-center">
-              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mr-3">
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mr-3" onClick={contactFunction}>
                 Contact {profile?.name}
               </button>
               <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" onClick={donateFunction}>
